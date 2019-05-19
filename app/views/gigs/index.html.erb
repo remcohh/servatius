@@ -1,14 +1,12 @@
-<h1 class="title">Gigs</h1>
+<h3 class="title">Gigs</h3>
+
+
+
 
 <table class="table is-fullwidth">
   <thead>
     <tr>
       <th scope="col">Title</th>
-      <th scope="col">Where</th>
-      <th scope="col">When</th>
-      <th scope="col">Band contact</th>
-      <th scope="col">Event contact</th>
-      <th scope="col">Confirmed</th>
       <th>Signed Up? </th>
       <th scope="col" colspan="3"></th>
     </tr>
@@ -16,41 +14,47 @@
 
   <tbody>
     <% @future_gigs.each do |gig| %>
-      <tr >
-        <th scope="row"><%= link_to gig.title, gig %></th>
-        <td><%= gig.where %></td>
-        <td><%= gig.when.to_formatted_s(:short) %></td>
-        <td><%= gig.gig_admin.first_name %></td>
-        <td><%= gig.event_contact %></td>
-        <% if gig.confirmed %>
-        <td class="is-success">Yes!</td>
-        <% else %>
-        <td class="is-danger">No</td>
-        <% end %>
-        <% if gig.players.include? current_member %>
-        <td class="is-success">Yes!</td>
-        <% else %>
-        <td class="is-danger">No</td>
-        <% end %>
-        <td><% if can? :edit, :gigs %><%= link_to 'Edit', edit_gig_path(gig) %> <% end %></td>
-        <td><% if can? :destroy, :gigs %><%= link_to 'Destroy', gig, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></td>
-      </tr>
+      <nav class="level is-mobile">
+        <div class="level-left w60">
+          <%= link_to "#{gig.when.to_formatted_s(:short)} #{gig.title}", gig %>
+        </div>
+        <div class="'level-right">
+          <% if gig.members.include?(current_member)%>
+            <span>Aangemeld (wijzig)</span>
+          <% elsif false #cancellations %>
+          <% else %>
+              <a class="button is-success">Ja</a>
+              <a class="button is-danger">Nee</a>
+          <% end %>
+        </div>
+
+      </nav>
+
+
+      <!--<tr >-->
+        <!--<td scope="row">-->
+          <!--<%= link_to "#{gig.when.to_formatted_s(:short)} #{gig.title}", gig %>-->
+        <!--</td>-->
+        <!--<% if gig.players.include? current_member %>-->
+        <!--<td class="is-success">Yes!</td>-->
+        <!--<% else %>-->
+        <!--<td>-->
+          <!--<a class="button is-info">Ja</a>-->
+          <!--<a class="button is-warning">Nee</a>-->
+        <!--</td>-->
+        <!--<% end %>-->
+      <!--</tr>-->
     <% end %>
   </tbody>
 </table>
 
 
-<h1 class="title">Past Gigs</h1>
+<h3 class="title">Past Gigs</h3>
 
 <table class="table is-fullwidth">
   <thead>
     <tr>
       <th scope="col">Title</th>
-      <th scope="col">Where</th>
-      <th scope="col">When</th>
-      <th scope="col">Band contact</th>
-      <th scope="col">Event contact</th>
-      <th scope="col">Confirmed</th>
       <th>Signed Up? </th>
       <th scope="col" colspan="3"></th>
     </tr>
@@ -59,17 +63,7 @@
   <tbody>
     <% @past_gigs.each do |gig| %>
       <tr >
-        <th scope="row"><%= link_to gig.title, gig %></th>
-        <td><%= gig.where %></td>
-        <td><%= gig.when.to_formatted_s(:short) %></td>
-        <td><%= gig.when.strftime('%A') %></td>
-        <td><%= gig.gig_admin.first_name %></td>
-        <td><%= gig.event_contact %></td>
-        <% if gig.confirmed %>
-        <td class="is-success">Yes!</td>
-        <% else %>
-        <td class="is-danger">No</td>
-        <% end %>
+        <th scope="row"><%= link_to "#{gig.when.to_formatted_s(:short)} #{gig.title}" %></th>
         <% if gig.players.include? current_member %>
         <td class="is-success">Yes!</td>
         <% else %>
