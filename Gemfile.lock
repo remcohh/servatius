@@ -302,7 +302,7 @@ DEPENDENCIES
   font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails
-  listen
+  listen (~> 3.1.5)
   mini_racer
   pg
   puma (~> 3.11)
