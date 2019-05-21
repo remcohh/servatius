@@ -1,0 +1,77 @@
+= form_with(model: gig, local: true) do |form|
+  - if gig.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(gig.errors.count, "error")
+        prohibited this gig from being saved:
+      %ul
+        - gig.errors.full_messages.each do |message|
+          %li= message
+  .tile.is-ancestor
+    .tile.is-6.is-vertical.is-parent
+      .tile.is-child.box
+        %p.title Details
+        .field.is-horizontal
+          .field-label
+            = form.label :title, class: 'label'
+          .field-body
+            %div{:calss => "field"}
+              .control
+                = form.text_field :title, class: 'input'
+        .field.is-horizontal
+          .field-label
+            = form.label :where, class: 'label'
+          .field-body
+            %div{:calss => "field"}
+              .control
+                = form.text_field :where, class: 'input'
+        .field.is-horizontal
+          .field-label
+            = form.label :when, class: 'label'
+          .field-body
+            %div{:calss => "field"}
+              .control
+                = form.datetime_select :when, class: 'input'
+        .field.is-horizontal
+          .field-label
+            = form.label :gig_admin, class: 'label'
+          .field-body
+            %div{:calss => "field"}
+              .control
+                - options = options_from_collection_for_select(@gig_admins, 'id', 'first_name')
+                = form.select :gig_admin_id,  options, {}, { class: 'select is-warning' }
+        .field.is-horizontal
+          .field-label
+            = form.label :event_contact, class: 'label'
+          .field-body
+            %div{:calss => "field"}
+              .control
+                = form.text_field :event_contact, class: 'input'
+        .field.is-horizontal
+          .field-label
+            = form.label :high_payer, class: 'checkbox'
+          .field-body
+            %div{:calss => "field"}
+              .control
+                = form.check_box :high_payer, class: 'checkbox'
+        .field.is-horizontal
+          .field-label
+            = form.label :charity, class: 'checkbox'
+          .field-body
+            %div{:calss => "field"}
+              .control
+                = form.check_box :charity, class: 'checkbox'
+        .field.is-horizontal
+          .field-label
+            = form.label :confirmed, class: 'checkbox'
+          .field-body
+            %div{:calss => "field"}
+              .control
+                = form.check_box :confirmed, class: 'checkbox'
+    .tile.is-parent
+      .tile.is-child.box
+        %p.title About
+        .field
+          = form.text_area :about
+  .actions
+    = form.submit   class: 'button'

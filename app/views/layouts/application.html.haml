@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Band,Aye?
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+  %body
+    %nav.navbar.is-info{"aria-label" => "main navigation", :role => "navigation"}
+      .navbar-brand
+        %a.navbar-item{:href => "/"}
+          = Settings.application.title
+        %a.navbar-item{:href => "/gigs"} Gigs
+        %a.navbar-item{:href => "/members"} Members
+        %a.navbar-burger.burger{"aria-expanded" => "false", "aria-label" => "menu", "data-target" => "navbarBasicExample", :role => "button"}
+          %span{"aria-hidden" => "true"}
+          %span{"aria-hidden" => "true"}
+          %span{"aria-hidden" => "true"}
+      #navbarBasicExample.navbar-menu
+        .navbar-end
+          .navbar-item
+            - if member_signed_in?
+              .navbar-item
+                Hi #{current_member.first_name}!
+              .buttons
+                = link_to 'Sign out', destroy_member_session_path, method: :delete, class: 'button '
+            - else
+              .buttons
+                = link_to 'Register', new_member_registration_path, class: 'button is-primary'
+                = link_to 'Sign in', new_member_session_path, class: 'button is-light'
+    - if flash[:notice]
+      %p.notification.is-success{:role => "alert"}
+        %button.delete
+        = notice
+    - if flash[:alert]
+      %p.notification.is-warning{:role => "alert"}
+        %button.delete
+        = alert
+    .container
+      .section
+        = yield

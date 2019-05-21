@@ -1,0 +1,13 @@
+%h1.title Members
+%table.table.is-fullwidth
+  %tr
+    %th Email
+    %th Name
+    %th Instrument
+    %th Phone
+    - @members.each do |member|
+      %tr
+        %td= member.email
+        %td= member.full_name
+        %td= member.instrument.name
+        %td= member.phone_number

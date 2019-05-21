@@ -1,0 +1,17 @@
+= form_with(model: instrument, local: true) do |form|
+  - if instrument.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(instrument.errors.count, "error")
+        prohibited this instrument from being saved:
+      %ul
+        - instrument.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = form.label :name
+    = form.text_field :name
+  .field
+    = form.label :family
+    = form.text_field :family
+  .actions
+    = form.submit

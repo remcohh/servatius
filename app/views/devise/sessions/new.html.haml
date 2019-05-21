@@ -1,0 +1,34 @@
+.columns
+  .column
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :email, class: 'label'
+        .field-body
+          .field
+            .control
+              = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'input'
+      .field.is-horizontal
+        .field-label.is-normal
+          = f.label :password, class: 'label'
+        .field-body
+          .field
+            .control
+              = f.password_field :password, autocomplete: 'current-password', class: 'input'
+      - if devise_mapping.rememberable?
+        .field.is-horizontal
+          .field-label
+            = f.label :remember_me, class: 'label' do
+              = resource.class.human_attribute_name('remember_me')
+          .field-body
+            .field.is-narrow
+              .control
+                = f.check_box :remember_me, class: 'checkbox'
+      .field.is-horizontal
+        .field-label
+        .field-body
+          .field
+            .control
+              = f.submit  "Sign In", class: 'button is-primary'
+  .column
+    = render 'devise/shared/links'

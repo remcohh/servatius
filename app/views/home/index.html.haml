@@ -1,0 +1,15 @@
+.columns
+  .column
+    .title Gigs You've Signed Up To
+    %table.table.is-fullwidth
+      - @gigs_signed_up_to.each do |gig|
+        %tr
+          %td= link_to gig.title, gig
+  .column
+    .title Upcoming Gigs
+    %table.table.is-fullwidth
+      - @gigs.each do |gig|
+        %tr
+          %td= link_to gig.title, gig
+          %td= gig.when.to_formatted_s(:short)
+          %td= gig.when.strftime('%A')
