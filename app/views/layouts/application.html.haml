@@ -1,44 +1,35 @@
 !!!
-%html
+%html{:lang => "en"}
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Band,Aye?
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %title= @cms_page.present? ? @cms_page.label : "Demo App"
+    / Required meta tags
+    %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+    %meta{:content => cms_fragment_content("meta-description"), :name => "description"}/
+    / Bootstrap CSS
+    %link{:crossorigin => "anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css", :integrity => "sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb", :rel => "stylesheet"}/
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
   %body
-    %nav.navbar.is-info{"aria-label" => "main navigation", :role => "navigation"}
-      .navbar-brand
-        %a.navbar-item{:href => "/"}
-          = Settings.application.title
-        %a.navbar-item{:href => "/gigs"} Gigs
-        %a.navbar-item{:href => "/members"} Members
-        %a.navbar-burger.burger{"aria-expanded" => "false", "aria-label" => "menu", "data-target" => "navbarBasicExample", :role => "button"}
-          %span{"aria-hidden" => "true"}
-          %span{"aria-hidden" => "true"}
-          %span{"aria-hidden" => "true"}
-      #navbarBasicExample.navbar-menu
-        .navbar-end
-          .navbar-item
-            - if member_signed_in?
-              .navbar-item
-                Hi #{current_member.first_name}!
-              .buttons
-                = link_to 'Sign out', destroy_member_session_path, method: :delete, class: 'button '
-            - else
-              .buttons
-                = link_to 'Register', new_member_registration_path, class: 'button is-primary'
-                = link_to 'Sign in', new_member_session_path, class: 'button is-light'
-    - if flash[:notice]
-      %p.notification.is-success{:role => "alert"}
-        %button.delete
-        = notice
-    - if flash[:alert]
-      %p.notification.is-warning{:role => "alert"}
-        %button.delete
-        = alert
-    .container
-      .section
-        = yield
+
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      %a.navbar-brand{:href => "#"} Navbar
+      %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+        %span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          - Comfy::Cms::Site.first.pages.published.each do |page|
+            %li.nav-item
+              %a.nav-link{:href => page.full_path}
+                = page.label
+    = yield
+    /
+      uncomment if you want to see what those variables contain
+      <haml_loud> debug @cms_site </haml_loud>
+      <haml_loud> debug @cms_layout </haml_loud>
+      <haml_loud> debug @cms_page </haml_loud>
+    / jQuery first, then Popper.js, then Bootstrap JS
+    %script{:crossorigin => "anonymous", :integrity => "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", :src => "https://code.jquery.com/jquery-3.2.1.slim.min.js"}
+    %script{:crossorigin => "anonymous", :integrity => "sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh", :src => "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"}
+    %script{:crossorigin => "anonymous", :integrity => "sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"}
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
