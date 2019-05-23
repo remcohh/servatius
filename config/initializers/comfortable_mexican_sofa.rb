@@ -133,6 +133,13 @@ module CmsDeviseAuth
 end
 
 Comfy::Admin::Cms::SitesController.class_eval do
+
+  def index
+    return redirect_to action: :new if ::Comfy::Cms::Site.count.zero?
+    @site   = ::Comfy::Cms::Site.find_by_id(session[:site_id])
+    @sites  = ::Comfy::Cms::Site.where(band_id: current_member.band_id)
+  end
+
   def site_params
     params.fetch(:site, {}).permit!.merge(band_id: current_member.band_id)
   end
