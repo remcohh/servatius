@@ -17,7 +17,7 @@ ComfortableMexicanSofa.configure do |config|
   # Module responsible for authorization on admin side. It should have #authorize
   # method that returns true or false based on params and loaded instance
   # variables available for a given controller.
-  #   config.admin_authorization = 'ComfyAdminAuthorization'
+  config.admin_authorization = 'CmsDeviseAuth'
 
   # Module responsible for public authentication. Similar to the above. You also
   # will have access to @cms_site, @cms_layout, @cms_page so you can use them in
@@ -123,8 +123,11 @@ end
 
 module CmsDeviseAuth
   def authenticate
-    unless current_user && current_user.admin?
-      redirect_to new_user_session_path
+    unless current_member && current_member.admin?
+      redirect_to new_member_session_path
     end
+  end
+  def authorize
+    true
   end
 end
