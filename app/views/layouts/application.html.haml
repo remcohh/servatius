@@ -18,7 +18,7 @@
         %span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
         %ul.navbar-nav.mr-auto
-          - Comfy::Cms::Site.first.pages.published.each do |page|
+          - Comfy::Cms::Site.first.try(:pages).try(:published).try(:each) do |page|
             %li.nav-item
               %a.nav-link{:href => page.full_path}
                 = page.label
