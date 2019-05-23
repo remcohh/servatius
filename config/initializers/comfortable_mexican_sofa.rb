@@ -90,8 +90,8 @@ end
 
 # Default credentials for ComfortableMexicanSofa::AccessControl::AdminAuthentication
 # YOU REALLY WANT TO CHANGE THIS BEFORE PUTTING YOUR SITE LIVE
-ComfortableMexicanSofa::AccessControl::AdminAuthentication.username = "username"
-ComfortableMexicanSofa::AccessControl::AdminAuthentication.password = "password"
+# ComfortableMexicanSofa::AccessControl::AdminAuthentication.username = "username"
+# ComfortableMexicanSofa::AccessControl::AdminAuthentication.password = "password"
 
 # Uncomment this module and `config.admin_auth` above to use custom admin authentication
 # module ComfyAdminAuthentication
@@ -120,3 +120,11 @@ ComfortableMexicanSofa::AccessControl::AdminAuthentication.password = "password"
 #     return true
 #   end
 # end
+
+module CmsDeviseAuth
+  def authenticate
+    unless current_user && current_user.admin?
+      redirect_to new_user_session_path
+    end
+  end
+end
