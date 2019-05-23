@@ -2,11 +2,5 @@
   "name": "band-aye",
   "private": true,
   "dependencies": {
-    "@rails/actiontext": "^6.0.0-beta1",
-    "@rails/webpacker": "3.5",
-    "trix": "^1.0.0"
-  },
-  "devDependencies": {
-    "webpack-dev-server": "2.11.2"
   }
 }
