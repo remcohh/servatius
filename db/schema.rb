@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
-# be faster and is potentially less error prone than running all of your
-# migrations from scratch. Old migrations may fail to apply correctly if those
-# migrations use external dependencies or application code.
+# Note that this schema.rb definition is the authoritative source for your
+# database schema. If you need to create the application database on another
+# system, you should be using db:schema:load, not running all the migrations
+# from scratch. The latter is a flawed and unsustainable approach (the more migrations
+# you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_21_165051) do
+ActiveRecord::Schema.define(version: 2019_05_23_180327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,12 @@ ActiveRecord::Schema.define(version: 2019_05_21_165051) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "bands", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comfy_cms_categories", force: :cascade do |t|
@@ -137,6 +143,8 @@ ActiveRecord::Schema.define(version: 2019_05_21_165051) do
     t.string "locale", default: "en", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "band_id"
+    t.index ["band_id"], name: "index_comfy_cms_sites_on_band_id"
     t.index ["hostname"], name: "index_comfy_cms_sites_on_hostname"
   end
 
@@ -179,6 +187,8 @@ ActiveRecord::Schema.define(version: 2019_05_21_165051) do
     t.datetime "updated_at", null: false
     t.boolean "high_payer"
     t.boolean "charity"
+    t.bigint "band_id"
+    t.index ["band_id"], name: "index_gigs_on_band_id"
     t.index ["gig_admin_id"], name: "index_gigs_on_gig_admin_id"
   end
 
@@ -210,11 +220,16 @@ ActiveRecord::Schema.define(version: 2019_05_21_165051) do
     t.boolean "gig_admin", default: false
     t.boolean "ordinary_member", default: true
     t.bigint "instrument_id"
+    t.bigint "band_id"
+    t.index ["band_id"], name: "index_members_on_band_id"
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["instrument_id"], name: "index_members_on_instrument_id"
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comfy_cms_sites", "bands"
+  add_foreign_key "gigs", "bands"
+  add_foreign_key "members", "bands"
   add_foreign_key "members", "instruments"
 end

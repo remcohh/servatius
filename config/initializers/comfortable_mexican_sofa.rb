@@ -131,3 +131,9 @@ module CmsDeviseAuth
     true
   end
 end
+
+Comfy::Admin::Cms::SitesController.class_eval do
+  def site_params
+    params.fetch(:site, {}).permit!.merge(band_id: current_member.band_id)
+  end
+end
