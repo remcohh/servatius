@@ -20,7 +20,7 @@
         %ul.navbar-nav.mr-auto
           - Comfy::Cms::Site.first.try(:pages).try(:published).try(:each) do |page|
             %li.nav-item
-              %a.nav-link{:href => page.full_path}
+              %a.nav-link{:href => page.url}
                 = page.label
     = yield
     /
