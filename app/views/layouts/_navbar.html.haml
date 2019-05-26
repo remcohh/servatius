@@ -1,5 +1,5 @@
-%nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  %a.navbar-brand{:href => "#"} Home
+%nav.navbar.navbar-expand-lg.navbar-light.servatius-blue
+  %a.navbar-brand.servatius-yellow{:href => "#"} Home
   %button.navbar-toggler{'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarSupportedContent', 'data-toggle' => 'collapse', :type => 'button'}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
@@ -8,7 +8,7 @@
         - @cms_site.pages.root.children.published.each do |page|
           - if page.children.any?
             %li.nav-item.dropdown
-              = active_link_to page.label, page.url, id: 'navbarDropdown', class: 'nav-link dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
+              = active_link_to page.label, page.url, id: 'navbarDropdown', class: 'nav-link servatius-yellow dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
               .dropdown-menu{ 'aria-labelledby' => "navbarDropdown" }
                 - #render childeren
                 - page.children.each do |childpage|
@@ -16,4 +16,4 @@
           - else
             - #render parent
             %li.nav-item
-              = active_link_to page.label, page.url, class: 'nav-link'
+              = active_link_to page.label, page.url, class: 'nav-link servatius-yellow'
