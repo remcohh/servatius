@@ -1,10 +1,18 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  %a.navbar-brand{:href => "#"} Navbar
-  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+  %a.navbar-brand{:href => "#"} Home
+  %button.navbar-toggler{'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarSupportedContent', 'data-toggle' => 'collapse', :type => 'button'}
     %span.navbar-toggler-icon
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
-      - @cms_site.try(:pages).try(:published).try(:each) do |page|
-        %li.nav-item
-          %a.nav-link{:href => page.url}
-            = page.label
+      - @cms_site.pages.root.children.published.each do |page|
+        - if page.children.any?
+          %li.nav-item.dropdown
+            = active_link_to page.label, page.url, id: 'navbarDropdown', class: 'nav-link dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
+            .dropdown-menu{ 'aria-labelledby' => "navbarDropdown" }
+              - #render childeren
+              - page.children.each do |childpage|
+                = active_link_to childpage.label, childpage.url, class: 'dropdown-item'
+        - else
+          - #render parent
+          %li.nav-item
+            = active_link_to page.label, page.url, class: 'nav-link'
