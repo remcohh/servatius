@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  comfy_route :cms_admin, path: "/cms"
+  comfy_route :cms_admin, path: '/cms'
   # Ensure that this route is defined last
-  comfy_route :cms, path: "/sites"
   resources :gigs
   resources :instruments
   devise_for :members, controllers: { registrations: 'registrations' }
@@ -11,6 +10,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'gig_signup/:id', to: 'gigs#signup', as: 'gig_signup'
   get 'gig_dropout/:id', to: 'gigs#dropout', as: 'gig_dropout'
+  comfy_route :cms, path: '/'
 
   root 'home#index'
 end

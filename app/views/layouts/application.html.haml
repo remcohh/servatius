@@ -10,8 +10,9 @@
     %link{:crossorigin => "anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css", :integrity => "sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb", :rel => "stylesheet"}/
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag comfy_cms_render_css_path(@cms_site.id, @cms_layout.identifier)
-    = javascript_include_tag comfy_cms_render_js_path(@cms_site.id, @cms_layout.identifier)
+    - if @cms_site.present?
+      = stylesheet_link_tag comfy_cms_render_css_path(@cms_site.id, @cms_layout.identifier)
+      = javascript_include_tag comfy_cms_render_js_path(@cms_site.id, @cms_layout.identifier)
   %body
     = render 'layouts/navbar'
     = yield
