@@ -4,7 +4,7 @@ set :repo_url, 'git@github.com:remcohh/band-aye.git'
 set :deploy_to, '/home/deploy/servatius'
 
 set :linked_files, %w{config/database.yml config/application.yml}
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/audios public/scans public/images}
+set :linked_dirs, %w{storage log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/audios public/scans public/images}
 
 namespace :deploy do
 
