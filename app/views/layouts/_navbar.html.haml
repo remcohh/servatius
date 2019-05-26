@@ -6,14 +6,15 @@
     %ul.navbar-nav.mr-auto
       - if @cms_site.present?
         - @cms_site.pages.root.children.published.each do |page|
-          - if page.children.any?
-            %li.nav-item.dropdown
-              = active_link_to page.label, page.url, id: 'navbarDropdown', class: 'nav-link servatius-yellow dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
-              .dropdown-menu{ 'aria-labelledby' => "navbarDropdown" }
-                - #render childeren
-                - page.children.each do |childpage|
-                  = active_link_to childpage.label, childpage.url, class: 'dropdown-item'
-          - else
-            - #render parent
-            %li.nav-item
-              = active_link_to page.label, page.url, class: 'nav-link servatius-yellow'
+          - if page.label[0..7] != '[nomenu]'
+            - if page.children.any?
+              %li.nav-item.dropdown
+                = active_link_to page.label, page.url, id: 'navbarDropdown', class: 'nav-link servatius-yellow dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
+                .dropdown-menu{ 'aria-labelledby' => "navbarDropdown" }
+                  - #render childeren
+                  - page.children.each do |childpage|
+                    = active_link_to childpage.label, childpage.url, class: 'dropdown-item'
+            - else
+              - #render parent
+              %li.nav-item
+                = active_link_to page.label, page.url, class: 'nav-link servatius-yellow'
