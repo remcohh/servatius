@@ -29,6 +29,7 @@ module BlockHelper
       out << '<p>'
       out << get_fragment(r.record_id, 'content').content
       out << '</p>'
+      out << "<p>#{link_to("read more", Comfy::Cms::Page.find(r.record_id).url)}</p>"
       out << '</div>'
       out << '</div>'
       out
