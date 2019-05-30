@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   comfy_route :cms_admin, path: '/cms'
   # Ensure that this route is defined last
+  resources :bands
   resources :gigs
   resources :instruments
   devise_for :members, controllers: { registrations: 'registrations' }

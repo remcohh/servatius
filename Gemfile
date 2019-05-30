@@ -53,6 +53,7 @@ gem 'comfortable_mexican_sofa'
 gem 'haml-rails'
 gem 'active_link_to'
 gem 'rails-i18n'
+gem 'bootstrap_form', '>= 4.2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
