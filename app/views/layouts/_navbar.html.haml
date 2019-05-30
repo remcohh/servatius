@@ -19,9 +19,13 @@
               %li.nav-item
                 = active_link_to page.label, page.url, class: 'nav-link servatius-yellow'
 
-      - if current_member.admin?
+      - if current_member&.admin?
         %li.nav-item.dropdown
           = link_to 'Admin', root_url, class: 'nav-link servatius-yellow', id: 'navbarDropdownAdmin', class: 'nav-link servatius-yellow dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
           .dropdown-menu{ 'aria-labelledby' => "navbarDropdownAdmin" }
             =link_to 'Verenigingen', bands_url, class: 'nav-link'
+
+      - if current_member
+        %li.nav-item.dropdown
+          = link_to('Logout', destroy_member_session_path, method: :delete, class: 'nav-link servatius-yellow')
 

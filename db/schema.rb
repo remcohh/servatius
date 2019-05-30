@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_23_180327) do
+ActiveRecord::Schema.define(version: 2019_05_30_151256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,6 +221,8 @@ ActiveRecord::Schema.define(version: 2019_05_23_180327) do
     t.boolean "ordinary_member", default: true
     t.bigint "instrument_id"
     t.bigint "band_id"
+    t.string "sign_in_token"
+    t.datetime "sign_in_token_sent_at"
     t.index ["band_id"], name: "index_members_on_band_id"
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["instrument_id"], name: "index_members_on_instrument_id"

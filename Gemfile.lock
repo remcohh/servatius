@@ -13,6 +13,14 @@ GIT
       capistrano (~> 3.1)
       sshkit (~> 1.3)
 
+GIT
+  remote: https://github.com/dvanderbeek/magic-link.git
+  revision: a576446bc54c85725f2ba9e12ef4a0c2ed17a13c
+  specs:
+    magic-link (0.1.0)
+      devise (>= 4)
+      rails (>= 5.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -132,6 +140,7 @@ GEM
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.10.0)
+    filterrific (5.1.0)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
     globalid (0.4.2)
@@ -277,6 +286,9 @@ GEM
       rubyzip (~> 1.2, >= 1.2.2)
     settingslogic (2.0.9)
     sexp_processor (4.12.0)
+    simple_form (4.1.0)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -310,6 +322,7 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    will_paginate (3.1.7)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -332,11 +345,13 @@ DEPENDENCIES
   comfortable_mexican_sofa
   devise
   erb2haml
+  filterrific
   font-awesome-rails
   haml-rails
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.1.5)
+  magic-link!
   mini_racer
   pg
   puma (~> 3.11)
@@ -346,11 +361,13 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   settingslogic
+  simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  will_paginate
 
 RUBY VERSION
    ruby 2.6.1p33

@@ -35,6 +35,7 @@ gem 'settingslogic'
 
 gem 'devise'
 gem 'cancancan', github:'CanCanCommunity/cancancan', branch: 'feature/3.0.0'
+gem 'magic-link', github:'dvanderbeek/magic-link'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -54,6 +55,9 @@ gem 'haml-rails'
 gem 'active_link_to'
 gem 'rails-i18n'
 gem 'bootstrap_form', '>= 4.2.0'
+gem 'simple_form'
+gem 'filterrific'
+gem 'will_paginate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

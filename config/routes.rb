@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Magic::Link::Engine, at: '/'
   comfy_route :cms_admin, path: '/cms'
   # Ensure that this route is defined last
   resources :bands
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
   get 'gig_signup/:id', to: 'gigs#signup', as: 'gig_signup'
   get 'gig_dropout/:id', to: 'gigs#dropout', as: 'gig_dropout'
   comfy_route :cms, path: '/'
+
+
 
   root 'home#index'
 end

@@ -1,7 +1,22 @@
 class BandsController < ApplicationController
 
   def index
-    @bands = Band.all
+    #@bands = Band.all
+
+    @filterrific = initialize_filterrific(
+        Band,
+        params[:filterrific],
+        select_options: {
+        },
+        persistence_id: "shared_key",
+        default_filter_params: {},
+        available_filters: [:sorted_by, :name_filter],
+        sanitize_params: true,
+    ) || return
+
+    @bands = @filterrific.find.page(params[:page])
+
+
   end
 
   def edit
