@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   devise_for :members, controllers: { registrations: 'registrations' }
   # get 'members/index'
   get 'home/index'
-  resources :members
+  resources :members do
+    get 'send_login_link', to: 'members#send_login_link'
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'gig_signup/:id', to: 'gigs#signup', as: 'gig_signup'
   get 'gig_dropout/:id', to: 'gigs#dropout', as: 'gig_dropout'

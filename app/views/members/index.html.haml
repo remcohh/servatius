@@ -1,13 +1,15 @@
-%h1.title Members
-%table.table.is-fullwidth
-  %tr
-    %th Email
-    %th Name
-    %th Instrument
-    %th Phone
-    - @members.each do |member|
-      %tr
-        %td= member.email
-        %td= member.full_name
-        %td= member.instrument.name
-        %td= member.phone_number
+.container-fuild
+  .row
+    .col-md-1
+    .col-md-10
+      .row
+        .col-sm-6
+          %h3
+            Leden
+          = form_for_filterrific @filterrific do |f|
+            = f.text_field(:name_filter, placeholder: 'Zoek op naam', class: 'filterrific-periodically-observed')
+        .col-md-2
+          = link_to 'Nieuw lid', new_member_path, class: 'btn btn-secondary float-right'
+      %hr
+      #filterrific_results
+        = render partial: 'list'

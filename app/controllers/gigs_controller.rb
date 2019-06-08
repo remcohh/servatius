@@ -1,4 +1,6 @@
 class GigsController < ApplicationController
+  before_action :authenticate_member!
+
   load_and_authorize_resource
   before_action :set_gig, only: [:show, :edit, :update, :destroy, :signup, :dropout]
 

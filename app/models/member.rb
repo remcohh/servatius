@@ -5,6 +5,22 @@ class Member < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  filterrific(
+      default_filter_params: { sorted_by: "last_name asc" },
+      available_filters: [
+          :sorted_by,
+          :name_filter
+      ],
+  )
+
+  scope :name_filter, ->(name) {
+    where('lower(last_name) like ? or lower(first_name) like ?', "%#{name.downcase}%", "%#{name.downcase}%")
+  }
+
+  scope :sorted_by, ->(o) {
+    order("last_name asc")
+  }
+
   has_many :gigs
   belongs_to :instrument
 

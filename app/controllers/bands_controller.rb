@@ -1,4 +1,5 @@
 class BandsController < ApplicationController
+  before_action :authenticate_member!
 
   def index
     #@bands = Band.all
@@ -40,6 +41,7 @@ class BandsController < ApplicationController
 
   def destroy
     Band.find(params[:id]).destroy!
+    redirect_to action: :index
   end
 
   private

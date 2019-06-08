@@ -1,0 +1,13 @@
+- @members.each do |member|
+  .row.mb-1
+    .col-sm-1.my-auto
+      = member.first_name
+    .col-sm-2.my-auto
+      = member.last_name
+    .col-sm-2.my-auto
+      = member.email
+    .col-sm-4
+      .btn-group.float-right
+        = link_to 'Send link', member_send_login_link_path(member), class: 'btn btn-outline-secondary'
+        = link_to 'Bewerken', edit_member_path(member), class: 'btn btn-outline-secondary'
+        = link_to 'Verwijderen',member_path(member),  method: :delete, data: { confirm: 'Weet u het zeker?' }, class: 'btn btn-danger'

@@ -12,7 +12,7 @@ class Band < ApplicationRecord
   }
 
   scope :sorted_by, ->(o) {
-    order(o)
+    order("created_at")
   }
 
 end

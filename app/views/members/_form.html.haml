@@ -1,0 +1,20 @@
+.container-fluid
+  .row
+    .col-md-1
+    .col-md-8
+      = bootstrap_form_for(@member) do |f|
+        .row
+          .col-sm-10
+            %h3
+              Lid
+        .row
+          .col-sm-8
+            = f.text_field :first_name, label: 'Voornaam'
+            = f.text_field :last_name, label: 'Achternaam'
+            = f.text_field :email, label: 'Email'
+
+          .col-sm-2
+        .row
+          .col-lg-10
+            = f.submit 'Opslaan'
+    .col-md-1

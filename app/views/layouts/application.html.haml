@@ -6,8 +6,6 @@
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
     %meta{:content => cms_fragment_content("meta-description"), :name => "description"}/
-    / Bootstrap CSS
-    %link{:crossorigin => "anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css", :integrity => "sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb", :rel => "stylesheet"}/
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     - if @cms_site.present?
@@ -15,6 +13,7 @@
       = javascript_include_tag comfy_cms_render_js_path(@cms_site.id, @cms_layout.identifier)
   %body
     = render 'layouts/navbar'
+    = render 'layouts/flash'
     = yield
     /
       uncomment if you want to see what those variables contain
