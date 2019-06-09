@@ -6,8 +6,9 @@
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
     %meta{:content => cms_fragment_content("meta-description"), :name => "description"}/
+    / Bootstrap CSS
     = csrf_meta_tags
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all'
     - if @cms_site.present?
       = stylesheet_link_tag comfy_cms_render_css_path(@cms_site.id, @cms_layout.identifier)
       = javascript_include_tag comfy_cms_render_js_path(@cms_site.id, @cms_layout.identifier)
@@ -21,7 +22,11 @@
       <haml_loud> debug @cms_layout </haml_loud>
       <haml_loud> debug @cms_page </haml_loud>
     / jQuery first, then Popper.js, then Bootstrap JS
-    %script{:crossorigin => "anonymous", :integrity => "sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN", :src => "https://code.jquery.com/jquery-3.2.1.slim.min.js"}
-    %script{:crossorigin => "anonymous", :integrity => "sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh", :src => "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"}
-    %script{:crossorigin => "anonymous", :integrity => "sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"}
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application'
+:javascript
+  // workaround for non functional dropdown menu items
+  $(document).ready(function () {
+    $('.dropdown-item').on('click', function(){
+      window.location = this.href
+    });
+  });

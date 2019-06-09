@@ -7,7 +7,17 @@
     .col-sm-2.my-auto
       = member.email
     .col-sm-4
+
+
       .btn-group.float-right
-        = link_to 'Send link', member_send_login_link_path(member), class: 'btn btn-outline-secondary'
+        .dropdown
+          .btn.btn-outline-secondary.dropdown-toggle{ data: { toggle: "dropdown" } }
+            Acties
+            .dropdown-menu
+              = link_to 'Verstuur inlog link', member_send_login_link_url(member), class: 'dropdown-item'
+              = link_to 'Verstuur wachtwoord reset', member_send_reset_password_link_url(member), class: 'dropdown-item'
         = link_to 'Bewerken', edit_member_path(member), class: 'btn btn-outline-secondary'
         = link_to 'Verwijderen',member_path(member),  method: :delete, data: { confirm: 'Weet u het zeker?' }, class: 'btn btn-danger'
+
+
+

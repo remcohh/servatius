@@ -55,6 +55,13 @@ class MembersController < ApplicationController
     redirect_to action: :index
   end
 
+  def send_reset_password_link
+    @member = Member.find params[:member_id]
+    @member.send_reset_password_instructions
+    flash[:notice] = 'Instructies verstuurd'
+    redirect_to action: :index
+  end
+
   private
 
   def member_params
