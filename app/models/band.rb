@@ -15,4 +15,6 @@ class Band < ApplicationRecord
     order("created_at")
   }
 
+  has_many :members
+  has_many :comfy_cms_sites, class_name: 'Comfy::Cms::Site', dependent: :destroy
 end

@@ -21,6 +21,8 @@ class Member < ApplicationRecord
     order("last_name asc")
   }
 
+
+  belongs_to :band
   has_many :gigs
   belongs_to :instrument
 

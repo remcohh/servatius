@@ -7,11 +7,9 @@
     .col-sm-2.my-auto
       = member.email
     .col-sm-4
-
-
       .btn-group.float-right
         .btn-group
-          .btn.btn-outline-secondary.dropdown-toggle{ data: { toggle: "dropdown" } }
+          .btn.btn-outline-secondary.dropdown-toggle{ data: { toggle: 'dropdown' } }
             Acties
             .dropdown-menu
               = link_to 'Verstuur inlog link', member_send_login_link_url(member), class: 'dropdown-item'

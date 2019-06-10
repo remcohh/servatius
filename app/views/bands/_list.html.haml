@@ -4,5 +4,5 @@
       = band.name
     .col-sm-2
       .btn-group.float-right
-        = link_to 'Bewerken', edit_band_path(band), class: 'btn btn-outline-secondary'
-        = link_to 'Verwijderen',band_path(band),  method: :delete, data: { confirm: 'Weet u het zeker?' }, class: 'btn btn-danger'
+        = link_to('Bewerken', edit_band_path(band), class: 'btn btn-outline-secondary')
+        = link_to('Verwijderen', band_path(band), method: :delete, data: { confirm: 'Weet u het zeker?' }, class: 'btn btn-danger')
