@@ -1,10 +1,9 @@
-class MembersController < ApplicationController
+class Admin::MembersController < ApplicationController
   before_action :authenticate_member!
 
   # ml=Magic::Link::MagicLink.new
   # ml.email="remcohh@gmail.com"
   # ml.send_login_instructions
-
 
   def index
     @filterrific = initialize_filterrific(
@@ -37,7 +36,10 @@ class MembersController < ApplicationController
   end
 
   def create
-    Member.create(member_params)
+    Member.create(member_params.merge(password: 'jjduuj',
+                                      password_confirmation: 'jjduuj',
+                                      band_id: current_member.band_id,
+    ))
     redirect_to action: :index
   end
 
@@ -65,6 +67,6 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:last_name, :first_name, :email)
+    params.require(:member).permit(:last_name, :first_name, :email, :instrument_id)
   end
 end

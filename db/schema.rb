@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_151256) do
+ActiveRecord::Schema.define(version: 2019_06_10_094239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,9 +229,19 @@ ActiveRecord::Schema.define(version: 2019_05_30_151256) do
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
+  create_table "rehearsals", force: :cascade do |t|
+    t.bigint "band_id"
+    t.string "description"
+    t.datetime "date_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_rehearsals_on_band_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comfy_cms_sites", "bands"
   add_foreign_key "gigs", "bands"
   add_foreign_key "members", "bands"
   add_foreign_key "members", "instruments"
+  add_foreign_key "rehearsals", "bands"
 end

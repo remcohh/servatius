@@ -1,0 +1,17 @@
+.container-fluid
+  .row
+    .col-1
+    .col-10
+      = bootstrap_form_for ['admin', @rehearsal] do |f|
+        .row
+          .col-10
+            %h3
+              Lid
+        .row
+          .col-10
+            = f.datetime_field :date_time, label: 'Datum en tijd'
+            = f.text_field :description, label: 'Omschrijving'
+        .row
+          .col-10
+            = f.submit 'Opslaan'
+    .col-md-1

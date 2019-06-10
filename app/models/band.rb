@@ -17,4 +17,5 @@ class Band < ApplicationRecord
 
   has_many :members
   has_many :comfy_cms_sites, class_name: 'Comfy::Cms::Site', dependent: :destroy
+  has_many :rehearsals
 end

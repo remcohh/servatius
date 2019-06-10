@@ -20,17 +20,18 @@
               %li.nav-item
                 = active_link_to page.label, page.url, class: 'nav-link servatius-yellow'
         %li.nav-item
-          = link_to 'App', members_url, class: 'nav-link servatius-yellow'
-
+          = link_to 'App', admin_members_url, class: 'nav-link servatius-yellow'
       -else
         - if current_member&.admin?
           %li.nav-item.dropdown
             = link_to 'Admin', root_url, class: 'nav-link servatius-yellow', id: 'navbarDropdownAdmin', class: 'nav-link servatius-yellow dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
             .dropdown-menu{ 'aria-labelledby' => "navbarDropdownAdmin" }
-              =link_to 'Verenigingen', bands_url, class: 'nav-link'
-              =link_to 'leden', members_url, class: 'nav-link'
+              = link_to 'Verenigingen', admin_bands_url, class: 'nav-link'
+              = link_to 'leden', admin_members_url, class: 'nav-link'
+              = link_to('Repetities', admin_rehearsals_path, class: 'nav-link servatius-yellow')
 
         - if current_member
           %li.nav-item.dropdown
-            = link_to('Logout', destroy_member_session_path, method: :delete, class: 'nav-link servatius-yellow')
-
+            = link_to('Repetities', admin_rehearsals_path, class: 'nav-link servatius-yellow')
+          %li.nav-item.dropdown
+            = link_to('Uitloggen', destroy_member_session_path, method: :delete, class: 'nav-link servatius-yellow')

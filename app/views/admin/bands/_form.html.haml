@@ -1,17 +1,16 @@
 .container-fluid
   .row
-    .col-md-1
-    .col-md-8
-      = bootstrap_form_for(@band) do |f|
+    .col-1
+    .col-10
+      = bootstrap_form_for ['admin', @band] do |f|
         .row
-          .col-sm-10
+          .col-10
             %h3
               Vereniging
         .row
-          .col-sm-8
+          .col-10
             = f.text_field :name, label: 'Naam'
-          .col-sm-2
         .row
-          .col-lg-10
+          .col-10
             = f.submit 'Opslaan'
-    .col-md-1
+    .col-1

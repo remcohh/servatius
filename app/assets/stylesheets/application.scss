@@ -70,3 +70,45 @@
   margin-bottom:  1rem;
 }
 
+body
+{
+  font-size: 12px;
+}
+h1
+{
+  font-size:30px;
+}
+h2
+{
+  font-size:30px;
+}
+h3
+{
+  font-size:30px;
+}
+
+@media (min-width: 768px)
+{
+  body
+  {
+    font-size: 15px;
+  }
+  h1
+  {
+    font-size:24px;
+  }
+  h2
+  {
+    font-size:30px;
+  }
+  h3
+  {
+    font-size:30px;
+  }
+}
+
+.filterrific-periodically-observed{
+  border: 1px solid  #17679e;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
