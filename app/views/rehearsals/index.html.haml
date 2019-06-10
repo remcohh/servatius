@@ -1,0 +1,13 @@
+.container
+  .row
+    .col-12
+      .row
+        .col-6
+          %h3
+            Repetities
+
+        .col-6
+          = link_to 'Nieuwe repetitie', new_admin_rehearsal_path, class: 'btn btn-secondary float-right'
+  .row
+    #filterrific_results.col-12
+      = render partial: 'list'

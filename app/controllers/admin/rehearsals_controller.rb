@@ -2,19 +2,7 @@ class Admin::RehearsalsController < ApplicationController
   before_action :authenticate_member!
 
   def index
-    @filterrific = initialize_filterrific(
-        Rehearsal,
-        params[:filterrific],
-        select_options: {
-        },
-        persistence_id: "shared_key",
-        default_filter_params: {},
-        available_filters: [:sorted_by],
-        sanitize_params: true,
-    ) || return
-
-    @rehearsals = @filterrific.find.page(params[:page])
-
+    @rehearsals = Rehearsal.all.order('date_time desc')
   end
 
   def edit

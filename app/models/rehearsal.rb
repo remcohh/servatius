@@ -1,14 +1,16 @@
 class Rehearsal < ApplicationRecord
-  filterrific(
-      default_filter_params: { sorted_by: 'date_time asc' },
-      available_filters: [
-          :sorted_by
-      ],
-  )
+  belongs_to :band
+  has_many :rehearsal_declines
 
-  scope :sorted_by, ->(o) {
-    order("date_time asc")
+
+  scope :upcoming_for_band, ->(band_id) {
+    where('date(date_time) >= current_date')
+        .where(band_id: band_id)
+        .order('date_time asc')
   }
 
-  belongs_to :band
+  def is_declined_by?(member)
+    rehearsal_declines.where(member_id: member.id).count > 0
+  end
+
 end

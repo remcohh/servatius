@@ -1,0 +1,17 @@
+- @rehearsals.each do |rehearsal|
+  .row.mb-1.align-items-center
+    .col-3
+      = rehearsal.date_time.strftime('%d-%m-%Y')
+    .col-4
+      = rehearsal.description
+    .col-1
+      = link_to 'Details', rehearsal_path(rehearsal)
+    .col-4
+      .btn-group.float-right
+        - if rehearsal.is_declined_by?(current_member)
+          Afgemeld
+        - else
+          = link_to 'Afmelden',decline_rehearsal_path(rehearsal), method: 'put', class: 'btn btn-sm btn-danger'
+
+
+

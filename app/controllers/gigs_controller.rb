@@ -14,7 +14,6 @@ class GigsController < ApplicationController
   # GET /gigs/1
   # GET /gigs/1.json
   def show
-    # byebug
   end
 
   # GET /gigs/new

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_094239) do
+ActiveRecord::Schema.define(version: 2019_06_10_152820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,15 @@ ActiveRecord::Schema.define(version: 2019_06_10_094239) do
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
+  create_table "rehearsal_declines", force: :cascade do |t|
+    t.bigint "member_id"
+    t.bigint "rehearsal_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["member_id"], name: "index_rehearsal_declines_on_member_id"
+    t.index ["rehearsal_id"], name: "index_rehearsal_declines_on_rehearsal_id"
+  end
+
   create_table "rehearsals", force: :cascade do |t|
     t.bigint "band_id"
     t.string "description"
@@ -243,5 +252,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_094239) do
   add_foreign_key "gigs", "bands"
   add_foreign_key "members", "bands"
   add_foreign_key "members", "instruments"
+  add_foreign_key "rehearsal_declines", "members"
+  add_foreign_key "rehearsal_declines", "rehearsals"
   add_foreign_key "rehearsals", "bands"
 end

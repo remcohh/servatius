@@ -3,6 +3,13 @@ Rails.application.routes.draw do
   devise_for :members, controllers: { registrations: 'registrations' }
   comfy_route :cms_admin, path: '/cms'
   # Ensure that this route is defined last
+
+  get 'members/home', to: 'home#index', as: 'members_home'
+  get 'rehearsals', to: 'rehearsals#index', as: 'rehearsals'
+  get 'rehearsal/:id', to: 'rehearsals#show', as: 'rehearsal'
+  put 'rehearsals/:id/decline', to: 'rehearsals#decline', as: 'decline_rehearsal'
+  put 'rehearsals/:id/remove_decline', to:  'rehearsals#remove_decline', as: 'remove_rehearsal_decline'
+
   namespace :admin do
     resources :bands
     resources :gigs

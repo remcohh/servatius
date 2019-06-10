@@ -1,0 +1,23 @@
+.container-fluid
+  .row
+    .col-1
+    .col-10
+      .row
+        .col-10
+          %h3
+            Repetitie
+      .row
+        .col-10
+          = "Datum: #{@rehearsal.date_time.strftime('%d-%m-%Y %H:%M')}"
+      .row
+        .col-10
+          - if @rehearsal.is_declined_by?(current_member)
+            %p U bent bent afgemeld voor deze repetitie
+            = link_to 'Weer aanmelden', remove_rehearsal_decline_path(@rehearsal), method: :put, class: 'btn btn-success'
+          - else
+            %p U bent niet afgemeld voor deze repetitie
+
+      .row.mt-3
+        .col-10
+          = link_to 'Terug naar overzicht', rehearsals_path
+    .col-1
