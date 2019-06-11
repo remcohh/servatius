@@ -73,6 +73,8 @@
 body
 {
   font-size: 12px;
+  padding-top: 70px;
+
 }
 h1
 {
@@ -92,6 +94,7 @@ h3
   body
   {
     font-size: 15px;
+    padding-top: 70px;
   }
   h1
   {
@@ -111,4 +114,9 @@ h3
   border: 1px solid  #17679e;
   margin-bottom: 1.5rem;
   width: 100%;
+}
+
+.topnav{
+  background-color: #17679e;
+  opacity: 0.95;
 }

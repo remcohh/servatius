@@ -1,8 +1,8 @@
-%nav.navbar.navbar-expand-lg.navbar-light.servatius-blue
+%nav.navbar.navbar-expand-lg.navbar-dark.fixed-top.topnav
   %a.navbar-brand.servatius-yellow
-    = link_to 'Fanfare Sint Servatius', root_url, class: 'nav-link servatius-yellow'
+    = link_to 'Home', root_url, class: 'nav-link servatius-yellow'
   %button.navbar-toggler{'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarSupportedContent', 'data-toggle' => 'collapse', :type => 'button'}
-    %span.navbar-toggler-icon
+    %span.navbar-toggler-icon.servatius-yellow
   #navbarSupportedContent.collapse.navbar-collapse
     %ul.navbar-nav.mr-auto
       - if @cms_site.present?
@@ -26,9 +26,9 @@
           %li.nav-item.dropdown
             = link_to 'Admin', root_url, class: 'nav-link servatius-yellow', id: 'navbarDropdownAdmin', class: 'nav-link servatius-yellow dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
             .dropdown-menu{ 'aria-labelledby' => "navbarDropdownAdmin" }
-              = link_to 'Verenigingen', admin_bands_url, class: 'nav-link'
-              = link_to 'leden', admin_members_url, class: 'nav-link'
-              = link_to('Repetities', admin_rehearsals_path, class: 'nav-link')
+              = link_to 'Verenigingen', admin_bands_url, class: 'dropdown-item'
+              = link_to 'leden', admin_members_url, class: 'dropdown-item'
+              = link_to('Repetities', admin_rehearsals_path, class: 'dropdown-item')
         - if current_member
           %li.nav-item.dropdown
             = link_to('Repetities', admin_rehearsals_path, class: 'nav-link servatius-yellow')
