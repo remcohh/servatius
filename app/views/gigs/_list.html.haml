@@ -1,0 +1,18 @@
+- @gigs.each do |gig|
+  .row.mb-1.align-items-center
+    .col-7
+      = "#{gig.when.strftime('%d-%m-%Y %H:%M')}: #{gig.title}"
+    .col-1
+      = link_to 'Details', gig_path(gig)
+    .col-4
+      .btn-group.float-right
+        - if gig.is_declined_by?(current_member)
+          Afgemeld
+        - elsif gig.is_accepted_by?(current_member)
+          Aangemeld
+        - else
+          = link_to 'Ja&nbsp&nbsp'.html_safe ,accept_gig_path(gig), method: 'put', class: 'btn btn-sm btn-success'
+          = link_to 'Nee',decline_gig_path(gig), method: 'put', class: 'btn btn-sm btn-danger'
+
+
+

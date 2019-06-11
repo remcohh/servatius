@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get 'rehearsal/:id', to: 'rehearsals#show', as: 'rehearsal'
   put 'rehearsals/:id/decline', to: 'rehearsals#decline', as: 'decline_rehearsal'
   put 'rehearsals/:id/remove_decline', to:  'rehearsals#remove_decline', as: 'remove_rehearsal_decline'
+  get 'gigs', to: 'gigs#index', as: 'gigs'
+  get 'gig/:id', to: 'gigs#show', as: 'gig'
+  put 'gig/:id/accept', to: 'gigs#accept', as: 'accept_gig'
+  put 'gig/:id/decline', to: 'gigs#decline', as: 'decline_gig'
 
   namespace :admin do
     resources :bands

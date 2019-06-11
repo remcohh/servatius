@@ -11,6 +11,14 @@ class Gig < ApplicationRecord
     members
   end
 
+  def is_declined_by?(user)
+    false
+  end
+
+  def is_accepted_by?(user)
+    false
+  end
+
   private
 
   def check_gig_admin_has_permission

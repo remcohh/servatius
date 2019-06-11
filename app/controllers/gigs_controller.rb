@@ -27,6 +27,14 @@ class GigsController < ApplicationController
     @gig_admins = Member.where(gig_admin: true)
   end
 
+  def accept
+    redirect_to action: :index
+  end
+
+  def decline
+    redirect_to action: :index
+  end
+
   # POST /gigs
   # POST /gigs.json
   def create
