@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  comfy_route :blog_admin, path: '/cms'
+  comfy_route :blog, path: '/blog'
   mount Magic::Link::Engine, at: '/'
   devise_for :members, controllers: { registrations: 'registrations' }
   comfy_route :cms_admin, path: '/cms'
