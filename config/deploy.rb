@@ -1,5 +1,5 @@
 set :application, 'servatius'
-set :repo_url, 'git@github.com:remcohh/band-aye.git'
+set :repo_url, 'git@github.com:remcohh/servatius.git'
 
 set :deploy_to, '/home/deploy/servatius'
 
