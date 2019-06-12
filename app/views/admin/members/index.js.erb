@@ -3,3 +3,9 @@
 ) %>
 $("#filterrific_results").html("<%= js %>");
 
+// workaround for non functional dropdown menu items
+$(document).ready(function () {
+  $('.dropdown-item').on('click', function(){
+    window.location = this.href
+  });
+});
