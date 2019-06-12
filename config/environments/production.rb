@@ -97,11 +97,11 @@ Rails.application.configure do
 
 
   config.action_mailer.smtp_settings = {
-      :user_name => 'maestoso',
+      :user_name => 'azure_339731738b776f443b7d6b403c9624ba@azure.com',
       :password => 'prosignia1',
-      :domain => 'onzemuziek.nl',
+      :domain => 'fanfaresintservatius.nl',
       :address => 'smtp.sendgrid.net',
-      :port => 2525,
+      :port => 587,
       :authentication => :plain,
       :enable_starttls_auto => true
   }
