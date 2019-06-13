@@ -28,10 +28,14 @@ class GigsController < ApplicationController
   end
 
   def accept
+    @gig = Gig.find(params[:id])
+    @gig.gig_members.where(member_id: current_member.id).first_or_create(presence: true)
     redirect_to action: :index
   end
 
   def decline
+    @gig = Gig.find(params[:id])
+    @gig.gig_members.where(member_id: current_member.id).first_or_create(presence: false)
     redirect_to action: :index
   end
 

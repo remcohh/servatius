@@ -13,6 +13,9 @@ class Member < ApplicationRecord
       ],
   )
 
+  has_many :gig_presences
+
+
   scope :name_filter, ->(name) {
     where('lower(last_name) like ? or lower(first_name) like ?', "%#{name.downcase}%", "%#{name.downcase}%")
   }
