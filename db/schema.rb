@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_13_190440) do
+ActiveRecord::Schema.define(version: 2019_06_13_194812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,7 +205,7 @@ ActiveRecord::Schema.define(version: 2019_06_13_190440) do
   create_table "gigs", force: :cascade do |t|
     t.string "title"
     t.string "where"
-    t.datetime "when"
+    t.datetime "date_time"
     t.string "band_contact"
     t.string "event_contact"
     t.boolean "confirmed"
@@ -213,9 +213,14 @@ ActiveRecord::Schema.define(version: 2019_06_13_190440) do
     t.bigint "gig_admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "high_payer"
-    t.boolean "charity"
     t.bigint "band_id"
+    t.datetime "gather_when"
+    t.string "gather_where"
+    t.string "dresscode"
+    t.string "where_address1"
+    t.string "where_address2"
+    t.text "member_remarks"
+    t.text "site_remarks"
     t.index ["band_id"], name: "index_gigs_on_band_id"
     t.index ["gig_admin_id"], name: "index_gigs_on_gig_admin_id"
   end

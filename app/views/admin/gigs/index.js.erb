@@ -1,5 +1,5 @@
 <% js = escape_javascript(
-  render(partial: 'members/list', locals: { rehearsals: @rehearsals })
+  render(partial: 'admin/gigs/list', locals: { gigs: @gigs })
 ) %>
 $("#filterrific_results").html("<%= js %>");
 
@@ -9,4 +9,3 @@ $(document).ready(function () {
     window.location = this.href
   });
 });
-

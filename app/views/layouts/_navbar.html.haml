@@ -29,6 +29,7 @@
               = link_to 'Verenigingen', admin_bands_url, class: 'dropdown-item'
               = link_to 'leden', admin_members_url, class: 'dropdown-item'
               = link_to('Repetities', admin_rehearsals_path, class: 'dropdown-item')
+              = link_to('Optredens', admin_gigs_path, class: 'dropdown-item')
         - if current_member
           %li.nav-item.dropdown
             = link_to('Repetities', rehearsals_path, class: 'nav-link servatius-yellow')
