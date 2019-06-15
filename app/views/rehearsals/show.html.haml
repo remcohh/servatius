@@ -16,6 +16,8 @@
             = link_to 'Weer aanmelden', remove_rehearsal_decline_path(@rehearsal), method: :put, class: 'btn btn-success'
           - else
             %p U bent niet afgemeld voor deze repetitie
+            = link_to 'Afmelden',decline_rehearsal_path(@rehearsal), method: 'put', class: 'btn btn-sm btn-danger'
+
 
       .row.mt-3
         .col-10

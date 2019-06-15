@@ -8,7 +8,14 @@
             Optreden
       .row
         .col-10
-          = "#{@gig.date_time.strftime('%d-%m-%Y %H:%M')} #{@gig.title}"
+          %p
+            = "#{@gig.date_time.strftime('%d-%m-%Y %H:%M')} #{@gig.title}"
+          %p
+            = "Verzamelen: #{@gig.gather_when.strftime('%H:%M')}, locatie: #{@gig.gather_where}"
+          %p
+            = "Kleding: #{@gig.dresscode}"
+          %p
+            = @gig.member_remarks
       .row
         .col-10
           - presence = @gig.presence_for_member(current_member)
