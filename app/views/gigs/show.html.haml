@@ -15,8 +15,8 @@
           - if presence.nil?
             %p
               U heeft zich nog niet aan- of afgemeld
-            = link_to 'Ja&nbsp&nbsp'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
-            = link_to 'Nee',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
+            = link_to 'Ik kom'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
+            = link_to 'Ik kom niet',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
           - elsif presence == true
             %p
               U bent aangemeld
