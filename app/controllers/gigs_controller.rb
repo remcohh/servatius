@@ -28,14 +28,12 @@ class GigsController < ApplicationController
   end
 
   def accept
-    @gig = Gig.find(params[:id])
-    @gig.gig_members.where(member_id: current_member.id).first_or_create(presence: true)
+    set_presence true
     redirect_to action: :index
   end
 
   def decline
-    @gig = Gig.find(params[:id])
-    @gig.gig_members.where(member_id: current_member.id).first_or_create(presence: false)
+    set_presence false
     redirect_to action: :index
   end
 
@@ -108,4 +106,11 @@ class GigsController < ApplicationController
                                 :gig_admin_id, :confirmed, :about, :about_r, :signup, :dropout,
                                 :high_payer, :charity)
   end
+
+  def set_presence(val)
+    @gig = Gig.find(params[:id])
+    gig_presence = @gig.gig_presences.where(member_id: current_member.id).first_or_create
+    gig_presence.update_attribute :present, val
+  end
+
 end

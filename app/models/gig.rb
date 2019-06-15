@@ -30,12 +30,16 @@ class Gig < ApplicationRecord
     members
   end
 
-  def is_declined_by?(user)
-    false
+  def presence_for_member(member)
+    gig_presences.where(member: member).first.try(:present)
   end
 
-  def is_accepted_by?(user)
-    false
+  def is_declined_by?(member)
+    presence_for_member(member) == false
+  end
+
+  def is_accepted_by?(member)
+    presence_for_member(member) == true
   end
 
   private

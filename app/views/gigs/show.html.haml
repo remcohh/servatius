@@ -1,79 +1,33 @@
-= @gig.title
+.container-fluid
+  .row
+    .col-1
+    .col-10
+      .row
+        .col-10
+          %h3
+            Optreden
+      .row
+        .col-10
+          = "#{@gig.date_time.strftime('%d-%m-%Y %H:%M')} #{@gig.title}"
+      .row
+        .col-10
+          - presence = @gig.presence_for_member(current_member)
+          - if presence.nil?
+            %p
+              U heeft zich nog niet aan- of afgemeld
+            = link_to 'Ja&nbsp&nbsp'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
+            = link_to 'Nee',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
+          - elsif presence == true
+            %p
+              U bent aangemeld
+            = link_to 'Toch afmelden',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
+          - elsif presence == false
+            %p
+              U bent afgemeld
+            = link_to 'Toch aanmelden'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
 
-- if @gig.confirmed
-  %span.tag.is-success.is-large Confirmed
-- else
-  %span.tag.is-info.is-large Unconfirmed
-- if @gig.high_payer
-  %span.tag.is-small £ $ €
-- if @gig.charity
-  %span.tag.is-small Charity
+      .row.mt-3
+        .col-10
+          = link_to 'Terug naar overzicht', gigs_path
+    .col-1
 
-%p.title Details
-
-%p
-  %strong Where:
-  = @gig.where
-%p
-  %strong When:
-  = @gig.when.to_formatted_s(:short)
-%p
-  %strong Band contact:
-  = @gig.gig_admin.first_name
-%p
-  %strong Event contact:
-  = @gig.event_contact
-
-%p.title Players Signed Up
-%p
-  %strong
-    Drums:
-    %span.tag= @gig.players.drummers.count
-  = @gig.players.drummers.map { |m| m.first_name}.to_sentence
-%p
-  %strong
-    Bass:
-    %span.tag= @gig.players.basses.count
-  = @gig.players.basses.map { |m| m.first_name}.to_sentence
-%p
-  %strong
-    Trombones:
-    %span.tag= @gig.players.boners.count
-  = @gig.players.boners.map { |m| m.first_name}.to_sentence
-
-%p
-  %strong
-    Trumpeters:
-    %span.tag= @gig.players.trumpeters.count
-  = @gig.players.trumpeters.map { |m| m.first_name}.to_sentence
-%p
-  %strong
-    Tenor Saxes:
-    %span.tag= @gig.players.tenor_saxes.count
-  = @gig.players.tenor_saxes.map { |m| m.first_name}.to_sentence
-%p
-  %strong
-    Alto Saxes:
-    %span.tag= @gig.players.alto_saxes.count
-  = @gig.players.alto_saxes.map { |m| m.first_name}.to_sentence
-%p
-  %strong
-    Soprano Saxes:
-    %span.tag= @gig.players.soprano_saxes.count
-  = @gig.players.soprano_saxes.map { |m| m.first_name}.to_sentence
-
-.tile.is-child.box
-  %p.title About
-  %p= @gig.about
-
-
-- if @gig.players.include? current_member
-  = link_to 'Drop Out', gig_dropout_path, id: "gig_dropout"
-  |
-- else
-  = link_to 'Sign Up', gig_signup_path, id: "gig_signup"
-  |
-- if can? :edit, :gigs
-  = link_to 'Edit', edit_gig_path(@gig)
-  |
-= link_to 'Back', gigs_path
