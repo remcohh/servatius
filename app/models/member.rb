@@ -29,8 +29,6 @@ class Member < ApplicationRecord
   belongs_to :instrument
   has_many :rehearsal_declines
 
-  has_and_belongs_to_many :gigs
-
   def admin_role
     return 'Admin' if admin?
     return 'Gig Admin' if gig_admin?
