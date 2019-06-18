@@ -42,6 +42,14 @@ class Gig < ApplicationRecord
     presence_for_member(member) == true
   end
 
+  def self.members_for_gig_and_instrument(gig_id, instrument_id, present )
+    Member.joins(:gig_presences)
+          .where('members.instrument_id = ?', instrument_id)
+          .where('gig_presences.gig_id = ?',gig_id )
+          .where('gig_presences.present = ?', present)
+          .order('members.last_name asc')
+  end
+
   private
 
   def check_gig_admin_has_permission

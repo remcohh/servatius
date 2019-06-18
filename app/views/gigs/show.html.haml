@@ -16,21 +16,27 @@
             = "Kleding: #{@gig.dresscode}"
           %p
             = @gig.member_remarks
+
       .row
         .col-10
-          - presence = @gig.presence_for_member(current_member)
-          - if presence.nil?
+          U bent momenteel
+          = @status
+      .row
+        .col-5
+          %a{"href"=>"#", "data-target" => "#myModal", "data-toggle" => "modal"}
+            Bekijk de bezetting op dit moment
+
+      .row
+        .col-10
+          - if @status == 'Onbekend'
             %p
-              U heeft zich nog niet aan- of afgemeld
             = link_to 'Ik kom'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
             = link_to 'Ik kom niet',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
-          - elsif presence == true
+          - elsif @status == 'Aangemeld'
             %p
-              U bent aangemeld
             = link_to 'Toch afmelden',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
-          - elsif presence == false
+          - elsif @status == 'Afgemeld'
             %p
-              U bent afgemeld
             = link_to 'Toch aanmelden'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
 
       .row.mt-3
@@ -38,3 +44,59 @@
           = link_to 'Terug naar overzicht', gigs_path
     .col-1
 
+#myModal.modal
+  .modal-dialog
+    .modal-content
+      / Modal Header
+      .modal-header
+        %h4.modal-title Bezetting overzicht
+        %button.close{"data-dismiss" => "modal", :type => "button"} ×
+      / Modal body
+      .modal-body
+        .container.accordion-group
+          .row
+            .col-6
+              Instrument
+            .col-3
+              Aangemeld
+            .col-3
+              Afgemeld
+          - for instrument in @instruments_availability
+            .row.group_header{"data-parent" => "accordion-group", "data-toggle"=>"collapse", "data-target" =>"#collapse_#{instrument['id']}", "aria-expanded"=>"true", "aria-controls"=>"collapse_#{instrument['id']}"}
+              .col-6
+                %a{href: "#"}
+                  = instrument['instrument_name']
+              .col-3
+                = instrument['count_present']
+              .col-3
+                = instrument['count_not_present']
+            .collapse.hide{"id" => "collapse_#{instrument['id']}", "aria-labelledby" => "headingOne", "data-parent" => "#accordion"}
+              .card-body
+                .row
+                  .col-5
+                    %b
+                      Aangemeld:
+                - members = Gig.members_for_gig_and_instrument(@gig.id, instrument['id'], 'true')
+                - if members.count == 0
+                  = "-"
+                - else
+                  - members.each do |member|
+                    .row
+                      .col-5
+                        = "#{member.first_name} #{member.last_name}"
+                .row
+                  .col-5
+                    %b
+                      Afgemeld:
+                - members = Gig.members_for_gig_and_instrument(@gig.id, instrument['id'], 'false')
+                - if members.count == 0
+                  = "-"
+                - else
+                  - members.each do |member|
+                    .row
+                      .col-5
+                        = "#{member.first_name} #{member.last_name}"
+
+      / Modal footer
+      .modal-footer
+        %button.btn.btn-danger{"data-dismiss" => "modal", :type => "button"} Sluiten

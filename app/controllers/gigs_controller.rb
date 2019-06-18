@@ -14,6 +14,25 @@ class GigsController < ApplicationController
   # GET /gigs/1
   # GET /gigs/1.json
   def show
+    query="SELECT instruments.id, instruments.name AS instrument_name, COUNT(CASE WHEN present THEN 1 END) AS COUNT_present, COUNT(CASE WHEN NOT present THEN 1 END) AS COUNT_not_present FROM instruments LEFT OUTER JOIN members ON members.instrument_id=instruments.id
+LEFT OUTER JOIN gig_presences ON gig_presences.member_id = members.id AND gig_presences.gig_id=#{@gig.id}
+GROUP BY instruments.id ORDER BY instruments.id"
+
+    @instruments_availability = ActiveRecord::Base.connection.execute(query)
+    @instruments_availability_member = @instruments_availability.find{ |i| i['id'] == current_member.instrument_id }
+    presence = @gig.presence_for_member(current_member)
+    @status = if presence.nil?
+                'Onbekend'
+              elsif presence
+                'Aangemeld'
+              else
+                'Afgemeld'
+              end
+
+
+
+
+
   end
 
   # GET /gigs/new
