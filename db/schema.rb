@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_13_194812) do
+ActiveRecord::Schema.define(version: 2019_06_19_195429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,17 +191,6 @@ ActiveRecord::Schema.define(version: 2019_06_13_194812) do
     t.index ["page_id"], name: "index_comfy_cms_translations_on_page_id"
   end
 
-  create_table "gig_presences", force: :cascade do |t|
-    t.bigint "gig_id"
-    t.bigint "member_id"
-    t.boolean "present"
-    t.string "remarks"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["gig_id"], name: "index_gig_presences_on_gig_id"
-    t.index ["member_id"], name: "index_gig_presences_on_member_id"
-  end
-
   create_table "gigs", force: :cascade do |t|
     t.string "title"
     t.string "where"
@@ -230,6 +219,19 @@ ActiveRecord::Schema.define(version: 2019_06_13_194812) do
     t.string "family"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "member_presences", force: :cascade do |t|
+    t.bigint "presentable_id"
+    t.bigint "member_id"
+    t.boolean "present"
+    t.string "remarks"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "presentable_type"
+    t.boolean "will_be_present"
+    t.index ["member_id"], name: "index_member_presences_on_member_id"
+    t.index ["presentable_id"], name: "index_member_presences_on_presentable_id"
   end
 
   create_table "members", force: :cascade do |t|
@@ -276,9 +278,8 @@ ActiveRecord::Schema.define(version: 2019_06_13_194812) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comfy_cms_sites", "bands"
-  add_foreign_key "gig_presences", "gigs"
-  add_foreign_key "gig_presences", "members"
   add_foreign_key "gigs", "bands"
+  add_foreign_key "member_presences", "members"
   add_foreign_key "members", "bands"
   add_foreign_key "members", "instruments"
   add_foreign_key "rehearsal_declines", "members"

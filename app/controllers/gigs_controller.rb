@@ -15,7 +15,7 @@ class GigsController < ApplicationController
   # GET /gigs/1.json
   def show
     query="SELECT instruments.id, instruments.name AS instrument_name, COUNT(CASE WHEN present THEN 1 END) AS COUNT_present, COUNT(CASE WHEN NOT present THEN 1 END) AS COUNT_not_present FROM instruments LEFT OUTER JOIN members ON members.instrument_id=instruments.id
-LEFT OUTER JOIN gig_presences ON gig_presences.member_id = members.id AND gig_presences.gig_id=#{@gig.id}
+LEFT OUTER JOIN member_presences ON member_presences.member_id = members.id AND member_presences.presentable_id=#{@gig.id} and member_presences.presentable_type='Gig'
 GROUP BY instruments.id ORDER BY instruments.id"
 
     @instruments_availability = ActiveRecord::Base.connection.execute(query)
@@ -128,8 +128,8 @@ GROUP BY instruments.id ORDER BY instruments.id"
 
   def set_presence(val)
     @gig = Gig.find(params[:id])
-    gig_presence = @gig.gig_presences.where(member_id: current_member.id).first_or_create
-    gig_presence.update_attribute :present, val
+    gig_presence = @gig.member_presences.where(member: current_member).first_or_create
+    gig_presence.update_attribute :will_be_present, val
   end
 
 end

@@ -17,7 +17,7 @@ class Gig < ApplicationRecord
   }
 
   belongs_to :gig_admin, class_name: 'Member'
-  has_many :gig_presences
+  has_many :member_presences, as: :presentable
 
 
   #validate :check_gig_admin_has_permission
@@ -31,7 +31,7 @@ class Gig < ApplicationRecord
   end
 
   def presence_for_member(member)
-    gig_presences.where(member: member).first.try(:present)
+    member_presences.where(member: member).first.try(:will_be_present)
   end
 
   def is_declined_by?(member)
@@ -43,10 +43,11 @@ class Gig < ApplicationRecord
   end
 
   def self.members_for_gig_and_instrument(gig_id, instrument_id, present )
-    Member.joins(:gig_presences)
+    Member.joins(:member_presences)
           .where('members.instrument_id = ?', instrument_id)
-          .where('gig_presences.gig_id = ?',gig_id )
-          .where('gig_presences.present = ?', present)
+          .where('member_presences.presentable_id = ?',gig_id )
+          .where('member_presences.presentable_type = ?','Gig' )
+          .where('member_presences.will_be_present = ?', present)
           .order('members.last_name asc')
   end
 

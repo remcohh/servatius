@@ -16,5 +16,11 @@
             er nog meer functies toegevoegd worden. Heeft u zelf goede ideeen? laat het mij weten!
 
           %p
-            Gebruik het menu om uw keuze te maken
+          %ul
+            %li
+              = link_to('Repetities', rehearsals_path)
+            %li
+              = link_to('Optredens', gigs_path)
+            %li
+              = link_to('Uitloggen', destroy_member_session_path)
 

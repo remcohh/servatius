@@ -13,7 +13,7 @@ class Member < ApplicationRecord
       ],
   )
 
-  has_many :gig_presences
+  has_many :member_presences
 
 
   scope :name_filter, ->(name) {
