@@ -16,32 +16,20 @@
             = "Kleding: #{@gig.dresscode}"
           %p
             = @gig.member_remarks
-
-      .row
-        .col-10
-          U bent momenteel
-          = @status
-      .row
-        .col-5
-          %a{"href"=>"#", "data-target" => "#myModal", "data-toggle" => "modal"}
-            Bekijk de bezetting op dit moment
-
-      .row
-        .col-10
-          - if @status == 'Onbekend'
-            %p
-            = link_to 'Ik kom'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
-            = link_to 'Ik kom niet',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
-          - elsif @status == 'Aangemeld'
-            %p
-            = link_to 'Toch afmelden',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
-          - elsif @status == 'Afgemeld'
-            %p
-            = link_to 'Toch aanmelden'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
-
-      .row.mt-3
-        .col-10
-          = link_to 'Terug naar overzicht', gigs_path
+          %p
+            Uw status:
+            %span{style: "color: #{status_color(@status)}"}
+              = @status
+          %p
+            %a{"href"=>"#", "data-target" => "#myModal", "data-toggle" => "modal", class: "btn btn-sm btn-info"}
+              Bekijk bezetting
+          %p
+            - if %w(Onbekend Afgemeld).include?(@status)
+              = link_to 'Aanmelden'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
+            - if %w(Onbekend Aangemeld).include?(@status)
+              = link_to 'Afmelden',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
+          %p
+            = link_to 'Terug naar overzicht', gigs_path
     .col-1
 
 #myModal.modal
