@@ -1,5 +1,6 @@
 class Rehearsal < ApplicationRecord
   belongs_to :band
+  belongs_to :member
   has_many :member_presences, as: :presentable
 
   scope :upcoming_for_band, ->(band_id) {
@@ -10,6 +11,10 @@ class Rehearsal < ApplicationRecord
 
   def is_declined_by?(member)
     member_presences.where(member_id: member.id).where(will_be_present: false).count > 0
+  end
+
+  def declined_members
+    member_presences.where(member_presences: { will_be_present: false}).eager_load(:member)
   end
 
 end

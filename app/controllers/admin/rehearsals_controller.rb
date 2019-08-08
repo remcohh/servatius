@@ -5,6 +5,10 @@ class Admin::RehearsalsController < ApplicationController
     @rehearsals = Rehearsal.all.order('date_time desc')
   end
 
+  def show
+    @rehearsal = Rehearsal.find(params[:id])
+  end
+
   def edit
     @rehearsal = Rehearsal.find params[:id]
   end

@@ -1,0 +1,16 @@
+.container-fluid
+  .row
+    .col-1
+    .col-10
+      %h3
+        = "Repetitie: #{@rehearsal.date_time.strftime("%d-%m-%Y")}"
+  .row
+    .col-1
+    .col-10
+      %h3
+        Afmeldingen
+  - @rehearsal.declined_members.order('last_name').each do |mp|
+    .row
+      .col-1
+      .col-10
+        = mp.member.last_name
