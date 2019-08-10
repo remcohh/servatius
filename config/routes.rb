@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :bands
+    resources :ensembles do
+      post 'ensemble_instruments', to: 'ensembles#add_instrument'
+      delete 'ensemble_instruments/:id', to: 'ensembles#delete_instrument', as: 'ensemble_instrument'
+    end
     resources :gigs
     resources :instruments
     resources :rehearsals

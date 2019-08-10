@@ -1,0 +1,8 @@
+- @ensembles.each do |ensemble|
+  .row.mb-1.align-items-center
+    .col-6
+      = link_to ensemble.name, admin_ensemble_path(ensemble)
+    .col-6
+      .btn-group.float-right
+        = link_to('Bewerken', edit_admin_ensemble_path(ensemble), class: 'btn btn-sm btn-outline-secondary')
+        = link_to('Verwijderen', admin_ensemble_path(ensemble), method: :delete, data: { confirm: 'Weet u het zeker?' }, class: 'btn btn-sm btn-danger')

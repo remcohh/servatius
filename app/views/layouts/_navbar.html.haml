@@ -27,6 +27,7 @@
             = link_to 'Admin', root_url, class: 'nav-link servatius-yellow', id: 'navbarDropdownAdmin', class: 'nav-link servatius-yellow dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
             .dropdown-menu{ 'aria-labelledby' => "navbarDropdownAdmin" }
               = link_to 'Verenigingen', admin_bands_url, class: 'dropdown-item'
+              = link_to 'Ensembles', admin_ensembles_url, class: 'dropdown-item'
               = link_to 'leden', admin_members_url, class: 'dropdown-item'
               = link_to('Repetities', admin_rehearsals_path, class: 'dropdown-item')
               = link_to('Optredens', admin_gigs_path, class: 'dropdown-item')

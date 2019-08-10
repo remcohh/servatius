@@ -1,0 +1,17 @@
+.container-fluid
+  .row
+    .col-1
+    .col-10
+      = bootstrap_form_for ['admin', @ensemble] do |f|
+        .row
+          .col-10
+            %h3
+              Ensemble
+        .row
+          .col-10
+            = f.text_field :name, label: 'Naam'
+            = f.select :band_id, options_from_collection_for_select(Band.all, :id, :name)
+        .row
+          .col-10
+            = f.submit 'Opslaan'
+    .col-1

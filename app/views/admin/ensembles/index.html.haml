@@ -1,0 +1,14 @@
+.container
+  .row
+    .col-12
+      .row
+        .col-6
+          %h3
+            Ensembles
+          = form_for_filterrific @filterrific do |f|
+            = f.text_field(:name_filter, placeholder: 'Zoek op naam', class: 'filterrific-periodically-observed', autocomplete: 'off')
+        .col-6
+          = link_to 'Nieuw ensemble', new_admin_ensemble_path, class: 'btn btn-secondary float-right'
+  .row
+    #filterrific_results.col-12
+      = render partial: 'list'

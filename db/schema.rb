@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_19_195429) do
+ActiveRecord::Schema.define(version: 2019_08_10_070625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,6 +191,23 @@ ActiveRecord::Schema.define(version: 2019_06_19_195429) do
     t.index ["page_id"], name: "index_comfy_cms_translations_on_page_id"
   end
 
+  create_table "ensemble_instruments", force: :cascade do |t|
+    t.bigint "ensemble_id"
+    t.bigint "instrument_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ensemble_id"], name: "index_ensemble_instruments_on_ensemble_id"
+    t.index ["instrument_id"], name: "index_ensemble_instruments_on_instrument_id"
+  end
+
+  create_table "ensembles", force: :cascade do |t|
+    t.string "name"
+    t.bigint "band_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_ensembles_on_band_id"
+  end
+
   create_table "gigs", force: :cascade do |t|
     t.string "title"
     t.string "where"
@@ -252,8 +269,10 @@ ActiveRecord::Schema.define(version: 2019_06_19_195429) do
     t.bigint "band_id"
     t.string "sign_in_token"
     t.datetime "sign_in_token_sent_at"
+    t.bigint "ensemble_id"
     t.index ["band_id"], name: "index_members_on_band_id"
     t.index ["email"], name: "index_members_on_email", unique: true
+    t.index ["ensemble_id"], name: "index_members_on_ensemble_id"
     t.index ["instrument_id"], name: "index_members_on_instrument_id"
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
@@ -278,9 +297,12 @@ ActiveRecord::Schema.define(version: 2019_06_19_195429) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comfy_cms_sites", "bands"
+  add_foreign_key "ensemble_instruments", "ensembles"
+  add_foreign_key "ensemble_instruments", "instruments"
   add_foreign_key "gigs", "bands"
   add_foreign_key "member_presences", "members"
   add_foreign_key "members", "bands"
+  add_foreign_key "members", "ensembles"
   add_foreign_key "members", "instruments"
   add_foreign_key "rehearsal_declines", "members"
   add_foreign_key "rehearsal_declines", "rehearsals"
