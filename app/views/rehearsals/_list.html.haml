@@ -1,11 +1,16 @@
-- @rehearsals.each do |rehearsal|
+- @ensembles.each do |ensemble|
   .row.mb-1.align-items-center
-    .col-7
-      = link_to "#{rehearsal.date_time.strftime('%d-%m')}: #{rehearsal.description}", rehearsal_path(rehearsal)
-    .col-4
-      .btn-group.float-right
-        - if rehearsal.is_declined_by?(current_member)
-          Afgemeld
+    .col-7.font-weight-bold
+      = ensemble.name
+
+  - Rehearsal.upcoming_for_ensemble(ensemble).each do |rehearsal|
+    .row.mb-1.align-items-center
+      .col-7
+        = link_to "#{rehearsal.date_time.strftime('%d-%m')}: #{rehearsal.description}", rehearsal_path(rehearsal)
+      .col-4
+        .btn-group.float-right
+          - if rehearsal.is_declined_by?(current_member)
+            Afgemeld
 
 
 

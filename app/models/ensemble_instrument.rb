@@ -9,4 +9,9 @@ class EnsembleInstrument < ApplicationRecord
     instrument.name
   end
 
+  def ensemble_and_instrument_name
+    "#{ensemble.name}: #{instrument.name}"
+  end
+
+
 end

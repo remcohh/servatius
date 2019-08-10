@@ -3,7 +3,8 @@ class RehearsalsController < ApplicationController
 
 
   def index
-    @rehearsals = Rehearsal.upcoming_for_band(current_member.band_id)
+    @ensembles = current_member.ensembles
+    @rehearsals = Rehearsal.upcoming_for_ensemble(current_member.ensembles.first)
   end
 
   def show

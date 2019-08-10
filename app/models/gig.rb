@@ -16,6 +16,12 @@ class Gig < ApplicationRecord
     order("date_time asc")
   }
 
+  scope :upcoming_for_ensemble, ->(ensemble) {
+    ensemble.gigs
+        .where('date(date_time) >= current_date')
+        .order('date_time asc')
+  }
+
   belongs_to :gig_admin, class_name: 'Member'
   has_many :member_presences, as: :presentable
   has_and_belongs_to_many :ensembles

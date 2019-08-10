@@ -1,15 +1,20 @@
-- @gigs.each do |gig|
+- @ensembles.each do |ensemble|
   .row.mb-1.align-items-center
-    .col-8
-      = link_to "#{gig.date_time.strftime('%d-%m')}: #{gig.title}", gig_path(gig)
-    .col-4
-      .btn-group.float-right
-        - if gig.is_declined_by?(current_member)
-          Afgemeld
-        - elsif gig.is_accepted_by?(current_member)
-          Aangemeld
-        - else
-          ?
+    .col-7.font-weight-bold
+      = ensemble.name
+
+  - Gig.upcoming_for_ensemble(ensemble).each do |gig|
+    .row.mb-1.align-items-center
+      .col-8
+        = link_to "#{gig.date_time.strftime('%d-%m')}: #{gig.title}", gig_path(gig)
+      .col-4
+        .btn-group.float-right
+          - if gig.is_declined_by?(current_member)
+            Afgemeld
+          - elsif gig.is_accepted_by?(current_member)
+            Aangemeld
+          - else
+            ?
 
 
 

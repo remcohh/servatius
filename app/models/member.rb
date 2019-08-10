@@ -24,6 +24,7 @@ class Member < ApplicationRecord
   }
 
   has_and_belongs_to_many :ensemble_instruments
+  has_many :ensembles, through: :ensemble_instruments
   belongs_to :band
   has_many :gigs
   has_many :rehearsal_declines

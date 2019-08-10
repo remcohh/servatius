@@ -7,8 +7,7 @@ class GigsController < ApplicationController
   # GET /gigs
   # GET /gigs.json
   def index
-    @past_gigs = Gig.past
-    @future_gigs = Gig.future
+    @ensembles = current_member.ensembles
   end
 
   # GET /gigs/1
