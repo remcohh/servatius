@@ -60,6 +60,18 @@ class Gig < ApplicationRecord
                       .order('members.last_name asc')
   end
 
+  def instruments_availabability(ensemble)
+    query="SELECT instruments.id, ensemble_instruments.id as ensemble_instrument_id, instruments.name AS instrument_name, COUNT(CASE WHEN will_be_present THEN 1 END) AS COUNT_present,
+    COUNT(CASE WHEN NOT will_be_present THEN 1 END) AS COUNT_not_present FROM instruments
+    INNER JOIN ensemble_instruments ON ensemble_instruments.instrument_id=instruments.id AND ensemble_instruments.ensemble_id=#{ensemble.id}
+    LEFT OUTER JOIN ensemble_instruments_members ON ensemble_instruments.id = ensemble_instruments_members.ensemble_instrument_id
+    LEFT OUTER JOIN members ON members.id = ensemble_instruments_members.member_id
+    LEFT OUTER JOIN member_presences ON member_presences.member_id = members.id
+    AND member_presences.presentable_id=#{id} and member_presences.presentable_type='Gig'
+    GROUP BY instruments.id, ensemble_instruments.id ORDER BY instruments.id"
+    ActiveRecord::Base.connection.execute(query)
+  end
+
   private
 
   def check_gig_admin_has_permission
