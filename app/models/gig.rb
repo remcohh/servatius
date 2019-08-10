@@ -18,6 +18,9 @@ class Gig < ApplicationRecord
 
   belongs_to :gig_admin, class_name: 'Member'
   has_many :member_presences, as: :presentable
+  has_and_belongs_to_many :ensembles
+  has_many :ensemble_instruments, through: :ensembles
+  has_many :members, through: :ensemble_instruments
 
 
   #validate :check_gig_admin_has_permission
@@ -42,13 +45,24 @@ class Gig < ApplicationRecord
     presence_for_member(member) == true
   end
 
-  def self.members_for_gig_and_instrument(gig_id, instrument_id, present )
-    Member.joins(:member_presences)
-          .where('members.instrument_id = ?', instrument_id)
-          .where('member_presences.presentable_id = ?',gig_id )
-          .where('member_presences.presentable_type = ?','Gig' )
-          .where('member_presences.will_be_present = ?', present)
-          .order('members.last_name asc')
+  def self.members_for_gig_and_ensemble_instrument(gig_id, ensemble_instrument_id, present )
+
+    # Member.joins(:member_presences)
+    #       .joins(:ensemble_instrument_members)
+    #       .joins(:ensemble_instrument)
+    #       .where('members.instrument_id = ?', instrument_id)
+    #       .where('member_presences.presentable_id = ?',gig_id )
+    #       .where('member_presences.presentable_type = ?','Gig' )
+    #       .where('member_presences.will_be_present = ?', present)
+    #       .order('members.last_name asc')
+
+
+    EnsembleInstrument.find(ensemble_instrument_id).members
+                      .joins(:member_presences)
+                      .where('member_presences.presentable_id = ?',gig_id )
+                      .where('member_presences.presentable_type = ?','Gig' )
+                      .where('member_presences.will_be_present = ?', present)
+                      .order('members.last_name asc')
   end
 
   private

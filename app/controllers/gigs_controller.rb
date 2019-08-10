@@ -14,15 +14,19 @@ class GigsController < ApplicationController
   # GET /gigs/1
   # GET /gigs/1.json
   def show
-    query="SELECT instruments.id, instruments.name AS instrument_name, COUNT(CASE WHEN will_be_present THEN 1 END) AS COUNT_present,
+    query="SELECT instruments.id, ensemble_instruments.id as ensemble_instrument_id, instruments.name AS instrument_name, COUNT(CASE WHEN will_be_present THEN 1 END) AS COUNT_present,
 COUNT(CASE WHEN NOT will_be_present THEN 1 END) AS COUNT_not_present FROM instruments
-LEFT OUTER JOIN members ON members.instrument_id=instruments.id
+
+INNER JOIN ensemble_instruments ON ensemble_instruments.instrument_id=instruments.id
+LEFT OUTER JOIN ensemble_instruments_members ON ensemble_instruments.id = ensemble_instruments_members.ensemble_instrument_id
+
+LEFT OUTER JOIN members ON members.id = ensemble_instruments_members.member_id
 LEFT OUTER JOIN member_presences ON member_presences.member_id = members.id
 AND member_presences.presentable_id=#{@gig.id} and member_presences.presentable_type='Gig'
-GROUP BY instruments.id ORDER BY instruments.id"
+GROUP BY instruments.id, ensemble_instruments.id ORDER BY instruments.id"
 
     @instruments_availability = ActiveRecord::Base.connection.execute(query)
-    @instruments_availability_member = @instruments_availability.find{ |i| i['id'] == current_member.instrument_id }
+    @instruments_availability_member = @instruments_availability.find{ |i| i['id'] == current_member.ensemble_instruments.first.instrument_id }
     presence = @gig.presence_for_member(current_member)
     @status = if presence.nil?
                 'Onbekend'

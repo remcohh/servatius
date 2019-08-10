@@ -64,7 +64,7 @@
                   .col-5
                     %b
                       Aangemeld:
-                - members = Gig.members_for_gig_and_instrument(@gig.id, instrument['id'], 'true')
+                - members = Gig.members_for_gig_and_ensemble_instrument(@gig.id, instrument['ensemble_instrument_id'], 'true')
                 - if members.count == 0
                   = "-"
                 - else
@@ -76,7 +76,7 @@
                   .col-5
                     %b
                       Afgemeld:
-                - members = Gig.members_for_gig_and_instrument(@gig.id, instrument['id'], 'false')
+                - members = Gig.members_for_gig_and_ensemble_instrument(@gig.id, instrument['ensemble_instrument_id'], 'false')
                 - if members.count == 0
                   = "-"
                 - else

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_10_123413) do
+ActiveRecord::Schema.define(version: 2019_08_10_141217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -215,6 +215,13 @@ ActiveRecord::Schema.define(version: 2019_08_10_123413) do
     t.index ["band_id"], name: "index_ensembles_on_band_id"
   end
 
+  create_table "ensembles_gigs", id: false, force: :cascade do |t|
+    t.bigint "gig_id", null: false
+    t.bigint "ensemble_id", null: false
+    t.index ["ensemble_id", "gig_id"], name: "index_ensembles_gigs_on_ensemble_id_and_gig_id"
+    t.index ["gig_id", "ensemble_id"], name: "index_ensembles_gigs_on_gig_id_and_ensemble_id"
+  end
+
   create_table "gigs", force: :cascade do |t|
     t.string "title"
     t.string "where"
@@ -243,15 +250,6 @@ ActiveRecord::Schema.define(version: 2019_08_10_123413) do
     t.string "family"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "member_ensemble_instruments", force: :cascade do |t|
-    t.bigint "member_id"
-    t.bigint "ensemble_instrument_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ensemble_instrument_id"], name: "index_member_ensemble_instruments_on_ensemble_instrument_id"
-    t.index ["member_id"], name: "index_member_ensemble_instruments_on_member_id"
   end
 
   create_table "member_presences", force: :cascade do |t|
@@ -316,8 +314,6 @@ ActiveRecord::Schema.define(version: 2019_08_10_123413) do
   add_foreign_key "ensemble_instruments", "ensembles"
   add_foreign_key "ensemble_instruments", "instruments"
   add_foreign_key "gigs", "bands"
-  add_foreign_key "member_ensemble_instruments", "ensemble_instruments"
-  add_foreign_key "member_ensemble_instruments", "members"
   add_foreign_key "member_presences", "members"
   add_foreign_key "members", "bands"
   add_foreign_key "members", "ensembles"

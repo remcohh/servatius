@@ -43,6 +43,18 @@ class Admin::GigsController < ApplicationController
   private
 
   def gig_params
-    params.require(:gig).permit(:title, :where, :date_time, :where, :gather_when, :gather_where, :dresscode, :where_address1, :where_address2, :member_remarks, :site_remarks)
+    params.require(:gig).permit(:title,
+                                :where,
+                                :date_time,
+                                :where,
+                                :gather_when,
+                                :gather_where,
+                                :dresscode,
+                                :where_address1,
+                                :where_address2,
+                                :member_remarks,
+                                :site_remarks,
+                                ensemble_ids: []
+                                )
   end
 end
