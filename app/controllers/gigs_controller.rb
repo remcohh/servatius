@@ -121,12 +121,10 @@ GROUP BY instruments.id, ensemble_instruments.id ORDER BY instruments.id"
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_gig
     @gig = Gig.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def gig_params
     params.require(:gig).permit(:title, :where, :when, :band_contact, :event_contact,
                                 :gig_admin_id, :confirmed, :about, :about_r, :signup, :dropout,
