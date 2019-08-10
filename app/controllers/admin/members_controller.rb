@@ -33,7 +33,6 @@ class Admin::MembersController < ApplicationController
   def update
     @member = Member.find params[:id]
     @member.update_attributes member_params
-    byebug
     redirect_to action: :index
   end
 

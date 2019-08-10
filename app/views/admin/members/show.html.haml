@@ -9,4 +9,7 @@
       .row
         .col-10
           = "Lid: #{@member.full_name}"
+      .row
+        .col-10
+          =link_to 'Bewerken', edit_admin_member_path(@member), class: 'btn btn-secondary'
   .col-1
