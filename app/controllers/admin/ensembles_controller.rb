@@ -39,7 +39,7 @@ class Admin::EnsemblesController < ApplicationController
   end
 
   def create
-    Ensemble.create(ensemble_params)
+    Ensemble.create(ensemble_params.merge(band_id: current_member.band_id))
     redirect_to action: :index
   end
 

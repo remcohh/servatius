@@ -10,7 +10,6 @@
         .row
           .col-10
             = f.text_field :name, label: 'Naam'
-            = f.select :band_id, options_from_collection_for_select(Band.all, :id, :name)
         .row
           .col-10
             = f.submit 'Opslaan'
