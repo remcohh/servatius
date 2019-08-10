@@ -10,6 +10,7 @@
         .row
           .col-10
             = f.datetime_field :date_time, label: 'Datum en tijd'
+            = f.collection_select :ensemble_ids, Ensemble.all, 'id', :name, {}, { :multiple => true }
             = f.text_field :description, label: 'Omschrijving'
         .row
           .col-10

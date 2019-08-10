@@ -19,5 +19,6 @@ class Ensemble < ApplicationRecord
   has_many :members, through: :ensemble_instruments
 
   has_and_belongs_to_many :gigs
+  has_and_belongs_to_many :rehearsals
 
 end

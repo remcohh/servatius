@@ -2,6 +2,7 @@ class Rehearsal < ApplicationRecord
   belongs_to :band
   belongs_to :member
   has_many :member_presences, as: :presentable
+  has_and_belongs_to_many :ensembles
 
   scope :upcoming_for_band, ->(band_id) {
     where('date(date_time) >= current_date')
