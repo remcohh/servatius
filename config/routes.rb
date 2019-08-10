@@ -28,7 +28,6 @@ Rails.application.routes.draw do
     resources :members do
       get 'send_login_link', to: 'members#send_login_link'
       get 'send_reset_password_link', to: 'members#send_reset_password_link'
-      post 'ensemble_instruments', to: 'members#add_ensemble_instrument'
     end
   end
   # get 'members/index'

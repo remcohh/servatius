@@ -9,21 +9,4 @@
       .row
         .col-10
           = "Lid: #{@member.full_name}"
-      .row
-        .col-10
-          Instrumenten:
-      - @member.ensemble_instruments.all.each do |ei|
-        .row
-          .col-10
-            = ei#.instrument.name
-            = link_to 'delete', admin_member_member_instrument_path(@member, ei), method: :delete
-
-
-      = bootstrap_form_for ['admin', @member] do |f|
-        .row
-          .col-10
-            = f.select :ensemble_instrument_ids, options_from_collection_for_select(EnsembleInstrument.all, :id, :name), label: 'Add instrument', :multiple => true
-        .row
-          .col-10
-            = f.submit 'Opslaan'
   .col-1

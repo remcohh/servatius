@@ -12,7 +12,9 @@
             = f.text_field :first_name, label: 'Voornaam'
             = f.text_field :last_name, label: 'Achternaam'
             = f.text_field :email, label: 'Email'
-            = f.select :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name)
+            = f.collection_select :ensemble_instrument_ids, EnsembleInstrument.all, "id", :name, { prompt: "Select an option" }, { :multiple => true }
+
+            //= f.select :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name)
         .row
           .col-10
             = f.submit 'Opslaan'
