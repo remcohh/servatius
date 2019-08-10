@@ -21,6 +21,11 @@ class Admin::MembersController < ApplicationController
 
   end
 
+  def show
+    @member = Member.find params[:id]
+    @ensemble_instrument = @member.ensemble_instruments.new
+  end
+
   def edit
     @member = Member.find params[:id]
   end
@@ -28,6 +33,7 @@ class Admin::MembersController < ApplicationController
   def update
     @member = Member.find params[:id]
     @member.update_attributes member_params
+    #byebug
     redirect_to action: :index
   end
 
@@ -64,9 +70,21 @@ class Admin::MembersController < ApplicationController
     redirect_to action: :index
   end
 
+  def add_ensemble_instrument
+    @member = Member.find params[:member_id]
+    ei = @member.ensemble_instruments.create ensemble_instrument_params
+    byebug
+    redirect_to admin_member_url @member
+  end
+
   private
 
   def member_params
-    params.require(:member).permit(:last_name, :first_name, :email, :instrument_id)
+    params.require(:member).permit(:last_name, :first_name, :email, :ensemble_instrument_instrument_ids)
   end
+
+  def ensemble_instrument_params
+    params.require(:ensemble_instrument).permit(:ensemble_instrument_id)
+  end
+
 end

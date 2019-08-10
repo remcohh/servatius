@@ -2,7 +2,7 @@
   .row.mb-1.align-items-center
     .col-6
       %span.font-weight-bold
-        = "#{member.first_name} #{member.last_name}"
+        = link_to "#{member.full_name}", admin_member_url(member)
       = "(#{member.email})"
     .col-6
       .btn-group.float-right

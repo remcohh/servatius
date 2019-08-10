@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_10_070625) do
+ActiveRecord::Schema.define(version: 2019_08_10_123413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -200,6 +200,13 @@ ActiveRecord::Schema.define(version: 2019_08_10_070625) do
     t.index ["instrument_id"], name: "index_ensemble_instruments_on_instrument_id"
   end
 
+  create_table "ensemble_instruments_members", id: false, force: :cascade do |t|
+    t.bigint "member_id", null: false
+    t.bigint "ensemble_instrument_id", null: false
+    t.index ["ensemble_instrument_id", "member_id"], name: "ens_in_mem"
+    t.index ["member_id", "ensemble_instrument_id"], name: "mem_en_in"
+  end
+
   create_table "ensembles", force: :cascade do |t|
     t.string "name"
     t.bigint "band_id"
@@ -238,6 +245,15 @@ ActiveRecord::Schema.define(version: 2019_08_10_070625) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "member_ensemble_instruments", force: :cascade do |t|
+    t.bigint "member_id"
+    t.bigint "ensemble_instrument_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ensemble_instrument_id"], name: "index_member_ensemble_instruments_on_ensemble_instrument_id"
+    t.index ["member_id"], name: "index_member_ensemble_instruments_on_member_id"
+  end
+
   create_table "member_presences", force: :cascade do |t|
     t.bigint "presentable_id"
     t.bigint "member_id"
@@ -265,7 +281,7 @@ ActiveRecord::Schema.define(version: 2019_08_10_070625) do
     t.boolean "admin", default: false
     t.boolean "gig_admin", default: false
     t.boolean "ordinary_member", default: true
-    t.bigint "instrument_id"
+    t.bigint "ensemble_instrument_id"
     t.bigint "band_id"
     t.string "sign_in_token"
     t.datetime "sign_in_token_sent_at"
@@ -273,7 +289,7 @@ ActiveRecord::Schema.define(version: 2019_08_10_070625) do
     t.index ["band_id"], name: "index_members_on_band_id"
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["ensemble_id"], name: "index_members_on_ensemble_id"
-    t.index ["instrument_id"], name: "index_members_on_instrument_id"
+    t.index ["ensemble_instrument_id"], name: "index_members_on_ensemble_instrument_id"
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
@@ -300,10 +316,12 @@ ActiveRecord::Schema.define(version: 2019_08_10_070625) do
   add_foreign_key "ensemble_instruments", "ensembles"
   add_foreign_key "ensemble_instruments", "instruments"
   add_foreign_key "gigs", "bands"
+  add_foreign_key "member_ensemble_instruments", "ensemble_instruments"
+  add_foreign_key "member_ensemble_instruments", "members"
   add_foreign_key "member_presences", "members"
   add_foreign_key "members", "bands"
   add_foreign_key "members", "ensembles"
-  add_foreign_key "members", "instruments"
+  add_foreign_key "members", "instruments", column: "ensemble_instrument_id"
   add_foreign_key "rehearsal_declines", "members"
   add_foreign_key "rehearsal_declines", "rehearsals"
   add_foreign_key "rehearsals", "bands"

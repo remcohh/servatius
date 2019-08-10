@@ -15,7 +15,6 @@ class Member < ApplicationRecord
 
   has_many :member_presences
 
-
   scope :name_filter, ->(name) {
     where('lower(last_name) like ? or lower(first_name) like ?', "%#{name.downcase}%", "%#{name.downcase}%")
   }
@@ -24,9 +23,9 @@ class Member < ApplicationRecord
     order("last_name asc")
   }
 
+  has_and_belongs_to_many :ensemble_instruments
   belongs_to :band
   has_many :gigs
-  belongs_to :instrument
   has_many :rehearsal_declines
 
   def admin_role
