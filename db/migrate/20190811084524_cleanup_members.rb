@@ -5,7 +5,7 @@ class CleanupMembers < ActiveRecord::Migration[5.2]
     remove_column :members, :ensemble_instrument_id, :integer
     remove_column :members, :ensemble_id, :integer
     add_column :members, :role, :integer
-    add_column :ensemble_instruments, :party, :integer
+    add_column :ensemble_instruments, :party, :string
     drop_table :rehearsal_declines
   end
 end
