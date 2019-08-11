@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'members/home', to: 'home#index', as: 'members_home'
   get 'rehearsals', to: 'rehearsals#index', as: 'rehearsals'
   get 'rehearsal/:id', to: 'rehearsals#show', as: 'rehearsal'
+  get 'rehearsal/:id/attendance', to: 'rehearsals#attendance', as: 'rehearsal_attendance'
+  put 'rehearsal/:id/attendance', to: 'rehearsals#set_attendance_status', as: 'rehearsal_attendance_update'
+
   put 'rehearsals/:id/decline', to: 'rehearsals#decline', as: 'decline_rehearsal'
   put 'rehearsals/:id/remove_decline', to:  'rehearsals#remove_decline', as: 'remove_rehearsal_decline'
   get 'gigs', to: 'gigs#index', as: 'gigs'

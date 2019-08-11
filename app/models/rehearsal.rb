@@ -2,6 +2,7 @@ class Rehearsal < ApplicationRecord
   belongs_to :band
   has_many :member_presences, as: :presentable
   has_and_belongs_to_many :ensembles
+  has_many :members, through: :ensembles
 
   scope :upcoming_for_ensemble, ->(ensemble) {
     ensemble.rehearsals
