@@ -72,7 +72,7 @@ class Admin::EnsemblesController < ApplicationController
   end
 
   def ensemble_instrument_params
-    params.require(:ensemble_instrument).permit(:instrument_id)
+    params.require(:ensemble_instrument).permit(:instrument_id, :party)
   end
 
 end

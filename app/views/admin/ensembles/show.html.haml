@@ -15,14 +15,15 @@
       - @ensemble.ensemble_instruments.each do |ei|
         .row
           .col-10
-            = ei.instrument.name
+            = "#{ei.instrument.name} #{ei.party}"
             = link_to 'delete', admin_ensemble_ensemble_instrument_path(@ensemble, ei), method: :delete
 
 
       = bootstrap_form_for ['admin', @ensemble, @ensemble_instrument] do |f|
         .row
           .col-10
-            = f.select :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name), label: 'Add instrument'
+            = f.select :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name), label: 'Instrument'
+            = f.text_field :party, label: 'Partij (1,2 of 3)'
         .row
           .col-10
             = f.submit 'Opslaan'

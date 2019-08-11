@@ -3,15 +3,13 @@ class EnsembleInstrument < ApplicationRecord
   belongs_to :instrument
   has_and_belongs_to_many :members
 
-  validates :instrument_id, uniqueness: { scope: :ensemble_id, message: 'Instrument is al toegevoegd' }
+  validates :instrument_id, uniqueness: { scope: [:ensemble_id, :party], message: 'Instrument is al toegevoegd' }
 
   def name
     instrument.name
   end
 
-  def ensemble_and_instrument_name
-    "#{ensemble.name}: #{instrument.name}"
+  def ensemble_instrument_and_party
+    "#{ensemble.name}: #{instrument.name} #{party}"
   end
-
-
 end
