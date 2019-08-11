@@ -15,7 +15,7 @@ class Ensemble < ApplicationRecord
     order("created_at")
   }
 
-  has_many :ensemble_instruments
+  has_many :ensemble_instruments, dependent: :destroy
   has_many :members, through: :ensemble_instruments
 
   has_and_belongs_to_many :gigs

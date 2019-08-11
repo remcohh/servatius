@@ -7,18 +7,28 @@
           %h3
             Presentielijst repetitie
       .row.mt-3
-        .col-10
+        .col-10.font-weight-bold
           = "Datum: #{@rehearsal.date_time.strftime('%d-%m-%Y %H:%M')}"
 
       .row.mt-3
         .col-md-10.col-12
           - @unknown.each do |rm|
-            .row
+            .row.mb-1
               .col-5
                 = rm.full_name
               .col-7
-                = link_to 'Afwezig', rehearsal_attendance_update_path(@rehearsal, { attendance: false }), method: :put, class: 'btn btn-danger btn-sm'
-                = link_to 'Aanwezig', rehearsal_attendance_update_path(@rehearsal, { attendance: true }), method: :put, class: 'btn btn-success btn-sm'
+                = link_to 'Afwezig', rehearsal_attendance_update_path(@rehearsal, { member_id: rm.id, attendance: false }), method: :put, class: 'btn btn-danger btn-sm'
+                = link_to 'Aanwezig', rehearsal_attendance_update_path(@rehearsal, { member_id: rm.id, attendance: true }), method: :put, class: 'btn btn-success btn-sm'
+      .row.mt-3
+        .col-10.font-weight-bold
+          Aanwezig
+      .row
+        .col-10
+          - @attending.each do |rm|
+            .row
+              .col-10
+                = rm.member.full_name
+                = link_to 'Reset', rehearsal_attendance_update_path(@rehearsal, { member_id: rm.member.id, attendance: 'reset' }), method: :put, class: ''
       .row.mt-3
         .col-10.font-weight-bold
           Afwezig
@@ -28,6 +38,8 @@
             .row
               .col-5
                 = rm.member.full_name
+                = link_to 'Reset', rehearsal_attendance_update_path(@rehearsal, { member_id: rm.member.id, attendance: 'reset' }), method: :put, class: ''
+
       .row.mt-3
         .col-10.font-weight-bold
           Afgemeld

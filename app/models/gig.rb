@@ -22,7 +22,6 @@ class Gig < ApplicationRecord
         .order('date_time asc')
   }
 
-  belongs_to :gig_admin, class_name: 'Member'
   has_many :member_presences, as: :presentable
   has_and_belongs_to_many :ensembles
   has_many :ensemble_instruments, through: :ensembles
@@ -61,7 +60,7 @@ class Gig < ApplicationRecord
   end
 
   def instruments_availabability(ensemble)
-    query="SELECT instruments.id, ensemble_instruments.id as ensemble_instrument_id, instruments.name AS instrument_name, COUNT(CASE WHEN will_be_present THEN 1 END) AS COUNT_present,
+    query="SELECT instruments.id, ensemble_instruments.id as ensemble_instrument_id, concat(instruments.name, ensemble_instruments.party) AS instrument_name, COUNT(CASE WHEN will_be_present THEN 1 END) AS COUNT_present,
     COUNT(CASE WHEN NOT will_be_present THEN 1 END) AS COUNT_not_present FROM instruments
     INNER JOIN ensemble_instruments ON ensemble_instruments.instrument_id=instruments.id AND ensemble_instruments.ensemble_id=#{ensemble.id}
     LEFT OUTER JOIN ensemble_instruments_members ON ensemble_instruments.id = ensemble_instruments_members.ensemble_instrument_id

@@ -11,7 +11,7 @@
           %p
             = "#{@gig.date_time.strftime('%d-%m-%Y %H:%M')} #{@gig.title}"
           %p
-            = "Verzamelen: #{@gig.gather_when.strftime('%H:%M')}, locatie: #{@gig.gather_where}"
+            = "Verzamelen: #{@gig.try(:gather_when).try(:strftime, '%H:%M')}, locatie: #{@gig.gather_where}"
           %p
             = "Kleding: #{@gig.dresscode}"
           %p

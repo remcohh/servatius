@@ -15,6 +15,7 @@ class RehearsalsController < ApplicationController
     @rehearsal = Rehearsal.find(params[:id])
     @declines = @rehearsal.member_presences.where(will_be_present: false)
     @absents = @rehearsal.member_presences.where(present: false)
+    @attending = @rehearsal.member_presences.where(present: true)
     @unknown = @rehearsal.members.joins("LEFT JOIN member_presences on member_presences.member_id = members.id AND member_presences.presentable_type='Rehearsal'")
                                   .where('member_presences.id is NULL')
   end
@@ -33,8 +34,12 @@ class RehearsalsController < ApplicationController
 
   def set_attendance_status
     @rehearsal = Rehearsal.find(params[:id])
-    att = @rehearsal.member_presences.where(member_id: current_member.id).first_or_create
-    att.update_attribute :present, params[:attendance]
+    att = @rehearsal.member_presences.where(member_id: params[:member_id]).first_or_create
+    if params[:attendance] == 'reset'
+      att.destroy
+    else
+      att.update_attribute :present, params[:attendance]
+    end
     redirect_to rehearsal_attendance_path(@rehearsal)
   end
 end

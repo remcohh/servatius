@@ -1,6 +1,6 @@
 class Instrument < ApplicationRecord
   has_many :members
 
-  has_many :ensemble_instruments
+  has_many :ensemble_instruments, dependent: :destroy
 
 end

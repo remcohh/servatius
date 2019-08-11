@@ -1,0 +1,9 @@
+id,band_id,description,date_time,ensemble_ids
+1,1,Optreden tijdens wijnfeest Lieser,2019-09-06 20:00:00,3
+2,1,Optreden tijdens wijnfeest Lieser,2019-09-07 20:00:00,3
+3,1,Optreden tijdens wijnfeest Lieser,2019-09-08 20:00:00,3
+4,1,Deelname stertocht in centrum tgv 75- jarige bevrijding Maastricht,2019-09-14 19:00:00,"1,2"
+5,1,St. Caeciliafeest,2019-10-26 20:00:00,"1,2,3"
+6,1,Concert in ’t Paenhuys in Riemst,2019-11-23 20:00:00,"1,2"
+7,1,Sinterklaas bij Pinokkio en in Biesland,2019-12-06 10:00:00,3
+8,1,Opluisteren kinderkerstviering,2019-12-24 16:30:00,1 

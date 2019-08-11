@@ -1,0 +1,27 @@
+id,ensemble_id,instrument_id,party,
+1,1,1,1,bugel
+2,1,1,2/3,
+3,1,2,1,trompet
+4,1,2,2/3,
+5,1,3,1,trombone
+6,1,3,2 ,
+7,1,3,3,
+8,1,4,1,alt sax
+9,1,4,2 ,
+10,1,5,,tenor sax
+11,1,6,,bariton sax
+12,1,7,1,hoorn
+13,1,7,2 ,
+14,1,8,1,tuba
+15,1,8,2 ,
+16,1,9,,Bas
+17,1,10,,Slagwek
+18,1,11,,Kleine trom
+19,1,12,,Overslag
+20,1,13,,Bekkens
+21,1,14,,Pauken
+22,1,15,,Melodisch slagwerk
+23,1,18,,sopraan sax
+24,2,16,,Trom tamboers
+25,2,17,,Tenor trom
+26,2,12,,Overslag

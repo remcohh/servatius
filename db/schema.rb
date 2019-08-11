@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_125532) do
+ActiveRecord::Schema.define(version: 2019_08_11_181438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -236,7 +236,6 @@ ActiveRecord::Schema.define(version: 2019_08_11_125532) do
     t.string "event_contact"
     t.boolean "confirmed"
     t.text "about"
-    t.bigint "gig_admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "band_id"
@@ -248,7 +247,6 @@ ActiveRecord::Schema.define(version: 2019_08_11_125532) do
     t.text "member_remarks"
     t.text "site_remarks"
     t.index ["band_id"], name: "index_gigs_on_band_id"
-    t.index ["gig_admin_id"], name: "index_gigs_on_gig_admin_id"
   end
 
   create_table "instruments", force: :cascade do |t|
