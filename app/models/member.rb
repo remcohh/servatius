@@ -23,6 +23,11 @@ class Member < ApplicationRecord
     order("last_name asc")
   }
 
+  scope :without_attendance,  -> {
+    joins("LEFT JOIN member_presences ON member_presences.member_id = members.id
+          AND member_presences.presentable_type = 'Rehearsal'AND member_presences.presentable_id = ensembles_rehearsals.rehearsal_id")
+    .where('member_presences.id is NULL') }
+
   has_and_belongs_to_many :ensemble_instruments
   has_many :ensembles, through: :ensemble_instruments
   belongs_to :band

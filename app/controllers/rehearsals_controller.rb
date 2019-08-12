@@ -16,8 +16,7 @@ class RehearsalsController < ApplicationController
     @declines = @rehearsal.member_presences.where(will_be_present: false)
     @absents = @rehearsal.member_presences.where(present: false)
     @attending = @rehearsal.member_presences.where(present: true)
-    @unknown = @rehearsal.members.joins("LEFT JOIN member_presences on member_presences.member_id = members.id AND member_presences.presentable_type='Rehearsal'")
-                                  .where('member_presences.id is NULL')
+    @unknown = @rehearsal.members.without_attendance
   end
 
   def decline
