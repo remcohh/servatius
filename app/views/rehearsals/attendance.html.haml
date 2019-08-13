@@ -36,7 +36,7 @@
         .col-10
           - @absents.each do |rm|
             .row
-              .col-5
+              .col-10
                 = rm.member.full_name
                 = link_to 'Reset', rehearsal_attendance_update_path(@rehearsal, { member_id: rm.member.id, attendance: 'reset' }), method: :put, class: ''
 

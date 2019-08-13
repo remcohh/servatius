@@ -74,6 +74,7 @@ namespace :import do
                      })
       puts "Member added!"
     end
+    set_id 'members'
   end
 
   def ensembles
@@ -88,6 +89,8 @@ namespace :import do
                        })
       puts "Ensemble added!"
     end
+    set_id 'ensembles'
+
   end
 
   def instruments
@@ -101,6 +104,7 @@ namespace :import do
                          })
       puts "Instrument added!"
     end
+    set_id 'instruments'
   end
 
   def ensemble_instruments
@@ -116,6 +120,7 @@ namespace :import do
                                  })
       puts "Ensemble instrument added!"
     end
+    set_id 'ensemble_instruments'
   end
 
   def rehearsals
@@ -132,6 +137,7 @@ namespace :import do
                                  })
       puts "Rehearsal added!"
     end
+    set_id 'rehearsals'
   end
 
   def gigs
@@ -148,6 +154,13 @@ namespace :import do
                         })
       puts "Gig added!"
     end
+    set_id 'gigs'
+  end
+
+  private
+
+  def set_id(table)
+    ActiveRecord::Base.connection.execute("SELECT setval('#{table}_id_seq', (SELECT MAX(id) FROM #{table}));")
   end
 
 end
