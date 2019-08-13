@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_181438) do
+ActiveRecord::Schema.define(version: 2019_08_13_172905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -290,6 +290,16 @@ ActiveRecord::Schema.define(version: 2019_08_11_181438) do
     t.index ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
   end
 
+  create_table "playable_songs", force: :cascade do |t|
+    t.bigint "song_id"
+    t.integer "playable_id"
+    t.string "playable_type"
+    t.string "remark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["song_id"], name: "index_playable_songs_on_song_id"
+  end
+
   create_table "rehearsals", force: :cascade do |t|
     t.bigint "band_id"
     t.string "description"
@@ -299,6 +309,14 @@ ActiveRecord::Schema.define(version: 2019_08_11_181438) do
     t.index ["band_id"], name: "index_rehearsals_on_band_id"
   end
 
+  create_table "songs", force: :cascade do |t|
+    t.string "title"
+    t.string "composer"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comfy_cms_sites", "bands"
   add_foreign_key "ensemble_instruments", "ensembles"
@@ -306,5 +324,6 @@ ActiveRecord::Schema.define(version: 2019_08_11_181438) do
   add_foreign_key "gigs", "bands"
   add_foreign_key "member_presences", "members"
   add_foreign_key "members", "bands"
+  add_foreign_key "playable_songs", "songs"
   add_foreign_key "rehearsals", "bands"
 end

@@ -26,6 +26,9 @@ class Gig < ApplicationRecord
   has_and_belongs_to_many :ensembles
   has_many :ensemble_instruments, through: :ensembles
   has_many :members, through: :ensemble_instruments
+  has_many :playable_songs, as: :playable
+  has_many :songs, through: :playable_songs
+
 
 
   #validate :check_gig_admin_has_permission
