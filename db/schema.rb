@@ -313,8 +313,10 @@ ActiveRecord::Schema.define(version: 2019_08_13_172905) do
     t.string "title"
     t.string "composer"
     t.string "state"
+    t.bigint "ensemble_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["ensemble_id"], name: "index_songs_on_ensemble_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

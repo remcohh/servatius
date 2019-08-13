@@ -4,6 +4,7 @@ class CreateSongs < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :composer
       t.string :state
+      t.references :ensemble
 
       t.timestamps
     end
