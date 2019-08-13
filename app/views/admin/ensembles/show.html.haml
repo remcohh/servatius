@@ -5,24 +5,25 @@
       .row
         .col-10
           %h3
-            Ensemble
+            = "Ensemble: #{@ensemble.name}"
       .row
-        .col-10
-          = "Ensemble: #{@ensemble.name}"
-      .row
-        .col-10
-          Instrumenten:
+        .col-10.font-weight-bold
+          Instrumenten in dit ensemble:
       - @ensemble.ensemble_instruments.each do |ei|
-        .row
-          .col-10
+        .row.mb-1
+          .col-8.col-lg-4
             = "#{ei.instrument.name} #{ei.party}"
-            = link_to 'delete', admin_ensemble_ensemble_instrument_path(@ensemble, ei), method: :delete
+          .col-2
+            = link_to('delete', admin_ensemble_ensemble_instrument_path(@ensemble, ei), method: :delete, class: 'btn btn-sm btn-danger')
 
 
       = bootstrap_form_for ['admin', @ensemble, @ensemble_instrument] do |f|
         .row
+          .col-10.font-weight-bold.mt-2
+            Instrument en partij toevoegen
+        .row
           .col-10
-            = f.select :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name), label: 'Instrument'
+            = f.select :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name)
             = f.text_field :party, label: 'Partij (1,2 of 3)'
         .row
           .col-10
