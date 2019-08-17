@@ -5,8 +5,6 @@ class Ability
     member ||= Member.new
     if member.admin?
       can :manage, :all
-    elsif member.gig_admin?
-      can :manage, :all
     else
       can :signup, Gig
       can :dropout, Gig
