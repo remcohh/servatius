@@ -15,7 +15,7 @@ class Admin::BandsController < ApplicationController
         sanitize_params: true,
     ) || return
 
-    @bands = @filterrific.find.page(params[:page])
+    @bands = @filterrific.find
 
 
   end

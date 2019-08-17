@@ -9,11 +9,11 @@ class Admin::GigsController < ApplicationController
         },
         persistence_id: "shared_key",
         default_filter_params: {},
-        available_filters: [:sorted_by, :title_filter],
+        available_filters: [:sorted_by, :description_filter],
         sanitize_params: true,
     ) || return
 
-    @gigs = @filterrific.find.page(params[:page])
+    @gigs = @filterrific.find
   end
 
   def edit
@@ -33,7 +33,6 @@ class Admin::GigsController < ApplicationController
   end
 
   def create
-    byebug
     Gig.create(gig_params.merge(band_id: current_member.band_id))
     redirect_to action: :index
   end

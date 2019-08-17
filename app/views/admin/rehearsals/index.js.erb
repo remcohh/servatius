@@ -1,5 +1,5 @@
 <% js = escape_javascript(
-  render(partial: 'members/list', locals: { rehearsals: @rehearsals })
+  render(partial: 'admin/rehearsals/list', locals: { rehearsals: @rehearsals })
 ) %>
 $("#filterrific_results").html("<%= js %>");
 

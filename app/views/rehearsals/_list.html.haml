@@ -4,13 +4,17 @@
       .row
         .col-3
           = link_to rehearsal.date_time.strftime('%d-%m'), rehearsal_path(rehearsal)
+          .small
+            = rehearsal.date_time.strftime('%H:%M')
         .col-9
-          = rehearsal.description
-      .row.small
-        .col-3
-          = rehearsal.date_time.strftime('%H:%M')
-        .col-6
-          = rehearsal.ensembles.first.name
-        .col-3.text-danger
-          - if rehearsal.is_declined_by?(current_member)
-            Afgemeld
+          .row
+            .col-9
+              = rehearsal.description
+          .row
+            .col-7.small
+              = rehearsal.ensembles.collect(&:name).join(', ')
+            .col-2.small.text-danger
+              - if rehearsal.is_declined_by?(current_member)
+                Afgemeld
+
+

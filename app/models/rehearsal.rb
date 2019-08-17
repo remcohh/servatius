@@ -8,6 +8,23 @@ class Rehearsal < ApplicationRecord
 
   accepts_nested_attributes_for :playable_songs, reject_if: proc{ |attr| attr[:song_id].blank? }, allow_destroy: true
 
+  filterrific(
+      default_filter_params: { sorted_by: "date_time asc" },
+      available_filters: [
+          :sorted_by,
+          :description_filter
+      ],
+  )
+
+  scope :description_filter, ->(description) {
+    where('lower(description) like ?', "%#{description.downcase}%")
+  }
+
+  scope :sorted_by, ->(o) {
+    order("date_time asc")
+  }
+
+
   scope :upcoming_for_ensemble, ->(ensemble) {
     ensemble.rehearsals
         .where('date(date_time) >= current_date')
@@ -23,7 +40,11 @@ class Rehearsal < ApplicationRecord
   end
 
   def self.for_member(member)
-    Rehearsal.joins(:members).where(['members.id = ?', member]).includes(:ensembles)
+    Rehearsal.joins(:members)
+              .where(['members.id = ?', member])
+              .where('date(date_time) >= current_date')
+              .includes(:ensembles)
+              .order(:date_time)
   end
 
 end

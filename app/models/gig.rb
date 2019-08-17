@@ -30,12 +30,9 @@ class Gig < ApplicationRecord
         .order('date_time asc')
   }
 
-
-
-
-
-  #validate :check_gig_admin_has_permission
-
+  def self.for_member(member)
+    Gig.joins(:members).where(['members.id = ?', member]).includes(:ensembles).order(:date_time)
+  end
 
   scope :past, -> { where(when: Time.now - 1.year..Time.now ) }
   scope :future, -> { where(when: Time.now..Time.now + 2.years) }

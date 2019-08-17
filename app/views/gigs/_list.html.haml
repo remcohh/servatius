@@ -1,21 +1,24 @@
-- @ensembles.each do |ensemble|
-  .row.mb-1.align-items-center
-    .col-7.font-weight-bold
-      = ensemble.name
-
-  - Gig.upcoming_for_ensemble(ensemble).each do |gig|
-    .row.mb-1.align-items-center
-      .col-8
-        = link_to "#{gig.date_time.strftime('%d-%m')}: #{gig.title}", gig_path(gig)
-      .col-4
-        .btn-group.float-right
-          - if gig.is_declined_by?(current_member)
-            Afgemeld
-          - elsif gig.is_accepted_by?(current_member)
-            Aangemeld
-          - else
-            ?
-
-
-
-
+- Gig.for_member(current_member).each do |gig|
+  .row.mb-1.align-items-center.data-row
+    .col-12.border-bottom
+      .row
+        .col-3
+          = link_to gig.date_time.strftime('%d-%m'), gig_path(gig)
+          .small
+            = gig.date_time.strftime('%H:%M')
+        .col-9
+          .row
+            .col-9
+              = gig.title
+          .row
+            .col-7
+              = gig.ensembles.collect(&:name).join(', ')
+            - if gig.is_declined_by?(current_member)
+              .col-2.text-danger
+                Afgemeld
+            - elsif gig.is_accepted_by?(current_member)
+              .col-2.text-success
+                Aangemeld
+            - else
+              .col-2.text-info
+                ?

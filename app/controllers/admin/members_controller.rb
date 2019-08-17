@@ -17,7 +17,7 @@ class Admin::MembersController < ApplicationController
         sanitize_params: true,
     ) || return
 
-    @members = @filterrific.find.page(params[:page])
+    @members = @filterrific.find
 
   end
 

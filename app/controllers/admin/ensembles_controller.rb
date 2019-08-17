@@ -14,7 +14,7 @@ class Admin::EnsemblesController < ApplicationController
         sanitize_params: true,
     ) || return
 
-    @ensembles = @filterrific.find.page(params[:page])
+    @ensembles = @filterrific.find
 
 
   end

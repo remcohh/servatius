@@ -5,7 +5,8 @@
         .col-6
           %h3
             Repetities
-
+          = form_for_filterrific @filterrific do |f|
+            = f.text_field(:description_filter, placeholder: 'Zoek op omschrijving', class: 'filterrific-periodically-observed', autocomplete: 'of')
         .col-6
           = link_to 'Nieuwe repetitie', new_admin_rehearsal_path, class: 'btn btn-secondary float-right'
   .row
