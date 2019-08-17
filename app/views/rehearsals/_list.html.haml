@@ -1,17 +1,16 @@
-- @ensembles.each do |ensemble|
-  .row.mb-1.align-items-center
-    .col-7.font-weight-bold
-      = ensemble.name
-
-  - Rehearsal.upcoming_for_ensemble(ensemble).each do |rehearsal|
-    .row.mb-1.align-items-center
-      .col-7
-        = link_to "#{rehearsal.date_time.strftime('%d-%m')}: #{rehearsal.description}", rehearsal_path(rehearsal)
-      .col-4
-        .btn-group.float-right
+- Rehearsal.for_member(current_member).each do |rehearsal|
+  .row.mb-1.align-items-center.data-row
+    .col-12.border-bottom
+      .row
+        .col-3
+          = link_to rehearsal.date_time.strftime('%d-%m'), rehearsal_path(rehearsal)
+        .col-9
+          = rehearsal.description
+      .row.small
+        .col-3
+          = rehearsal.date_time.strftime('%H:%M')
+        .col-6
+          = rehearsal.ensembles.first.name
+        .col-3.text-danger
           - if rehearsal.is_declined_by?(current_member)
             Afgemeld
-
-
-
-

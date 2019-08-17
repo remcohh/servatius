@@ -18,20 +18,23 @@ class Admin::GigsController < ApplicationController
 
   def edit
     @gig = Gig.find params[:id]
+    3.times { @gig.playable_songs.build }
   end
 
   def update
     @gig = Gig.find params[:id]
-    @gig.update_attributes gig_params
+    @gig.update gig_params
     redirect_to action: :index
   end
 
   def new
     @gig = Gig.new
+    3.times { @gig.playable_songs.build }
   end
 
   def create
-    Gig.create(gig_params.merge(band_id: current_member.band_id, gig_admin: current_member))
+    byebug
+    Gig.create(gig_params.merge(band_id: current_member.band_id))
     redirect_to action: :index
   end
 
@@ -54,7 +57,8 @@ class Admin::GigsController < ApplicationController
                                 :where_address2,
                                 :member_remarks,
                                 :site_remarks,
-                                ensemble_ids: []
+                                ensemble_ids: [],
+                                playable_songs_attributes:[:_destroy, :id, :song_id]
                                 )
   end
 end

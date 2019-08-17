@@ -14,5 +14,16 @@
             = f.text_field :description, label: 'Omschrijving'
         .row
           .col-10
+            %h3
+              Te repeteren
+        = f.fields_for :playable_songs do |ff|
+          .row
+            .col-10
+              = ff.collection_select(:song_id, Song.all, :id, :title, include_blank: true, label: 'Titel')
+          .row
+            .col-10
+              = ff.text_area :remark, label: 'Opmerkingen'
+
+        .row
+          .col-10
             = f.submit 'Opslaan'
-    .col-md-1

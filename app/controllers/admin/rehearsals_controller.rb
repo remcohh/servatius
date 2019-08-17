@@ -11,17 +11,20 @@ class Admin::RehearsalsController < ApplicationController
 
   def edit
     @rehearsal = Rehearsal.find params[:id]
+    3.times { @rehearsal.playable_songs.build }
   end
 
   def update
     @rehearsal = Rehearsal.find params[:id]
-    @rehearsal.update_attributes rehearsal_params
+    @rehearsal.update rehearsal_params
     redirect_to action: :index
   end
 
   def new
     @rehearsal = Rehearsal.new
     @rehearsal.description = 'Reguliere repetitie'
+    3.times { @rehearsal.playable_songs.build }
+
   end
 
   def create
@@ -37,6 +40,6 @@ class Admin::RehearsalsController < ApplicationController
   private
 
   def rehearsal_params
-    params.require(:rehearsal).permit(:date_time, :description, ensemble_ids: [])
+    params.require(:rehearsal).permit(:date_time, :description, ensemble_ids: [], playable_songs_attributes:[:_destroy, :id, :song_id, :remark])
   end
 end

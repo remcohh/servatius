@@ -20,6 +20,24 @@
             = f.text_field :dresscode, label: 'Kleding'
             = f.text_area :member_remarks, label: 'Opmerkingen voor leden'
             = f.text_area :site_remarks, label: 'Website tekst'
+
+
+        .row
+          .col-10
+            %h3
+              Programma
+        .row
+          .col-10
+            = f.fields_for :playable_songs do |ff|
+              = ff.collection_select(:song_id, Song.all, :id, :title, include_blank: true, label: 'Titel')
+              .row
+                .col-10.mb-4
+                  - unless ff.object.id.nil?
+                    = ff.check_box '_destroy', label: 'Verwijder'
+
+
+
+
         .row
           .col-10
             = f.submit 'Opslaan'

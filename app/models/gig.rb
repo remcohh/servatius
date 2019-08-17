@@ -1,4 +1,12 @@
 class Gig < ApplicationRecord
+  has_many :member_presences, as: :presentable
+  has_and_belongs_to_many :ensembles
+  has_many :ensemble_instruments, through: :ensembles
+  has_many :members, through: :ensemble_instruments
+  has_many :playable_songs, as: :playable
+  has_many :songs, through: :playable_songs
+
+  accepts_nested_attributes_for :playable_songs, reject_if: proc{ |attr| attr[:song_id].blank? }, allow_destroy: true
 
   filterrific(
       default_filter_params: { sorted_by: "date_time asc" },
@@ -22,12 +30,7 @@ class Gig < ApplicationRecord
         .order('date_time asc')
   }
 
-  has_many :member_presences, as: :presentable
-  has_and_belongs_to_many :ensembles
-  has_many :ensemble_instruments, through: :ensembles
-  has_many :members, through: :ensemble_instruments
-  has_many :playable_songs, as: :playable
-  has_many :songs, through: :playable_songs
+
 
 
 

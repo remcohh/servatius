@@ -15,18 +15,30 @@
   %body
     = render 'layouts/navbar'
     = render 'layouts/flash'
-    = yield
-    /
-      uncomment if you want to see what those variables contain
-      <haml_loud> debug @cms_site </haml_loud>
-      <haml_loud> debug @cms_layout </haml_loud>
-      <haml_loud> debug @cms_page </haml_loud>
-    / jQuery first, then Popper.js, then Bootstrap JS
     = javascript_include_tag 'application'
+    = yield
+
 :javascript
   // workaround for non functional dropdown menu items
   $(document).ready(function () {
     $('.dropdown-item').on('click', function(){
       window.location = this.href
     });
+
+    // enables clicking anywhere in the data-row
+    $('.data-row').on('click', function(e){
+      link = $(this).find('a').attr('href');
+      if(typeof(link) != undefined){
+        console.log(link);
+        window.location = link
+        e.preventDefault();
+      }
+    });
+
+
+
+  });
+
+    $(document).ready(function () {
+
   });
