@@ -8,8 +8,8 @@ class Admin::RehearsalsController < ApplicationController
         select_options: {
         },
         persistence_id: "shared_key",
-        default_filter_params: {},
-        available_filters: [:upcoming, :description_filter],
+        default_filter_params: {list_filter: 'Toekomstig'},
+        available_filters: [:upcoming, :description_filter, :list_filter],
         sanitize_params: true,
     ) || return
 

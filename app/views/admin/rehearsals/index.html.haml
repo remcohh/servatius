@@ -2,13 +2,17 @@
   .row
     .col-12
       .row.form-group
-        .col-6
+        .col-9
           %h3
             Repetities
-          = form_for_filterrific @filterrific do |f|
+      = form_for_filterrific @filterrific do |f|
+        .row.form-group
+          .col-lg-4.input-group
+            = f.select(:list_filter, %w(Toekomstig Afgelopen Alles), {}, { class: 'filterrific-periodically-observed' })
+          .col-lg-6.input-group
             = f.text_field(:description_filter, placeholder: 'Zoek op omschrijving', class: 'filterrific-periodically-observed', autocomplete: 'of')
-        .col-6
-          = link_to 'Nieuwe repetitie', new_admin_rehearsal_path, class: 'btn btn-secondary float-right'
+          .col-lg-2
+            = link_to 'Nieuwe repetitie', new_admin_rehearsal_path, class: 'btn btn-secondary btn-sm float-right'
   .row
     #filterrific_results.col-12
       = render partial: 'list'

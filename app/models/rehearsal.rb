@@ -9,10 +9,10 @@ class Rehearsal < ApplicationRecord
   accepts_nested_attributes_for :playable_songs, reject_if: proc{ |attr| attr[:song_id].blank? }, allow_destroy: true
 
   filterrific(
-      default_filter_params: { upcoming: '_' },
+      default_filter_params: { list_filter: 'Toekomstig' },
       available_filters: [
-          :upcoming,
-          :description_filter
+          :description_filter,
+          :list_filter
       ],
   )
 
@@ -30,9 +30,19 @@ class Rehearsal < ApplicationRecord
         .order('date_time asc')
   }
 
-  scope :upcoming, ->(_) {
-    where('date(date_time) >= current_date')
-    .order('date_time asc')
+  scope :list_filter, ->(filter) {
+    case filter
+      when 'Toekomstig'
+        where('date(date_time) >= current_date')
+        .order('date_time asc')
+      when 'Afgelopen'
+        where('date(date_time) < current_date')
+        .order('date_time asc')
+      else
+        all.order('date_time asc')
+    end
+
+
   }
 
   def is_declined_by?(member)

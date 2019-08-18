@@ -3,14 +3,34 @@
     .col-1
     .col-10
       %h3
-        = "Repetitie: #{@rehearsal.date_time.strftime("%d-%m-%Y")}"
+        = "Repetitie: #{@rehearsal.date_time.strftime("%d-%m-%Y")}: #{@rehearsal.description}"
+
   .row
     .col-1
     .col-10
-      %h3
-        Afmeldingen
-  - @rehearsal.declined_members.order('last_name').each do |mp|
-    .row
-      .col-1
-      .col-10
-        = mp.member.last_name
+      .row
+        .col-10.font-weight-bold
+          Afmeldingen
+      - @rehearsal.declined_members.order('last_name').each do |mp|
+        .row
+          .col-10
+            = mp.member.full_name
+      .row
+        .col-10.font-weight-bold.mt-2
+          Afwezig
+      - @rehearsal.member_presences.where(present: false).each do |mp|
+        .row
+          .col-10
+            = mp.member.full_name
+      .row
+        .col-10.font-weight-bold.mt-2
+          Aanwezig
+      - @rehearsal.member_presences.where(present: true).each do |mp|
+        .row
+          .col-10
+            = mp.member.full_name
+
+      .row
+        .col-10
+          = link_to 'Aanpassen', edit_admin_rehearsal_path, class: 'btn btn-info btn-sm'
+          = link_to 'Presentielijst', rehearsal_attendance_path, class: 'btn btn-info btn-sm'
