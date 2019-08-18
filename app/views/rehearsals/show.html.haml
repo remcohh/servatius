@@ -18,6 +18,20 @@
             %p U bent niet afgemeld voor deze repetitie
             = link_to 'Afmelden',decline_rehearsal_path(@rehearsal), method: 'put', class: 'btn btn-sm btn-danger'
 
+      .row
+        .col-10.mt-3.font-weight-bold
+          Te repeteren:
+      - if @rehearsal.playable_songs.empty?
+        .row
+          .col-10
+            = '-'
+      - @rehearsal.playable_songs.each do |ps|
+        .row
+          .col-10
+            = ps.song.title
+        .row
+          .col-10.small.mb-2
+            = ps.remark
 
       .row.mt-3
         .col-10

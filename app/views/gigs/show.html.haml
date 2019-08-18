@@ -18,6 +18,17 @@
       .row
         .col-10.border-bottom.p-1
           = "Kleding: #{@gig.dresscode}"
+      .row
+        .col-10.font-weight-bold.p-1
+          Programma:
+      - if @gig.playable_songs.empty?
+        .row.border-bottom.p-1
+          .col-10.pl-1
+            = '-'
+      - @gig.playable_songs.each do |ps|
+        .row
+          .col-10.pl-1
+            = ps.song.title
 
       - unless @gig.member_remarks.blank?
         .row
