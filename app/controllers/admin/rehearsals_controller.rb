@@ -9,7 +9,7 @@ class Admin::RehearsalsController < ApplicationController
         },
         persistence_id: "shared_key",
         default_filter_params: {},
-        available_filters: [:sorted_by, :description_filter],
+        available_filters: [:upcoming, :description_filter],
         sanitize_params: true,
     ) || return
 
