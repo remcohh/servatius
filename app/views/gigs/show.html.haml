@@ -32,6 +32,7 @@
         .col-5.col-lg-2.border-bottom.p-1
           %a{"href"=>"#", "data-target" => "#myModal", "data-toggle" => "modal", class: "btn btn-sm btn-info"}
             Bekijk bezetting
+      .row
         .col-5.border-bottom.p-1
           - if %w(Onbekend Afgemeld).include?(@status)
             = link_to 'Aanmelden'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
