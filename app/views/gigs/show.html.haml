@@ -33,11 +33,11 @@
           %a{"href"=>"#", "data-target" => "#myModal", "data-toggle" => "modal", class: "btn btn-sm btn-info"}
             Bekijk bezetting
       .row
-        .col-5.col-lg-2.border-bottom.p-1
-          - if %w(Onbekend Afgemeld).include?(@status)
+        - if %w(Onbekend Afgemeld).include?(@status)
+          .col-5.col-lg-2.border-bottom.p-1
             = link_to 'Aanmelden'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
-        .col-5.border-bottom.p-1
-          - if %w(Onbekend Aangemeld).include?(@status)
+        - if %w(Onbekend Aangemeld).include?(@status)
+          .col-5.border-bottom.p-1
             = link_to 'Afmelden',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
       .row
         .col-10.p-1.mt-3
