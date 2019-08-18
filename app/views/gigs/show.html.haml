@@ -2,34 +2,44 @@
   .row
     .col-1
     .col-10
-      .row
-        .col-10
+      .row.mb-1
+        .col-10.p-1
           %h3
             Optreden
+      .row.mb-1
+        .col-10.border-bottom.p-1
+          = "#{@gig.date_time.strftime('%d-%m-%Y %H:%M')} #{@gig.title}"
       .row
-        .col-10
-          %p
-            = "#{@gig.date_time.strftime('%d-%m-%Y %H:%M')} #{@gig.title}"
-          %p
-            = "Verzamelen: #{@gig.try(:gather_when).try(:strftime, '%H:%M')}, locatie: #{@gig.gather_where}"
-          %p
-            = "Kleding: #{@gig.dresscode}"
-          %p
+        .col-10.border-bottom.p-1
+          = "Verzamelen: #{@gig.try(:gather_when).try(:strftime, '%H:%M')}"
+      .row
+        .col-10.border-bottom.p-1
+          = "locatie: #{@gig.gather_where}"
+      .row
+        .col-10.border-bottom.p-1
+          = "Kleding: #{@gig.dresscode}"
+
+      - unless @gig.member_remarks.empty?
+        .row
+          .col-10.border-bottom.p-1
             = @gig.member_remarks
-          %p
-            Uw status:
-            %span{style: "color: #{status_color(@status)}"}
-              = @status
-          %p
-            %a{"href"=>"#", "data-target" => "#myModal", "data-toggle" => "modal", class: "btn btn-sm btn-info"}
-              Bekijk bezetting
-          %p
-            - if %w(Onbekend Afgemeld).include?(@status)
-              = link_to 'Aanmelden'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
-            - if %w(Onbekend Aangemeld).include?(@status)
-              = link_to 'Afmelden',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
-          %p
-            = link_to 'Terug naar overzicht', gigs_path
+      .row
+        .col-10.p-1
+          Uw status:
+          %span.font-weight-bold{style: "color: #{status_color(@status)}"}
+            = @status
+      .row
+        .col-5.col-lg-2.border-bottom.p-1
+          %a{"href"=>"#", "data-target" => "#myModal", "data-toggle" => "modal", class: "btn btn-sm btn-info"}
+            Bekijk bezetting
+        .col-5.border-bottom.p-1
+          - if %w(Onbekend Afgemeld).include?(@status)
+            = link_to 'Aanmelden'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
+          - if %w(Onbekend Aangemeld).include?(@status)
+            = link_to 'Afmelden',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
+      .row
+        .col-10.p-1.mt-3
+          = link_to 'Terug naar overzicht', gigs_path
     .col-1
 
 = render partial: 'layouts/availability_modal', locals: {instruments_availability: @instruments_availability, gig: @gig}
