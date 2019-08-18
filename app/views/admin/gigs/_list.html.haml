@@ -1,10 +1,19 @@
 - @gigs.each do |gig|
-  .row.mb-1.align-items-center
-    .col-4
-      = gig.date_time.strftime('%d-%m-%Y %H:%M')
-    .col-4
-      = gig.title
-    .col-4
-      .btn-group.float-right
-        = link_to('Bewerken', edit_admin_gig_path(gig), class: 'btn btn-sm btn-outline-secondary')
-        = link_to('Verwijderen', admin_gig_path(gig), method: :delete, data: { confirm: 'Weet u het zeker?' }, class: 'btn btn-sm btn-danger')
+  .row.mb-1.align-items-center.data-row
+    .col-12.border-bottom
+      .row
+        .col-3
+          = link_to gig.date_time.strftime('%d-%m'), admin_gig_path(gig)
+          .small
+            = gig.date_time.strftime('%H:%M')
+        .col-9
+          .row
+            .col-9
+              = gig.title
+          .row
+            .col-7.small
+              = gig.ensembles.collect(&:name).join(', ')
+
+
+
+

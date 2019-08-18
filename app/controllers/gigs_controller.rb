@@ -1,23 +1,15 @@
 class GigsController < ApplicationController
+  include Availability
   before_action :authenticate_member!
-
   before_action :set_gig, only: [:show, :edit, :update, :destroy, :signup, :dropout]
 
-  # GET /gigs
-  # GET /gigs.json
+
   def index
     @ensembles = current_member.ensembles
   end
 
-  # GET /gigs/1
-  # GET /gigs/1.json
   def show
-    @instruments_availability = {}
-    @instruments_availability_member = {}
-    @gig.ensembles.each do |ensemble|
-      @instruments_availability[ensemble.id] = @gig.instruments_availabability(ensemble)
-      @instruments_availability_member[ensemble.id] = @instruments_availability[ensemble.id].find{ |i| i['id'] == current_member.ensemble_instruments.first.instrument_id }
-    end
+    calc_availability(@gig)
     presence = @gig.presence_for_member(current_member)
     @status = if presence.nil?
                 'Onbekend'
@@ -28,13 +20,11 @@ class GigsController < ApplicationController
               end
   end
 
-  # GET /gigs/new
   def new
     @gig_admins = Member.where(gig_admin: true)
     @gig = Gig.new
   end
 
-  # GET /gigs/1/edit
   def edit
     @gig_admins = Member.where(gig_admin: true)
   end

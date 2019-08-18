@@ -1,4 +1,6 @@
 class Admin::GigsController < ApplicationController
+  include Availability
+
   before_action :authenticate_member!
 
   def index
@@ -14,6 +16,11 @@ class Admin::GigsController < ApplicationController
     ) || return
 
     @gigs = @filterrific.find
+  end
+
+  def show
+    @gig = Gig.find params[:id]
+    calc_availability(@gig)
   end
 
   def edit
