@@ -1,11 +1,11 @@
 class GigsController < ApplicationController
   include Availability
-  before_action :authenticate_member!
+  before_action :authenticate_member!, except: [:published_gig, :published_gigs]
   before_action :set_gig, only: [:show, :edit, :update, :destroy, :signup, :dropout]
 
 
   def index
-    @ensembles = current_member.ensembles
+    @gigs = Gig.for_member(current_member)
   end
 
   def show
@@ -88,6 +88,18 @@ class GigsController < ApplicationController
     end
   end
 
+  def published_gigs
+    @cms_site = cms_site_from_request
+    @gigs = Gig.where(band_id: @cms_site.band_id).published.ascending
+
+  end
+
+  def published_gig
+    @cms_site = cms_site_from_request
+    @gig = Gig.where(band_id: @cms_site.band_id).find(params[:id])
+  end
+
+
   private
 
   def set_gig
@@ -104,6 +116,10 @@ class GigsController < ApplicationController
     @gig = Gig.find(params[:id])
     gig_presence = @gig.member_presences.where(member: current_member).first_or_create
     gig_presence.update_attribute :will_be_present, val
+  end
+
+  def cms_site_from_request
+    Comfy::Cms::Site.where(hostname: request.host_with_port).first
   end
 
 end

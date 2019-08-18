@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   put 'gig/:id/accept', to: 'gigs#accept', as: 'accept_gig'
   put 'gig/:id/decline', to: 'gigs#decline', as: 'decline_gig'
 
+  get 'agenda', to: 'gigs#published_gigs', as: 'published_gigs'
+  get 'agenda/:id', to: 'gigs#published_gig', as: 'published_gig'
+
   namespace :admin do
     resources :bands
     resources :ensembles do

@@ -1,0 +1,19 @@
+.row.mb-1.align-items-center
+  .col-2
+  .col-10
+    .row
+      .col-9
+        %h3
+          = @gig.title
+    .row
+      .col-9
+        = "Datum: #{@gig.date_time.strftime("%d %b %Y")}"
+    .row
+      .col-9
+        = "Tijd: #{@gig.date_time.strftime("%H: %M")}"
+    .row
+      .col-9
+        = @gig.where
+    .row
+      .col-9
+        = @gig.site_remarks

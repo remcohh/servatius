@@ -24,18 +24,23 @@ class Gig < ApplicationRecord
     order("date_time asc")
   }
 
+  scope :ascending, -> {
+    order("date_time asc")
+  }
+
   scope :upcoming_for_ensemble, ->(ensemble) {
     ensemble.gigs
         .where('date(date_time) >= current_date')
         .order('date_time asc')
   }
 
-  def self.for_member(member)
-    Gig.joins(:members).where(['members.id = ?', member]).includes(:ensembles).order(:date_time)
-  end
+  scope :future, -> {
+    where('date(date_time) >= current_date')
+  }
 
-  scope :past, -> { where(when: Time.now - 1.year..Time.now ) }
-  scope :future, -> { where(when: Time.now..Time.now + 2.years) }
+  def self.for_member(member)
+    Gig.future.joins(:members).where(['members.id = ?', member]).includes(:ensembles).order(:date_time)
+  end
 
   def players
     members
@@ -72,6 +77,11 @@ class Gig < ApplicationRecord
     AND member_presences.presentable_id=#{id} and member_presences.presentable_type='Gig'
     GROUP BY instruments.id, ensemble_instruments.id ORDER BY instruments.id"
     ActiveRecord::Base.connection.execute(query)
+  end
+
+  def self.published(ensemble = nil)
+    return Gig.future.all if ensemble.nil?
+    ensemble.gigs
   end
 
   private
