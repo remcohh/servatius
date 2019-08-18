@@ -19,7 +19,7 @@
         .col-10.border-bottom.p-1
           = "Kleding: #{@gig.dresscode}"
 
-      - unless @gig.member_remarks.empty?
+      - unless @gig.member_remarks.blank?
         .row
           .col-10.border-bottom.p-1
             = @gig.member_remarks
