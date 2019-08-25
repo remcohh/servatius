@@ -1,0 +1,14 @@
+.container
+  .row
+    .col-12
+      .row
+        .col-6
+          %h3
+            Klusjes
+          = form_for_filterrific @filterrific do |f|
+            = f.text_field(:title_filter, placeholder: 'Zoek op titel', class: 'filterrific-periodically-observed', autocomplete: 'off')
+        .col-6
+          = link_to 'Nieuwe klus', new_admin_chore_path, class: 'btn btn-secondary float-right'
+  .row
+    #filterrific_results.col-12
+      = render partial: 'list'

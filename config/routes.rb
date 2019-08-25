@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       get 'send_reset_password_link', to: 'members#send_reset_password_link'
     end
     resources :songs
+    resources :chores
   end
   # get 'members/index'
   get 'home/index'

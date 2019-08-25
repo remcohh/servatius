@@ -1,0 +1,13 @@
+- @chores.each do |chore|
+  .row.mb-1.align-items-center.data-row
+    .col-12.border-bottom
+      .row
+        .col-3
+          = link_to chore.date_time.strftime('%d-%m'), edit_admin_chore_path(chore)
+          .small
+            = chore.date_time.strftime('%H:%M')
+        .col-2
+          = chore.title
+        .col-6
+          .btn-group.float-right
+            = link_to('Verwijderen', admin_chore_path(chore), method: :delete, data: { confirm: 'Weet u het zeker?' })
