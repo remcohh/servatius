@@ -1,0 +1,32 @@
+.container-fluid
+  .row
+    .col-1
+    .col-10
+      .row
+        .col-10
+          %h3
+            Klus
+      .row
+        .col-10
+          = "Datum: #{@chore.date_time.strftime('%d-%m-%Y %H:%M')}"
+      .row
+        .col-10.font-weight-bold.mt-3
+          Reeds aangemeld:
+      - if @present_members.empty?
+        .row
+          .col-10
+            = '-'
+      - @present_members.each do |m|
+        .row
+          .col-10
+            =m.member.full_name
+      .row
+        .col-10.mt-3
+          - if @chore.member_is_present? current_member
+            = link_to 'Afmelden', chore_attendance_update_path(@chore, { member_id: current_member.id, attendance: false }), method: :put, class: 'btn btn-danger btn-sm'
+          - else
+            = link_to 'Aanmelden', chore_attendance_update_path(@chore, { member_id: current_member.id, attendance: true }), method: :put, class: 'btn btn-success btn-sm'
+      .row.mt-3
+        .col-10
+          = link_to 'Terug naar overzicht', chores_path
+    .col-1

@@ -1,0 +1,23 @@
+- Chore.all.for_band(current_member.band_id).each do |chore|
+  .row.mb-1.align-items-center.data-row
+    .col-12.border-bottom
+      .row
+        .col-3
+          = link_to chore.date_time.strftime('%d-%m'), chore_path(chore)
+          .small
+            = chore.date_time.strftime('%H:%M')
+        .col-9
+          .row
+            .col-9
+              = chore.description
+          .row
+            .col-7.small
+              = 'Aangemeld: '
+              = "#{chore.present_members.count} van minimaal #{chore.min_number}"
+            - if chore.member_is_present? current_member
+              .col-2.small.text-success
+                = 'Aangemeld'
+            - else
+              .col-2.small.text-info
+                = '?'
+

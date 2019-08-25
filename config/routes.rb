@@ -22,6 +22,11 @@ Rails.application.routes.draw do
   get 'agenda', to: 'gigs#published_gigs', as: 'published_gigs'
   get 'agenda/:id', to: 'gigs#published_gig', as: 'published_gig'
 
+  get 'chores', to: 'chores#index', as: 'chores'
+  get 'chore/:id', to: 'chores#show', as: 'chore'
+  put 'chore/:id/attendance', to: 'chores#set_attendance_status', as: 'chore_attendance_update'
+
+
   namespace :admin do
     resources :bands
     resources :ensembles do
