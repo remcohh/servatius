@@ -41,4 +41,46 @@ class RehearsalsController < ApplicationController
     end
     redirect_to rehearsal_attendance_path(@rehearsal)
   end
+
+  def statistics
+    @series = {}
+    @ensembles = current_member.band.ensembles
+    @ensembles.each do |ens|
+      @series[ens.name] = [
+          {
+              name: 'Aanwezig',
+              data: series_builder(ens.rehearsals, :present, true)
+          },
+
+          {
+              name: 'Afwezig',
+              data: series_builder(ens.rehearsals, :present, false)
+          },
+          {
+              name: 'Afgemeld',
+              data: series_builder(ens.rehearsals, :will_be_present, false)
+          },
+          {
+              name: 'Onbekend',
+              data: unknown_attendance_series(ens.rehearsals)
+          }
+      ]
+    end
+
+  end
+
+  def series_builder(rehearsals, field, state)
+    rehearsals.inject({}) do |h,r|
+      h[r.date_time.strftime('%d-%m')] = r.member_presences.where(field => state).count
+      h
+    end
+  end
+
+  def unknown_attendance_series(rehearsals)
+    rehearsals.inject({}) do |h,r|
+      h[r.date_time.strftime('%d-%m')] = r.members.without_attendance.count
+      h
+    end
+  end
+
 end

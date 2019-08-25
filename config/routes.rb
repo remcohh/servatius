@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get 'chore/:id', to: 'chores#show', as: 'chore'
   put 'chore/:id/attendance', to: 'chores#set_attendance_status', as: 'chore_attendance_update'
 
+  get 'statistics/rehearsals', to: 'rehearsals#statistics', as: 'rehearsal_statistics'
+
 
   namespace :admin do
     resources :bands
