@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_25_075310) do
+ActiveRecord::Schema.define(version: 2019_08_25_092252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -268,6 +268,8 @@ ActiveRecord::Schema.define(version: 2019_08_25_075310) do
     t.string "family"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "band_id"
+    t.index ["band_id"], name: "index_instruments_on_band_id"
   end
 
   create_table "member_presences", force: :cascade do |t|
@@ -330,6 +332,8 @@ ActiveRecord::Schema.define(version: 2019_08_25_075310) do
     t.bigint "ensemble_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "band_id"
+    t.index ["band_id"], name: "index_songs_on_band_id"
     t.index ["ensemble_id"], name: "index_songs_on_ensemble_id"
   end
 
@@ -340,8 +344,10 @@ ActiveRecord::Schema.define(version: 2019_08_25_075310) do
   add_foreign_key "ensemble_instruments", "ensembles"
   add_foreign_key "ensemble_instruments", "instruments"
   add_foreign_key "gigs", "bands"
+  add_foreign_key "instruments", "bands"
   add_foreign_key "member_presences", "members"
   add_foreign_key "members", "bands"
   add_foreign_key "playable_songs", "songs"
   add_foreign_key "rehearsals", "bands"
+  add_foreign_key "songs", "bands"
 end

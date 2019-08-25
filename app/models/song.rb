@@ -16,6 +16,10 @@ class Song < ApplicationRecord
     order("created_at")
   }
 
+  scope :for_band, ->(band) {
+    where(band_id: band)
+  }
+
   has_many :playable_songs
   has_many :rehearsals, through: :playable_songs, source: 'playable', source_type: 'Rehearsal'
   has_many :gigs, through: :playable_songs, source: 'playable', source_type: 'Gig'

@@ -34,7 +34,7 @@ class Admin::SongsController < ApplicationController
   end
 
   def create
-    Song.create(song_params)
+    Song.create(song_params.merge(band_id: current_member.band_id))
     redirect_to action: :index
   end
 
