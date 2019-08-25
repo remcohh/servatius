@@ -1,0 +1,9 @@
+- @instruments.each do |instrument|
+  .row.mb-1.align-items-center.data-row
+    .col-12.border-bottom
+      .row
+        .col-6
+          = link_to instrument.name, edit_admin_instrument_path(instrument)
+        .col-6
+          .btn-group.float-right
+            = link_to('Verwijderen', admin_song_path(instrument), method: :delete, data: { confirm: 'Weet u het zeker?' })

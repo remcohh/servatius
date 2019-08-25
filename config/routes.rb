@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     end
     resources :songs
     resources :chores
+    resources :instruments
   end
   # get 'members/index'
   get 'home/index'

@@ -1,0 +1,16 @@
+.container-fluid
+  .row
+    .col-1
+    .col-10
+      = bootstrap_form_for ['admin', @instrument] do |f|
+        .row
+          .col-10
+            %h3
+              Muziekstuk
+        .row
+          .col-10
+            = f.text_field :name, label: 'Naam'
+        .row
+          .col-10
+            = f.submit 'Opslaan'
+    .col-1

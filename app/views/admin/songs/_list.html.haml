@@ -3,7 +3,7 @@
     .col-12.border-bottom
       .row
         .col-4
-          = song.title
+          = link_to song.title, edit_admin_song_path(song)
         .col-2
           = song.state
         .col-6
