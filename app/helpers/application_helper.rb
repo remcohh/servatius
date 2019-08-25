@@ -12,4 +12,9 @@ module ApplicationHelper
 
   end
 
+  def band
+    return Band.find(@cms_site.band_id) if @cms_site.present?
+    current_member.band
+  end
+
 end

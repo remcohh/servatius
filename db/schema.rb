@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_25_092252) do
+ActiveRecord::Schema.define(version: 2019_08_25_180802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,13 @@ ActiveRecord::Schema.define(version: 2019_08_25_092252) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "font"
+    t.string "topnav_color"
+    t.string "topnav_color_secondary"
+    t.string "topnav_opacity"
+    t.string "topnav_font_size"
+    t.string "topnav_font_color"
+    t.string "topnav_font_color_secondary"
   end
 
   create_table "chores", force: :cascade do |t|

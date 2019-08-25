@@ -3,7 +3,7 @@
     .col-12.border-bottom
       .row
         .col-6
-          = band.name
+          = link_to band.name, edit_admin_band_path(band)
         .col-6
           .btn-group.float-right
             = link_to('Verwijderen', admin_band_path(band), method: :delete, data: { confirm: 'Weet u het zeker?' })

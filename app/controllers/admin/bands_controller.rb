@@ -47,7 +47,14 @@ class Admin::BandsController < ApplicationController
   private
 
   def band_params
-    params.require(:band).permit(:name)
+    params.require(:band).permit(:name,
+                                 :topnav_color,
+                                 :topnav_color_secondary,
+                                 :topnav_opacity,
+                                 :font,
+                                 :topnav_font_size,
+                                 :topnav_font_color,
+                                 :topnav_font_color_secondary)
   end
 
 end
