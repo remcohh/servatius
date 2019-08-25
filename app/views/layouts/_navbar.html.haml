@@ -24,7 +24,7 @@
                 = active_link_to page.label, page.url, class: 'nav-link topnav_font_color'
         %li.nav-item
           = link_to 'Leden app', members_home_url, class: 'nav-link topnav_font_color'
-      -else
+      - else
         - if current_member&.admin?
           %li.nav-item.dropdown
             = link_to 'Admin', root_url, class: 'nav-link topnav_font_color', id: 'navbarDropdownAdmin', class: 'nav-link topnav_font_color dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
