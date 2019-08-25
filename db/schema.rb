@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_13_172905) do
+ActiveRecord::Schema.define(version: 2019_08_25_075310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,20 @@ ActiveRecord::Schema.define(version: 2019_08_13_172905) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "chores", force: :cascade do |t|
+    t.bigint "band_id"
+    t.bigint "coordinator_id"
+    t.datetime "date_time"
+    t.string "title"
+    t.integer "min_number"
+    t.integer "max_number"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_chores_on_band_id"
+    t.index ["coordinator_id"], name: "index_chores_on_coordinator_id"
   end
 
   create_table "comfy_blog_posts", force: :cascade do |t|
@@ -320,6 +334,8 @@ ActiveRecord::Schema.define(version: 2019_08_13_172905) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chores", "bands"
+  add_foreign_key "chores", "members", column: "coordinator_id"
   add_foreign_key "comfy_cms_sites", "bands"
   add_foreign_key "ensemble_instruments", "ensembles"
   add_foreign_key "ensemble_instruments", "instruments"

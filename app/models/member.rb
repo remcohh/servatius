@@ -35,6 +35,7 @@ class Member < ApplicationRecord
   belongs_to :band
   has_many :gigs
   has_many :rehearsal_declines
+  has_many :chores, foreign_key: 'coordinator_id'
 
   def admin_role
     return 'Admin' if admin?
