@@ -14,7 +14,8 @@ module ApplicationHelper
 
   def band
     return Band.find(@cms_site.band_id) if @cms_site.present?
-    current_member.band
+    return current_member.band unless current_member.nil?
+    return Band.first
   end
 
 end

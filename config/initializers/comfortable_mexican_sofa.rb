@@ -22,7 +22,7 @@ ComfortableMexicanSofa.configure do |config|
   # Module responsible for public authentication. Similar to the above. You also
   # will have access to @cms_site, @cms_layout, @cms_page so you can use them in
   # your logic. Default module doesn't do anything.
-  #   config.public_auth = 'ComfyPublicAuthentication'
+  config.public_auth = 'ComfyPublicAuthentication'
 
   # Module responsible for public authorization. It should have #authorize
   # method that returns true or false based on params and loaded instance
@@ -108,11 +108,13 @@ end
 # end
 
 # Uncomment this module and `config.public_auth` above to use custom public authentication
-# module ComfyPublicAuthentication
-#   def authenticate
-#     return true
-#   end
-# end
+module ComfyPublicAuthentication
+  def authenticate
+    return true if params[:cms_path].nil?
+    first_part = params[:cms_path].split('/')[0]
+    redirect_to new_member_session_path if first_part == 'leden' && current_member.nil?
+  end
+end
 
 # Uncomment this module and `config.public_authorization` above to use custom public authorization
 # module ComfyPublicAuthorization
