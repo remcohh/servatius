@@ -10,7 +10,8 @@
     %ul.navbar-nav.mr-auto
       - if @cms_site.present?
         - @cms_site.pages.root.children.published.each do |page|
-          - if page.label[0..7] != '[nomenu]'
+          - first_slug = page.slug.split('/')[0]
+          - unless %w(nomenu leden).include?(first_slug)
             - if page.children.any?
               %li.nav-item.dropdown
                 = active_link_to page.label, page.url, id: 'navbarDropdown', class: 'nav-link topnav_font_color dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
@@ -48,5 +49,7 @@
             = link_to('Statistieken', rehearsal_statistics_path, class: 'nav-link topnav_font_color')
           %li.nav-item.dropdown
             = link_to('Website', root_url, class: 'nav-link topnav_font_color')
+          %li.nav-item.dropdown
+            = link_to('Info', '/leden', class: 'nav-link topnav_font_color')
           %li.nav-item.dropdown
             = link_to('Uitloggen', destroy_member_session_path, method: :delete, class: 'nav-link topnav_font_color')
