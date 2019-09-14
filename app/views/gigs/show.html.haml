@@ -16,7 +16,7 @@
         .col-10.p-1
           = "locatie: #{@gig.gather_where}"
       .row
-        .col-10.border-bottom.p-1
+        .col-10.p-1
           = "Kleding: #{@gig.dresscode}"
       .row
         .col-10.font-weight-bold.p-1
@@ -32,11 +32,11 @@
 
       - unless @gig.member_remarks.blank?
         .row
-          .col-10.border-bottom.p-1
+          .col-10.p-1
             = @gig.member_remarks
       .row
         .col-10.p-1
-          Uw status:
+          Aanwezigheid:
           %span.font-weight-bold{style: "color: #{status_color(@status)}"}
             = @status
       .row
@@ -44,11 +44,10 @@
           %a{"href"=>"#", "data-target" => "#myModal", "data-toggle" => "modal", class: "btn btn-sm btn-info"}
             Bekijk bezetting
       .row
-        - if %w(Onbekend Afgemeld).include?(@status)
-          .col-5.col-lg-2.border-bottom.p-1
+        .col-10.col-lg-2.p-1
+          - if %w(Onbekend Afgemeld).include?(@status)
             = link_to 'Aanmelden'.html_safe ,accept_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-success'
-        - if %w(Onbekend Aangemeld).include?(@status)
-          .col-5.border-bottom.p-1
+          - if %w(Onbekend Aangemeld).include?(@status)
             = link_to 'Afmelden',decline_gig_path(@gig), method: 'put', class: 'btn btn-sm btn-danger'
       .row
         .col-10.p-1.mt-3
