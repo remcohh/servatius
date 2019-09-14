@@ -46,4 +46,18 @@ class Member < ApplicationRecord
     [first_name, last_name].join(' ')
   end
 
+  def instrument_for_ensemble(ensemble)
+    query = <<-SQL
+      SELECT  "instruments".*, ensemble_instruments.*, ei.*
+      FROM "instruments"
+      INNER JOIN "ensemble_instruments" ON "ensemble_instruments"."instrument_id" = "instruments"."id"
+      INNER JOIN ensemble_instruments_members ei ON ei.ensemble_instrument_id = ensemble_instruments.id
+      
+      WHERE ensemble_instruments.ensemble_id=#{2} AND member_id=#{id}
+    SQL
+    result = ActiveRecord::Base.connection.execute(query)
+    result[0]
+  end
+
+
 end

@@ -15,7 +15,7 @@
           - instrument = ''
           - @unknown.each do |rm|
             - previnstrument = instrument
-            - instrument = rm.instruments.first.name
+            - instrument = rm.instrument_for_ensemble(@rehearsal.ensembles.first)['name']
             - if instrument != previnstrument
               .row.mb-1
                 .col-7.font-weight-bold
