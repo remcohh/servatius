@@ -7,13 +7,13 @@
           %h3
             Optreden
       .row.mb-1
-        .col-10.border-bottom.p-1
+        .col-10.p-1
           = "#{@gig.date_time.strftime('%d-%m-%Y %H:%M')} #{@gig.title}"
       .row
-        .col-10.border-bottom.p-1
+        .col-10.p-1
           = "Verzamelen: #{@gig.try(:gather_when).try(:strftime, '%H:%M')}"
       .row
-        .col-10.border-bottom.p-1
+        .col-10.p-1
           = "locatie: #{@gig.gather_where}"
       .row
         .col-10.border-bottom.p-1
@@ -22,7 +22,7 @@
         .col-10.font-weight-bold.p-1
           Programma:
       - if @gig.playable_songs.empty?
-        .row.border-bottom.p-1
+        .row.p-1
           .col-10.pl-1
             = '-'
       - @gig.playable_songs.each do |ps|
