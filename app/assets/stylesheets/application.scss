@@ -16,7 +16,7 @@
 @import "bootstrap";
 
 @font-face {
-  font-family:'Merriweather';
+  font-family:'Quicksand';
 }
 
 // We need to override trix.css’s image gallery styles to accommodate the
@@ -70,7 +70,8 @@ body
 {
   font-size: 16px;
   padding-top: 70px;
-  font-family: Merriweather;
+  font-family: Quicksand;
+  font-weight: 300;
 
 }
 h1
