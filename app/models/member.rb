@@ -53,10 +53,10 @@ class Member < ApplicationRecord
       INNER JOIN "ensemble_instruments" ON "ensemble_instruments"."instrument_id" = "instruments"."id"
       INNER JOIN ensemble_instruments_members ei ON ei.ensemble_instrument_id = ensemble_instruments.id
       
-      WHERE ensemble_instruments.ensemble_id=#{2} AND member_id=#{id}
+      WHERE ensemble_instruments.ensemble_id=#{ensemble.id} AND member_id=#{id}
     SQL
     result = ActiveRecord::Base.connection.execute(query)
-    result[0]
+    result.count > 0  ? result[0] : { name: 'Geen instrument' }
   end
 
 
