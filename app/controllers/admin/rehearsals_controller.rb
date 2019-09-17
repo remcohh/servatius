@@ -7,7 +7,7 @@ class Admin::RehearsalsController < ApplicationController
         params[:filterrific],
         select_options: {
         },
-        persistence_id: "shared_key",
+        persistence_id: false,
         default_filter_params: {list_filter: 'Toekomstig'},
         available_filters: [:upcoming, :description_filter, :list_filter],
         sanitize_params: true,

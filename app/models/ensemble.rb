@@ -17,6 +17,7 @@ class Ensemble < ApplicationRecord
 
   has_many :ensemble_instruments, dependent: :destroy
   has_many :members, through: :ensemble_instruments
+  has_many :songs
 
   has_and_belongs_to_many :gigs
   has_and_belongs_to_many :rehearsals

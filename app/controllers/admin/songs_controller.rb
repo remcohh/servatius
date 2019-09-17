@@ -8,9 +8,9 @@ class Admin::SongsController < ApplicationController
         params[:filterrific],
         select_options: {
         },
-        persistence_id: "shared_key",
+        persistence_id: false,
         default_filter_params: {},
-        available_filters: [:sorted_by, :title_filter],
+        available_filters: [:sorted_by, :title_filter, :ensemble_filter],
         sanitize_params: true,
     ) || return
 
@@ -46,7 +46,7 @@ class Admin::SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title, :composer, :state)
+    params.require(:song).permit(:title, :composer, :state, :ensemble_id)
   end
 
 end

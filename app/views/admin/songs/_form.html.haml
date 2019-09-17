@@ -4,14 +4,14 @@
     .col-10
       = bootstrap_form_for ['admin', @song] do |f|
         .row
-          .col-10
+          .col-12
             %h3
               Muziekstuk
         .row
           .col-10
             = f.text_field :title, label: 'Titel'
             = f.text_field :composer, label: 'Componist'
-            = f.collection_select :ensemble_id, Ensemble.all, 'id', :name, {}, { :multiple => true }
+            = f.collection_select :ensemble_id, Ensemble.all, 'id', :name, {}, { :multiple => false }
             = f.select :state, %w(Instuderen Speelbaar Archief), label: 'Staat'
         .row
           .col-10
