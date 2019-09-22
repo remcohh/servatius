@@ -13,7 +13,7 @@ module BlockHelper
 
   def newsblock_helper
     out = ''
-    Comfy::Blog::Post.all.each do |post|
+    Comfy::Blog::Post.all.order('published_at desc').each do |post|
       out << "<div class='row'>"
       out << "<div class='col-md-12'>"
       first_image = Nokogiri::HTML(post.content_cache).search("img")[0].attribute_nodes[0].value
