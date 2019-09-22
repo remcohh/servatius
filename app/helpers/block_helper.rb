@@ -14,6 +14,8 @@ module BlockHelper
   def newsblock_helper
     out = ''
     Comfy::Blog::Post.all.each do |post|
+      out << "<div class='row'>"
+      out << "<div class='col-md-12'>"
       first_image = Nokogiri::HTML(post.content_cache).search("img")[0].attribute_nodes[0].value
       first_paragraph = Nokogiri::HTML(post.content_cache).search("p")[0].children[0].text
       out << "<div class='ppst_date'>#{post.published_at.strftime('%d-%m-%Y')}</div>"
@@ -21,6 +23,8 @@ module BlockHelper
       out << "<img src='#{first_image}' class='float-md-left mr-3'>"
       out << "<p>#{first_paragraph}</p>"
       out << link_to('Lees verder', comfy_blog_post_path(@cms_site.path, post.year, post.month, post.slug))
+      out << "</div>"
+      out << "</div>"
     end
     out.html_safe
   end

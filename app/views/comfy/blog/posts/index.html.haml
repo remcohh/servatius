@@ -4,17 +4,18 @@
       %h3 Blog Posts
 
       - @blog_posts.each do |post|
+        .row
+          .col-md-12
+            %h3
+              = post.title
+            .date
+              = post.published_at.to_s(:db)
+            %img{ src:  Nokogiri::HTML(post.content_cache).search("img")[0].attribute_nodes[0].value, class: 'float-left mr-3' }
+            %p
+              = Nokogiri::HTML(post.content_cache).search("p")[0].children[0].text
+              = link_to 'Lees verder', comfy_blog_post_path(@cms_site.path, post.year, post.month, post.slug)
 
-        %h3
-          = post.title
-        .date
-          = post.published_at.to_s(:db)
-        %img{ src:  Nokogiri::HTML(post.content_cache).search("img")[0].attribute_nodes[0].value, class: 'float-left mr-3' }
-        %p
-          = Nokogiri::HTML(post.content_cache).search("p")[0].children[0].text
-          = link_to 'Lees verder', comfy_blog_post_path(@cms_site.path, post.year, post.month, post.slug)
-
-      = comfy_paginate @blog_posts
+          = comfy_paginate @blog_posts
 
     .col-md-4
 
