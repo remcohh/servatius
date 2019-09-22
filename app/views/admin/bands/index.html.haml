@@ -8,7 +8,7 @@
           = form_for_filterrific @filterrific do |f|
             = f.text_field(:name_filter, placeholder: 'Zoek op naam', class: 'filterrific-periodically-observed', autocomplete: 'off')
         .col-6
-          = link_to 'Nieuwe vereniging', new_admin_band_path, class: 'btn btn-secondary float-right'
+          = link_to 'Nieuwe vereniging', new_admin_band_path, class: 'btn btn-primary float-right'
   .row
     #filterrific_results.col-12
       = render partial: 'list'

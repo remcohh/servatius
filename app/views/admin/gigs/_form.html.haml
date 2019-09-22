@@ -35,6 +35,6 @@
                   - unless ff.object.id.nil?
                     = ff.check_box '_destroy', label: 'Verwijder'
         .row
-          .col-10
-            = f.submit 'Opslaan'
+          .col-10.mb-5
+            = f.submit 'Opslaan', class: 'btn btn-primary'
     .col-1

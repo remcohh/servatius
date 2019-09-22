@@ -11,13 +11,13 @@
           = "Lid: #{@member.full_name}"
       .row
         .col-10.mb-1
-          = link_to 'Bewerken', edit_admin_member_path(@member), class: 'btn btn-sm btn-info'
+          = link_to 'Bewerken', edit_admin_member_path(@member), class: 'btn btn-sm btn-primary'
       .row
         .col-10.mb-1
-          = link_to 'Verstuur inlog link', admin_member_send_login_link_url(@member), class: 'btn btn-sm btn-info'
+          = link_to 'Verstuur inlog link', admin_member_send_login_link_url(@member), class: 'btn btn-sm btn-primary'
       .row
         .col-10.mb-1
-          = link_to 'Verstuur wachtwoord reset', admin_member_send_reset_password_link_url(@member), class: 'btn btn-sm btn-info'
+          = link_to 'Verstuur wachtwoord reset', admin_member_send_reset_password_link_url(@member), class: 'btn btn-sm btn-primary'
       .row
         .col-10.mb-1
           = link_to 'Verwijderen',admin_member_path(@member),  method: :delete, data: { confirm: 'Weet u het zeker?' }, class: 'btn btn-sm btn-danger'

@@ -11,4 +11,4 @@
               = "Repetitiebezoek #{ensemble.name}"
         .row.mb-5
           .col-10
-            = column_chart @series[ensemble.name], stacked: true
+            = column_chart @series[ensemble.name], stacked: true, colors: %w(green red orange lightgrey)

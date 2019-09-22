@@ -14,6 +14,6 @@
             = f.collection_select :ensemble_id, Ensemble.all, 'id', :name, {}, { :multiple => false }
             = f.select :state, %w(Instuderen Speelbaar Archief), label: 'Staat'
         .row
-          .col-10
-            = f.submit 'Opslaan'
+          .col-10.mb-5
+            = f.submit 'Opslaan', class: 'btn btn-primary'
     .col-1

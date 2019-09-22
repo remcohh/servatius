@@ -13,9 +13,7 @@
             = f.text_field :last_name, label: 'Achternaam'
             = f.text_field :email, label: 'Email'
             = f.collection_select :ensemble_instrument_ids, EnsembleInstrument.all, "id", :ensemble_instrument_and_party, {label: 'Orkest en instrument'}, { :multiple => true }
-
-            //= f.select :instrument_id, options_from_collection_for_select(Instrument.all, :id, :name)
         .row
-          .col-10
-            = f.submit 'Opslaan'
+          .col-10.mb-5
+            = f.submit 'Opslaan', class: 'btn btn-primary'
     .col-md-1
