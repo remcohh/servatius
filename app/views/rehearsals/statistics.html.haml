@@ -4,10 +4,6 @@
     .col-10
       .row
         .col-10
-
-
-
-
       - @ensembles.each do |ensemble|
         .row.ml-3
           .col-10.text-center
@@ -15,4 +11,4 @@
               = "Repetitiebezoek #{ensemble.name}"
         .row.mb-5
           .col-10
-            = line_chart @series[ensemble.name]
+            = column_chart @series[ensemble.name], stacked: true
