@@ -14,13 +14,12 @@ module BlockHelper
   def newsblock_helper
     out = ''
     Comfy::Blog::Post.all.order('published_at desc').each do |post|
-      out << "<div class='row'>"
+      out << "<div class='row mb-5'>"
       out << "<div class='col-md-12'>"
       first_image = Nokogiri::HTML(post.content_cache).search("img")[0].attribute_nodes[0].value
       first_paragraph = Nokogiri::HTML(post.content_cache).search("p")[0].children[0].text
-      out << "<div class='ppst_date'>#{post.published_at.strftime('%d-%m-%Y')}</div>"
-      out << "<h3>#{post.title}</h3>"
-      out << "<img src='#{first_image}' class='float-md-left mr-3'>"
+      out << "<h4>#{post.published_at.strftime('%d-%m-%Y')}: #{post.title}</h4>"
+      out << "<img src='#{first_image}' class='float-md-left mr-3 mt-1'>"
       out << "<p>#{first_paragraph}</p>"
       out << link_to('Lees verder', comfy_blog_post_path(@cms_site.path, post.year, post.month, post.slug))
       out << "</div>"
@@ -29,11 +28,11 @@ module BlockHelper
     out.html_safe
   end
 
-  def published_gigs_helper(nr=5, ensemble_id = nil)
+  def published_gigs_helper(nr=4, ensemble_id = nil)
     out = '<h4>Agenda</h4>'
-    out << '<ul>'
-    Gig.published(ensemble_id).last(nr).each do |gig|
-      out << '<li>'
+    out << '<ul class="list-group">'
+    Gig.published(ensemble_id).order('date_time asc').first(nr).each do |gig|
+      out << '<li class="list-group-item">'
       out << "<div>#{gig.date_time.strftime('%d-%m-%Y')} om #{gig.date_time.strftime('%H:%M')}:</div>"
       out << link_to(gig.title, published_gig_path(gig))
       out << '</li>'
