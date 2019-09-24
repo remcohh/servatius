@@ -33,7 +33,7 @@ module BlockHelper
     out << '<ul class="list-group">'
     Gig.published(ensemble_id).order('date_time asc').first(nr).each do |gig|
       out << '<li class="list-group-item">'
-      out << "<div>#{gig.date_time.strftime('%d-%m-%Y')} om #{gig.date_time.strftime('%H:%M')}:</div>"
+      out << "<div>#{gig.date_time.strftime('%d-%m-%Y')} om #{gig.date_time.strftime('%H:%M')}</div>"
       out << link_to(gig.title, published_gig_path(gig))
       out << '</li>'
     end
