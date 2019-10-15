@@ -1,0 +1,23 @@
+.container-fluid
+  .row
+    .col-1
+    .col-10
+      = bootstrap_form_for ['admin', @group] do |f|
+        .row
+          .col-10
+            %h3
+              Group
+        .row
+          .col-10
+            = f.text_field :name, label: 'Naam'
+        .row
+          .col-10
+            = f.text_field :description, label: 'Omschrijving'
+        .row
+          .col-10
+            = f.collection_select(:member_ids, Member.all, :id, :full_name, {}, { :multiple => true } )
+
+        .row
+          .col-10.mb-5
+            = f.submit 'Opslaan', class: 'btn btn-primary'
+    .col-1

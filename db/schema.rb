@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_25_180802) do
+ActiveRecord::Schema.define(version: 2019_10_15_180939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -270,6 +270,20 @@ ActiveRecord::Schema.define(version: 2019_08_25_180802) do
     t.index ["band_id"], name: "index_gigs_on_band_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.bigint "band_id"
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_groups_on_band_id"
+  end
+
+  create_table "groups_members", id: false, force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "member_id", null: false
+  end
+
   create_table "instruments", force: :cascade do |t|
     t.string "name"
     t.string "family"
@@ -351,6 +365,7 @@ ActiveRecord::Schema.define(version: 2019_08_25_180802) do
   add_foreign_key "ensemble_instruments", "ensembles"
   add_foreign_key "ensemble_instruments", "instruments"
   add_foreign_key "gigs", "bands"
+  add_foreign_key "groups", "bands"
   add_foreign_key "instruments", "bands"
   add_foreign_key "member_presences", "members"
   add_foreign_key "members", "bands"

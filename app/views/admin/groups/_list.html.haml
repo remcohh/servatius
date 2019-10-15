@@ -1,0 +1,9 @@
+- @groups.each do |group|
+  .row.mb-1.align-items-center.data-row
+    .col-12.border-bottom
+      .row
+        .col-6
+          = link_to group.name, edit_admin_group_path(group)
+        .col-6
+          .btn-group.float-right
+            = link_to('Verwijderen', admin_group_path(group), method: :delete, data: { confirm: 'Weet u het zeker?' })

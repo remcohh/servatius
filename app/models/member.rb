@@ -30,6 +30,7 @@ class Member < ApplicationRecord
     .where('member_presences.id is NULL') }
 
   has_and_belongs_to_many :ensemble_instruments
+  has_and_belongs_to_many :groups
   has_many :instruments, through: :ensemble_instruments
   has_many :ensembles, through: :ensemble_instruments
   belongs_to :band

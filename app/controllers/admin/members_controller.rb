@@ -72,7 +72,7 @@ class Admin::MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:last_name, :first_name, :email, ensemble_instrument_ids: [])
+    params.require(:member).permit(:last_name, :first_name, :email, ensemble_instrument_ids: [], group_ids: [])
   end
 
   def ensemble_instrument_params
