@@ -14,6 +14,29 @@
             = f.collection_select :ensemble_id, Ensemble.all, 'id', :name, {}, { :multiple => false }
             = f.select :state, %w(Instuderen Speelbaar Archief), label: 'Staat'
         .row
+          .col-10
+            %h3
+              Partituren
+        .row
+          .col-10
+            = f.fields_for :parts do |part|
+              .row
+                .col-5
+                  = part.hidden_field :id
+                  = part.collection_select :ensemble_instrument_id, EnsembleInstrument.where(ensemble: @song.ensemble), :id, :instrument_and_party, include_blank: true
+                .col-5
+                  = part.file_field_without_bootstrap :upload
+                  = part.try(:object).try(:upload).try(:filename).to_s
+        .row
           .col-10.mb-5
-            = f.submit 'Opslaan', class: 'btn btn-primary'
+            = f.submit 'Opslaan', class: 'btn btn-primary', name: 'next_action', value: '+'
+        .row
+          .col-10.mb-5
+            = f.submit 'Opslaan', class: 'btn btn-primary', name: 'next_action', value: 'Opslaan'
     .col-1
+
+:javascript
+  $('input[type="file"]').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('.custom-file-label').html(fileName);
+  });

@@ -8,6 +8,8 @@ class Song < ApplicationRecord
           :ensemble_filter
       ],
   )
+  has_many :parts
+  accepts_nested_attributes_for :parts
 
   scope :title_filter, ->(title) {
     where('lower(title) like ?', "%#{title.downcase}%")
@@ -30,4 +32,5 @@ class Song < ApplicationRecord
   has_many :playable_songs
   has_many :rehearsals, through: :playable_songs, source: 'playable', source_type: 'Rehearsal'
   has_many :gigs, through: :playable_songs, source: 'playable', source_type: 'Gig'
+  has_many :parts
 end

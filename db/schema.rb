@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_20_133929) do
+ActiveRecord::Schema.define(version: 2019_10_20_152245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -339,6 +339,15 @@ ActiveRecord::Schema.define(version: 2019_10_20_133929) do
     t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
   end
 
+  create_table "parts", force: :cascade do |t|
+    t.bigint "ensemble_instrument_id"
+    t.bigint "song_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ensemble_instrument_id"], name: "index_parts_on_ensemble_instrument_id"
+    t.index ["song_id"], name: "index_parts_on_song_id"
+  end
+
   create_table "playable_songs", force: :cascade do |t|
     t.bigint "song_id"
     t.integer "playable_id"
@@ -381,6 +390,8 @@ ActiveRecord::Schema.define(version: 2019_10_20_133929) do
   add_foreign_key "instruments", "bands"
   add_foreign_key "member_presences", "members"
   add_foreign_key "members", "bands"
+  add_foreign_key "parts", "ensemble_instruments"
+  add_foreign_key "parts", "songs"
   add_foreign_key "playable_songs", "songs"
   add_foreign_key "rehearsals", "bands"
   add_foreign_key "songs", "bands"

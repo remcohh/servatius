@@ -21,12 +21,17 @@ class Admin::SongsController < ApplicationController
 
   def edit
     @song = Song.find params[:id]
+    @song.parts.build if params[:build_new] == 'true'
   end
 
   def update
     @song = Song.find params[:id]
     @song.update_attributes song_params
-    redirect_to action: :index
+    if params[:next_action] == '+'
+      redirect_to action: :edit, build_new: true
+    else
+      redirect_to action: :index
+    end
   end
 
   def new
@@ -46,7 +51,9 @@ class Admin::SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:title, :composer, :state, :ensemble_id)
+    p = params.require(:song).permit(:title, :composer, :state, :ensemble_id, parts_attributes: [:id, :ensemble_instrument_id, :upload] )
+    p[:parts_attributes] = p[:parts_attributes].to_h.except("id")
+    p
   end
 
 end
