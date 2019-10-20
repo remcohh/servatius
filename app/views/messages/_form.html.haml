@@ -7,7 +7,7 @@
         = hidden_field_tag :id, params[:id]
         .row
           .col-10
-            = f.text_area :message, label: "Bericht voor: #{@messageable.name}"
+            = f.text_area :message, label: "Bericht voor: #{@messageable.name}", autofocus: true
         .row
           .col-10
             = f.check_box :email_notification, label: "Stuur email notificatie"
