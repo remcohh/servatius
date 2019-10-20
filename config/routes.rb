@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   comfy_route :blog_admin, path: '/cms'
   comfy_route :blog, path: '/blog'
   mount Magic::Link::Engine, at: '/'
-  devise_for :members, controllers: { registrations: 'registrations' }
+  devise_for :members, controllers: { registrations: 'members/registrations', sessions: 'members/sessions' }
   comfy_route :cms_admin, path: '/cms'
   # Ensure that this route is defined last
 
