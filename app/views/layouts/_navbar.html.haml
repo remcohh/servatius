@@ -42,6 +42,8 @@
               = link_to('Site beheer', '/cms', class: 'dropdown-item')
         - if current_member
           %li.nav-item.dropdown
+            = link_to('Berichten', messages_path, class: 'nav-link topnav_font_color')
+          %li.nav-item.dropdown
             = link_to('Repetities', rehearsals_path, class: 'nav-link topnav_font_color')
           %li.nav-item.dropdown
             = link_to('Optredens', gigs_path, class: 'nav-link topnav_font_color')

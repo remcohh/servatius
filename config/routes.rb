@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   comfy_route :cms_admin, path: '/cms'
   # Ensure that this route is defined last
 
-  get 'members/home', to: 'home#index', as: 'members_home'
+  get 'members/home', to: 'messages#index', as: 'members_home'
   get 'rehearsals', to: 'rehearsals#index', as: 'rehearsals'
   get 'rehearsal/:id', to: 'rehearsals#show', as: 'rehearsal'
   get 'rehearsal/:id/attendance', to: 'rehearsals#attendance', as: 'rehearsal_attendance'
@@ -25,9 +25,10 @@ Rails.application.routes.draw do
   get 'chores', to: 'chores#index', as: 'chores'
   get 'chore/:id', to: 'chores#show', as: 'chore'
   put 'chore/:id/attendance', to: 'chores#set_attendance_status', as: 'chore_attendance_update'
+  get 'messageables', to: 'messageables#index', as: 'messageables'
 
   get 'statistics/rehearsals', to: 'rehearsals#statistics', as: 'rehearsal_statistics'
-
+  resources :messages
 
   namespace :admin do
     resources :bands

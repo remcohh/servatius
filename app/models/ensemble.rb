@@ -21,6 +21,8 @@ class Ensemble < ApplicationRecord
 
   has_and_belongs_to_many :gigs
   has_and_belongs_to_many :rehearsals
+  has_many :messages, as: :messageable
+
 
   belongs_to :band
 

@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %p
+      #{@sender.full_name} heeft een bericht gestuurd naar #{@messageable.name}
+    %p
+      = @message.message
+    %p
+      Klik op onderstaande link om dit bericht in de app te lezen.
+      %br/
+      = link_to('Open in app', messages_url(@message))

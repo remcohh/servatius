@@ -32,8 +32,8 @@
     // enables clicking anywhere in the data-row
     $('.data-row').on('click', function(e){
       link = $(this).find('a').attr('href');
-      if(typeof(link) != undefined){
-        console.log(link);
+      console.log(link);
+      if(link != undefined){
         window.location = link
         e.preventDefault();
       }

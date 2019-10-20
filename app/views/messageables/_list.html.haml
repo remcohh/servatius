@@ -1,0 +1,14 @@
+- @messageables.each do |messageable|
+  .row.mb-1.align-items-center.data-row
+    .col-12.border-bottom
+      .row
+        .col-12
+          .row
+            .col-9
+              = link_to messageable.name, new_message_path(model: messageable.class.name, id: messageable.id)
+          .row
+            -#.col-7.small
+            -#  = message.ensembles.collect(&:name).join(', ')
+
+
+

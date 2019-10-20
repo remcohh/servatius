@@ -68,10 +68,10 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
   gem 'web-console', '>= 3.3.0'
- # gem 'listen'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'erb2haml'
+  gem 'letter_opener'
 end
 
 group :test do

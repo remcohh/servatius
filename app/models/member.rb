@@ -60,5 +60,9 @@ class Member < ApplicationRecord
     result.count > 0  ? result[0] : { name: 'Geen instrument' }
   end
 
+  def messageables
+    (ensembles + groups).sort_by{ |m| m.name }
+  end
+
 
 end

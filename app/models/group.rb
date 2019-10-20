@@ -17,5 +17,6 @@ class Group < ApplicationRecord
 
   has_and_belongs_to_many :members
   belongs_to :band
+  has_many :messages, as: :messageable
 
 end
