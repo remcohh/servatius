@@ -18,6 +18,9 @@
 
 
 :javascript
-  $(document).ready(function () {
-    $('#message_message').focus()
-  });
+
+  $(document).ready(function() {
+    $('#message_message').click(function(e){
+        $(this).focus();
+    });
+});
