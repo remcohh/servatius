@@ -29,6 +29,7 @@ Rails.application.routes.draw do
 
   get 'statistics/rehearsals', to: 'rehearsals#statistics', as: 'rehearsal_statistics'
   resources :messages
+  resources :songs, only: %i(index show)
 
   namespace :admin do
     resources :bands

@@ -27,6 +27,10 @@ class Song < ApplicationRecord
     where(band_id: band)
   }
 
+  scope :for_member, ->(member) {
+    where(ensemble_id: member.ensembles.pluck(:id) )
+  }
+
   belongs_to :ensemble
 
   has_many :playable_songs

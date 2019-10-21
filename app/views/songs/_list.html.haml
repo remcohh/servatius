@@ -1,0 +1,10 @@
+- @songs.each do |song|
+  .row.mb-1.align-items-center.data-row
+    .col-12.border-bottom
+      .row
+        .col-12
+          .row
+            .col-12
+              = link_to song.title, song_path(song)
+
+

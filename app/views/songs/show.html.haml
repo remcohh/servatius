@@ -1,0 +1,22 @@
+.container-fluid
+  .row
+    .col-1
+    .col-10
+      .row
+        .col-10
+          %h3
+            Muziekstuk
+      .row.mb-3
+        .col-10
+          = @song.title
+      - @parts.each do |part|
+        .row
+          .col-5.col-lg-3
+            - ensemble_instrument = part.ensemble_instrument
+            = "#{ensemble_instrument.instrument.name} #{ensemble_instrument.party}"
+          .col-5.col-lg-7
+            = link_to part.upload.filename, rails_blob_path(part.upload, disposition: 'attachment')
+      .row.mt-3
+        .col-10
+          = link_to 'Terug naar overzicht', songs_path
+    .col-1
