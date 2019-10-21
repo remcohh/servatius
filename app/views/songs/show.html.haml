@@ -15,7 +15,7 @@
             - ensemble_instrument = part.ensemble_instrument
             = "#{ensemble_instrument.instrument.name} #{ensemble_instrument.party}"
           .col-5.col-lg-7
-            = link_to part.upload.filename, rails_blob_path(part.upload, disposition: 'attachment')
+            = link_to 'Download', rails_blob_path(part.upload, disposition: 'attachment')
       .row.mt-3
         .col-10
           = link_to 'Terug naar overzicht', songs_path
