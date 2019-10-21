@@ -2,11 +2,11 @@ Rails.application.routes.draw do
   comfy_route :blog_admin, path: '/cms'
   comfy_route :blog, path: '/blog'
   mount Magic::Link::Engine, at: '/'
-  devise_for :members, controllers: { registrations: 'members/registrations', sessions: 'members/sessions' }
+  devise_for :members, controllers: { registrations: 'registrations', sessions: 'members/sessions' }
   comfy_route :cms_admin, path: '/cms'
   # Ensure that this route is defined last
 
-  get 'members/home', to: 'messages#index', as: 'members_home'
+  get 'members', to: redirect('/messages'), as: 'members_messages'
   get 'rehearsals', to: 'rehearsals#index', as: 'rehearsals'
   get 'rehearsal/:id', to: 'rehearsals#show', as: 'rehearsal'
   get 'rehearsal/:id/attendance', to: 'rehearsals#attendance', as: 'rehearsal_attendance'
