@@ -39,8 +39,12 @@ class Admin::SongsController < ApplicationController
   end
 
   def create
-    Song.create(song_params.merge(band_id: current_member.band_id))
-    redirect_to action: :index
+    @song = Song.create(song_params.merge(band_id: current_member.band_id))
+    if params[:next_action] == '+'
+      redirect_to action: :edit, id: @song.id, build_new: true
+    else
+      redirect_to action: :index
+    end
   end
 
   def destroy

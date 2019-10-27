@@ -21,12 +21,13 @@
           .col-10
             = f.fields_for :parts do |part|
               .row
-                .col-5
+                .col-3
                   = part.hidden_field :id
                   = part.collection_select :ensemble_instrument_id, EnsembleInstrument.where(ensemble: @song.ensemble), :id, :instrument_and_party, include_blank: true
-                .col-5
-                  = part.file_field_without_bootstrap :upload
-                  = part.try(:object).try(:upload).try(:filename).to_s
+                .col-7
+                  .upload
+                    Upload
+                  = "<span style = 'float:left; margin-right:5px;'>#{part.try(:object).try(:upload).try(:filename).to_s}</span> #{part.file_field_without_bootstrap(:upload)}".html_safe
         .row
           .col-10.mb-5
             = f.submit 'Opslaan', class: 'btn btn-primary', name: 'next_action', value: '+'
