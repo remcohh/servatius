@@ -39,7 +39,7 @@ class Gig < ApplicationRecord
   }
 
   def self.for_member(member)
-    Gig.future.joins(:members).where(['members.id = ?', member]).includes(:ensembles).order(:date_time)
+    Gig.future.joins(:members).where(['members.id = ?', member]).includes(:ensembles).order(:date_time).uniq
   end
 
   def players
