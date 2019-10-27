@@ -59,6 +59,7 @@ class Rehearsal < ApplicationRecord
               .where('date(date_time) >= current_date')
               .includes(:ensembles)
               .order(:date_time)
+              .uniq
   end
 
 end
