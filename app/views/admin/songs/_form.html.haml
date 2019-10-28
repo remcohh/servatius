@@ -18,16 +18,24 @@
             %h3
               Partituren
         .row
-          .col-10
-            = f.fields_for :parts do |part|
-              .row
-                .col-3
-                  = part.hidden_field :id
-                  = part.collection_select :ensemble_instrument_id, EnsembleInstrument.where(ensemble: @song.ensemble), :id, :instrument_and_party, include_blank: true
-                .col-7
-                  .upload
-                    Upload
-                  = "<span style = 'float:left; margin-right:5px;'>#{part.try(:object).try(:upload).try(:filename).to_s}</span> #{part.file_field_without_bootstrap(:upload)}".html_safe
+          .col-3
+            Instrument
+        - counter = 0
+        = f.fields_for :parts do |part|
+          .row
+            .col-md-3
+              = part.hidden_field :id
+              = part.collection_select :ensemble_instrument_id, EnsembleInstrument.where(ensemble: @song.ensemble), :id, :instrument_and_party, include_blank: true, hide_label: true
+            .col-3.col-md-1
+              - unless part.object.id.nil?
+                = link_to 'Download', rails_blob_path(part.object.upload, disposition: 'attachment')
+
+            .col-2
+              .image-upload
+                %label{for: "song_parts_attributes_#{counter}_upload"}
+                  %span.fa.fa-upload
+                = part.file_field_without_bootstrap(:upload)
+          - counter += 1
         .row
           .col-10.mb-5
             = f.submit 'Opslaan', class: 'btn btn-primary', name: 'next_action', value: '+'
