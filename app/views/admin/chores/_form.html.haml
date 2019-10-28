@@ -12,7 +12,7 @@
             = f.datetime_field :date_time,  label: 'Wanneer'
             = f.text_field :title, label: 'Titel'
             = f.text_field :description, label: 'Omschrijving'
-            = f.collection_select :coordinator_id, Member.all, 'id', :full_name, {}, { :multiple => false }
+            = f.collection_select :coordinator_id, Member.all.order('last_name'), 'id', :full_name, {}, { :multiple => false }
             = f.text_field :min_number, label: 'Minimaal aantal deelnemers'
             = f.text_field :max_number, label: 'Maximaal aantal deelnemers'
         .row
