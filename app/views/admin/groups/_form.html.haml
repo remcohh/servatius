@@ -15,7 +15,7 @@
             = f.text_field :description, label: 'Omschrijving'
         .row
           .col-10
-            = f.collection_select(:member_ids, Member.all.order(:last_name), :id, :full_name, {}, { :multiple => true } )
+            = f.collection_check_boxes(:member_ids, Member.all.order(:last_name), :id, :full_name )
 
         .row
           .col-10.mb-5
