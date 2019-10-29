@@ -34,6 +34,8 @@
               .image-upload
                 %label{for: "song_parts_attributes_#{counter}_upload"}
                   %span.fa.fa-upload
+                  %span{ id: "song_parts_attributes_#{counter}_upload_selected" }
+                    Kies bestand
                 = part.file_field_without_bootstrap(:upload)
           - counter += 1
         .row
@@ -45,7 +47,8 @@
     .col-1
 
 :javascript
-  $('input[type="file"]').change(function(e){
-        var fileName = e.target.files[0].name;
-        $('.custom-file-label').html(fileName);
+  $('input[type="file"]').on('change', function() {
+    var file = $(this)
+    var filename = file.val().split("\\").pop()
+    $("#" + file.context.getAttribute("id") + "_selected").html(filename)
   });

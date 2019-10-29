@@ -10,8 +10,28 @@
             = f.text_area :message, label: "Bericht voor: #{@messageable.name}"
         .row
           .col-10
+            Upload
+        .row
+          .col-10
+            .image-upload
+              %label{for: "message_upload"}
+                %span.fa.fa-upload
+                %span#selected.ml-1
+                  Kies bestand
+              = f.file_field_without_bootstrap(:upload)
+
+        .row
+          .col-10
             = f.check_box :email_notification, label: "Stuur email notificatie"
         .row
           .col-10.mb-5.mt-3
             = f.submit 'Versturen', class: 'btn btn-primary'
     .col-1
+
+:javascript
+  $('input[type="file"]').on('change', function() {
+    var file = $(this).val()
+    var filename = file.split("\\").pop()
+    $("#selected").html(filename)
+    console.log(filename)
+  });
