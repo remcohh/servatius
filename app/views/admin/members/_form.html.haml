@@ -12,8 +12,8 @@
             = f.text_field :first_name, label: 'Voornaam'
             = f.text_field :last_name, label: 'Achternaam'
             = f.text_field :email, label: 'Email'
-            = f.collection_select :ensemble_instrument_ids, EnsembleInstrument.all, "id", :ensemble_instrument_and_party, {label: 'Orkest en instrument'}, { :multiple => true }
-            = f.collection_select :group_ids, Group.all, "id", :name, {label: 'Groepen'}, { :multiple => true }
+            = f.collection_check_boxes :ensemble_instrument_ids, EnsembleInstrument.all, "id", :ensemble_instrument_and_party, { label: 'Orkest en instrument' }
+            = f.collection_check_boxes :group_ids, Group.all, "id", :name, { label: 'Groepen' }
 
         .row
           .col-10.mb-5
