@@ -1,11 +1,11 @@
 - @messages.each do |message|
-  .row.mb-1.align-items-center.data-row
+  .row.mb-1.align-items-center
     .col-12.border-bottom
       .row
-        .col-12
+        .col-12.small
           = "#{message.member.full_name}, #{distance_of_time_in_words(message.created_at, Time.now)} geleden"
       .row
-        .col-12
+        .col-12.small
           = "Bericht voor: #{message.messageable.name}"
       .row.mt-2.mb-2
         .col-12
