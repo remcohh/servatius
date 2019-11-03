@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:message, :email_notification)
+    params.require(:message).permit(:message, :email_notification, :upload)
   end
 
   def get_messageable(model, id)

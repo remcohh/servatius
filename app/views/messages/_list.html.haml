@@ -10,6 +10,15 @@
       .row.mt-2.mb-2
         .col-12
           = message.message
+      .row.mt-2.mb-2
+        .col-12
+          - if message.upload.attached?
+            - path = rails_blob_path(message.upload)
+            - if %w(jpg png gif).include?(path.split(".").last)
+              %img.w-100{src: rails_blob_path(message.upload, disposition: 'attachment')}
+            - else
+              = link_to message.upload.filename, rails_blob_path(message.upload, disposition: 'attachment')
+
 
 
 
