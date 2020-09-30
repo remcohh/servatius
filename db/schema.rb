@@ -276,6 +276,12 @@ ActiveRecord::Schema.define(version: 2020_09_30_131852) do
     t.index ["band_id"], name: "index_gigs_on_band_id"
   end
 
+  create_table "gigs_members", id: false, force: :cascade do |t|
+    t.bigint "gig_id", null: false
+    t.bigint "member_id", null: false
+    t.index ["gig_id", "member_id"], name: "index_gigs_members_on_gig_id_and_member_id"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.bigint "band_id"
     t.string "name"
