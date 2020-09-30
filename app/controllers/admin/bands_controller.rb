@@ -48,6 +48,10 @@ class Admin::BandsController < ApplicationController
 
   def band_params
     params.require(:band).permit(:name,
+                                 :rehearsals_active,
+                                 :gigs_active,
+                                 :chores_active,
+                                 :statistics_active,
                                  :topnav_color,
                                  :topnav_color_secondary,
                                  :topnav_opacity,

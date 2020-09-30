@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_20_152245) do
+ActiveRecord::Schema.define(version: 2020_09_30_131852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,12 @@ ActiveRecord::Schema.define(version: 2019_10_20_152245) do
     t.string "topnav_font_size"
     t.string "topnav_font_color"
     t.string "topnav_font_color_secondary"
+    t.boolean "rehearsals_active"
+    t.boolean "gigs_active"
+    t.boolean "chores_active"
+    t.boolean "statistics_active"
+    t.boolean "website_active"
+    t.boolean "info_active"
   end
 
   create_table "chores", force: :cascade do |t|
@@ -364,6 +370,7 @@ ActiveRecord::Schema.define(version: 2019_10_20_152245) do
     t.datetime "date_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "max_present"
     t.index ["band_id"], name: "index_rehearsals_on_band_id"
   end
 

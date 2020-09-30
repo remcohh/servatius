@@ -49,6 +49,14 @@ class Rehearsal < ApplicationRecord
     member_presences.where(member_id: member.id).where(will_be_present: false).count > 0
   end
 
+  def is_accepted_by?(member)
+    member_presences.where(member_id: member.id).where(will_be_present: true).count > 0
+  end
+
+  def accepted_members
+    member_presences.where(member_presences: { will_be_present: true}).eager_load(:member)
+  end
+
   def declined_members
     member_presences.where(member_presences: { will_be_present: false}).eager_load(:member)
   end

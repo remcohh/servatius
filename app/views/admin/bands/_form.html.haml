@@ -11,13 +11,16 @@
           .col-10
             = f.text_field :name, label: 'Naam'
             = f.text_field :font, label: 'Font'
+            = f.check_box :rehearsals_active, label: "Gebruik repetities"
+            = f.check_box :gigs_active, label: "Gebruik optredens"
+            = f.check_box :chores_active, label: "Gebruik klussen"
+            = f.check_box :statistics_active, label: "Gebruik statistieken"
             = f.text_field :topnav_color, label: 'Kleur topnavigatie'
             = f.text_field :topnav_color_secondary, label: 'Kleur topnavigatie secundair'
             = f.text_field :topnav_opacity, label: 'Transparantie topnavigatie'
             = f.text_field :topnav_font_size, label: 'Navigatie font grootte'
             = f.text_field :topnav_font_color, label: 'Navigatie font kleur'
             = f.text_field :topnav_font_color_secondary, label: 'Navigatie font kleur secundair'
-
         .row
           .col-10.mb-5
             = f.submit 'Opslaan', class: 'btn btn-primary'

@@ -18,4 +18,12 @@ module ApplicationHelper
     return Band.first
   end
 
+  def decline_style(rehearsal_or_gig, member)
+    rehearsal_or_gig.is_declined_by?(member) ? 'btn btn-danger' : 'btn btn-outline-danger'
+  end
+
+  def accept_style(rehearsal_or_gig, member)
+    rehearsal_or_gig.is_accepted_by?(member) ? 'btn btn-success' : 'btn btn-outline-success'
+  end
+
 end

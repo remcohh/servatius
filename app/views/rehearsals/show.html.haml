@@ -10,31 +10,44 @@
         .col-10
           = "Datum: #{@rehearsal.date_time.strftime('%d-%m-%Y %H:%M')}"
       .row
-        .col-10.mt-3.font-weight-bold
-          Te repeteren:
-      - if @rehearsal.playable_songs.empty?
-        .row
-          .col-10
-            = '-'
-      - @rehearsal.playable_songs.each do |ps|
-        .row
-          .col-10
-            = ps.song.title
-        .row
-          .col-10.small.mb-2
-            = ps.remark
+        .col-10.mt-3
+          - if @state == :full && !@rehearsal.is_accepted_by?(current_member)
+            = link_to 'Aanmelden', '', class: 'btn btn-outline-secondary'
+          - else
+            = link_to 'Aanmelden', accept_rehearsal_path(@rehearsal), method: :put, class: accept_style(@rehearsal, current_member)
+          = link_to 'Afmelden',decline_rehearsal_path(@rehearsal), method: 'put', class: decline_style(@rehearsal, current_member)
+
+      .row
+        .col-10.mt-3
+          Aanmeldigen:
+          = @accepted_members_count
       .row
         .col-10
-          - if @rehearsal.is_declined_by?(current_member)
-            %p U bent bent afgemeld voor deze repetitie
-            = link_to 'Weer aanmelden', remove_rehearsal_decline_path(@rehearsal), method: :put, class: 'btn btn-sm btn-success'
-          - else
-            %p U bent niet afgemeld voor deze repetitie
-            = link_to 'Afmelden',decline_rehearsal_path(@rehearsal), method: 'put', class: 'btn btn-sm btn-danger'
+          Afmeldingen:
+          = @declined_members_count
+
+      - if @rehearsal.max_present >= 0
+        .row
+          .col-10
+            Beschikbaar:
+            = @rehearsal.max_present - @accepted_members_count
+
+      - if !@rehearsal.playable_songs.empty?
+        .row
+          .col-10.mt-3.font-weight-bold
+            Te repeteren:
+        - @rehearsal.playable_songs.each do |ps|
+          .row
+            .col-10
+              = ps.song.title
+          .row
+            .col-10.small.mb-2
+              = ps.remark
+
       .row.mt-3
         .col-10
           = link_to 'Presentielijst', rehearsal_attendance_path
       .row.mt-3
         .col-10
-          = link_to 'Terug naar overzicht', rehearsals_path
+          = link_to 'Overzicht repetities', rehearsals_path
     .col-1

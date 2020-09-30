@@ -9,6 +9,9 @@ class RehearsalsController < ApplicationController
 
   def show
     @rehearsal = Rehearsal.find(params[:id])
+    @accepted_members_count = @rehearsal.accepted_members.count
+    @declined_members_count = @rehearsal.declined_members.count
+    @state = @rehearsal.max_present && @rehearsal.max_present - @accepted_members_count <= 0 ? :full : :available
   end
 
   def attendance
@@ -21,8 +24,32 @@ class RehearsalsController < ApplicationController
 
   def decline
     @rehearsal = Rehearsal.find(params[:id])
-    @rehearsal.member_presences.create(member_id: current_member.id, will_be_present: false)
-    redirect_to action: :index
+    if @rehearsal.is_declined_by?(current_member)
+      @rehearsal.member_presences.where(member_id: current_member.id).delete_all
+    else
+      member_presence = @rehearsal.member_presences.where(member_id: current_member.id).first
+      if member_presence
+        member_presence.update_attribute(:will_be_present, false)
+      else
+        @rehearsal.member_presences.create(member_id: current_member.id, will_be_present: false)
+      end
+    end
+    redirect_to action: :show
+  end
+
+  def accept
+    @rehearsal = Rehearsal.find(params[:id])
+    if @rehearsal.is_accepted_by?(current_member)
+      @rehearsal.member_presences.where(member_id: current_member.id).delete_all
+    else
+      member_presence = @rehearsal.member_presences.where(member_id: current_member.id).first
+      if member_presence
+        member_presence.update_attribute(:will_be_present, true)
+      else
+        @rehearsal.member_presences.create(member_id: current_member.id, will_be_present: true)
+      end
+    end
+    redirect_to action: :show
   end
 
   def remove_decline

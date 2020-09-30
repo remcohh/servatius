@@ -44,7 +44,4 @@ Instrument.create(id: 24, name: 'Tenor trom', family: 'Slagwerk')
 
 
 # Tenor saxes
-# Member.create(email: 'remcohh@gmail.com', password: 'test123',
-#               password_confirmation: 'test123',
-#               first_name: 'Remco', last_name: 'Huijdts',
-#               gig_admin: true, admin: true, instrument: Instrument.find(6))
+ Member.create(email: 'remcohh@gmail.com', password: 'test123', password_confirmation: 'test123', first_name: 'Remco', last_name: 'Huijdts', admin: true, band_id: 1)

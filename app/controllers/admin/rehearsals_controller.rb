@@ -51,6 +51,6 @@ class Admin::RehearsalsController < ApplicationController
   private
 
   def rehearsal_params
-    params.require(:rehearsal).permit(:date_time, :description, ensemble_ids: [], playable_songs_attributes:[:_destroy, :id, :song_id, :remark])
+    params.require(:rehearsal).permit(:date_time, :max_present, :description, ensemble_ids: [], playable_songs_attributes:[:_destroy, :id, :song_id, :remark])
   end
 end
