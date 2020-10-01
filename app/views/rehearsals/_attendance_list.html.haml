@@ -12,6 +12,6 @@
       .col-5
         = rm.full_name
       .col-7.mb-1
-        = link_to 'Afwezig', rehearsal_attendance_update_path(@rehearsal, { member_id: rm.id, attendance: false }), method: :put, remote: true, class: not_attended_style(@rehearsal, current_member)
-        = link_to 'Aanwezig', rehearsal_attendance_update_path(@rehearsal, { member_id: rm.id, attendance: true }), method: :put, remote: true, class: attended_style(@rehearsal, current_member)
+        = link_to 'Afwezig', rehearsal_attendance_update_path(@rehearsal, { member_id: rm.id, attendance: false }), method: :put, remote: true, class: not_attended_style(@rehearsal, rm)
+        = link_to 'Aanwezig', rehearsal_attendance_update_path(@rehearsal, { member_id: rm.id, attendance: true }), method: :put, remote: true, class: attended_style(@rehearsal, rm)
 
