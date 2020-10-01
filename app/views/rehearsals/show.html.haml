@@ -43,10 +43,12 @@
           .row
             .col-10.small.mb-2
               = ps.remark
-
       .row.mt-3
         .col-10
-          = link_to 'Presentielijst', rehearsal_attendance_path
+          = link_to 'Aan- en afmeldingen', rehearsal_registrations_path
+      .row.mt-3
+        .col-10
+          = link_to 'Aanwezigheid', rehearsal_presence_path
       .row.mt-3
         .col-10
           = link_to 'Overzicht repetities', rehearsals_path

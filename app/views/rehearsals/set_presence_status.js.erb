@@ -1,0 +1,5 @@
+<% content = escape_javascript(
+  render(partial: 'presence/presence_list',  locals: { event: @rehearsal, members: @members })
+) %>
+
+$("#attendance_list").html("<%= content %>");

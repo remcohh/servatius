@@ -24,6 +24,10 @@ class Rehearsal < ApplicationRecord
     order("date_time asc")
   }
 
+  def registered_members
+    members.includes(:member_presences).where('member_presences.will_be_present' => true)
+  end
+
   scope :upcoming_for_ensemble, ->(ensemble) {
     ensemble.rehearsals
         .where('date(date_time) >= current_date')

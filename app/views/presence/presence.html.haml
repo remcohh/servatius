@@ -5,12 +5,12 @@
       .row
         .col-10
           %h3
-            Presentielijst repetitie
+            Aanwezigheid
       .row.mt-3
         .col-10.font-weight-bold
-          = "Datum: #{@rehearsal.date_time.strftime('%d-%m-%Y %H:%M')}"
+          = "Datum: #{event.date_time.strftime('%d-%m-%Y %H:%M')}"
       .row.mt-3#attendance_list
-        = render partial: "attendance_list"
+        = render partial: "presence/presence_list", locals: { event: event, members: members }
       .row.mt-3
         .col-10
           = link_to 'Terug naar overzicht', rehearsals_path

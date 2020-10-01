@@ -29,10 +29,12 @@
         .row
           .col-10
             = mp.member.full_name
-
       .row
         .col-10.mt-2
-          = link_to 'Presentielijst', rehearsal_attendance_path
+          = link_to 'Aan- en afmeldingen', rehearsal_registrations_path
+      .row
+        .col-10.mt-2
+          = link_to 'Aan- en afwezigheid', rehearsal_presence_path
       .row
         .col-10.mt-2
           = link_to 'Aanpassen', edit_admin_rehearsal_path, class: 'btn btn-primary btn-sm'

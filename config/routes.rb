@@ -10,8 +10,11 @@ Rails.application.routes.draw do
   get 'members', to: redirect('/messages')
   get 'rehearsals', to: 'rehearsals#index', as: 'rehearsals'
   get 'rehearsal/:id', to: 'rehearsals#show', as: 'rehearsal'
-  get 'rehearsal/:id/attendance', to: 'rehearsals#attendance', as: 'rehearsal_attendance'
-  put 'rehearsal/:id/attendance', to: 'rehearsals#set_attendance_status', as: 'rehearsal_attendance_update'
+  get 'rehearsal/:id/presence', to: 'rehearsals#presence', as: 'rehearsal_presence'
+  put 'rehearsal/:id/presence', to: 'rehearsals#set_presence_status', as: 'rehearsal_presence_update'
+
+  get 'rehearsal/:id/registrations', to: 'rehearsals#registrations', as: 'rehearsal_registrations'
+  put 'rehearsal/:id/registration', to: 'rehearsals#set_registration_status', as: 'rehearsal_registration_update'
 
   put 'rehearsals/:id/accept', to: 'rehearsals#accept', as: 'accept_rehearsal'
   put 'rehearsals/:id/decline', to: 'rehearsals#decline', as: 'decline_rehearsal'

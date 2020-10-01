@@ -1,0 +1,17 @@
+.container-fluid
+  .row
+    .col-md-1
+    .col-md-10.col-12
+      .row
+        .col-10
+          %h3
+            Aan- en afmeldingen
+      .row.mt-3
+        .col-10.font-weight-bold
+          = "Datum: #{event.date_time.strftime('%d-%m-%Y %H:%M')}"
+      .row.mt-3#attendance_list
+        = render partial: "registration/registration_list", locals: { event: event, members: members }
+      .row.mt-3
+        .col-10
+          = link_to 'Terug naar overzicht', rehearsals_path
+    .col-md-1

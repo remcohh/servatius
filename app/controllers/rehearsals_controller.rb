@@ -14,12 +14,16 @@ class RehearsalsController < ApplicationController
     @state = @rehearsal.max_present && @rehearsal.max_present - @accepted_members_count <= 0 ? :full : :available
   end
 
-  def attendance
+  def presence
     @rehearsal = Rehearsal.find(params[:id])
-    @declines = @rehearsal.member_presences.where(will_be_present: false)
-    @absents = @rehearsal.member_presences.where(present: false)
-    @attending = @rehearsal.member_presences.where(present: true)
+    @members = @rehearsal.registered_members.order("ensemble_instruments.id")
+    render template: 'presence/presence', locals: { event: @rehearsal, members: @members }
+  end
+
+  def registrations
+    @rehearsal = Rehearsal.find(params[:id])
     @members = @rehearsal.members.order("ensemble_instruments.id")
+    render template: 'registration/registration', locals: { event: @rehearsal, members: @members }
   end
 
   def decline
@@ -58,13 +62,20 @@ class RehearsalsController < ApplicationController
     redirect_to action: :index
   end
 
-  def set_attendance_status
+  def set_presence_status
     @rehearsal = Rehearsal.find(params[:id])
     @members = @rehearsal.members.order("ensemble_instruments.id")
     att = @rehearsal.member_presences.where(member_id: params[:member_id]).first_or_create
     val = params[:attendance] == 'true'
     att.update_attribute :present, att.present == val ? nil : val
-      #redirect_to rehearsal_attendance_path(@rehearsal)
+  end
+
+  def set_registration_status
+    @rehearsal = Rehearsal.find(params[:id])
+    @members = @rehearsal.members.order("ensemble_instruments.id")
+    att = @rehearsal.member_presences.where(member_id: params[:member_id]).first_or_create
+    val = params[:attendance] == 'true'
+    att.update_attribute :will_be_present, att.will_be_present == val ? nil : val
   end
 
   def statistics
