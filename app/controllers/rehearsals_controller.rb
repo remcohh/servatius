@@ -19,7 +19,7 @@ class RehearsalsController < ApplicationController
     @declines = @rehearsal.member_presences.where(will_be_present: false)
     @absents = @rehearsal.member_presences.where(present: false)
     @attending = @rehearsal.member_presences.where(present: true)
-    @unknown = @rehearsal.members.without_attendance
+    @members = @rehearsal.members.order("ensemble_instruments.id")
   end
 
   def decline
@@ -60,13 +60,11 @@ class RehearsalsController < ApplicationController
 
   def set_attendance_status
     @rehearsal = Rehearsal.find(params[:id])
+    @members = @rehearsal.members.order("ensemble_instruments.id")
     att = @rehearsal.member_presences.where(member_id: params[:member_id]).first_or_create
-    if params[:attendance] == 'reset'
-      att.destroy
-    else
-      att.update_attribute :present, params[:attendance]
-    end
-    redirect_to rehearsal_attendance_path(@rehearsal)
+    val = params[:attendance] == 'true'
+    att.update_attribute :present, att.present == val ? nil : val
+      #redirect_to rehearsal_attendance_path(@rehearsal)
   end
 
   def statistics

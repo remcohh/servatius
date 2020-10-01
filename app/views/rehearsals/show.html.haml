@@ -11,12 +11,12 @@
           = "Datum: #{@rehearsal.date_time.strftime('%d-%m-%Y %H:%M')}"
       .row
         .col-10.mt-3
-          - if @state == :full && !@rehearsal.is_accepted_by?(current_member)
-            = link_to 'Aanmelden', '', class: 'btn btn-outline-secondary'
+          - if @rehearsal.is_attended_by?(current_member)
+            Aanwezig
+          - elsif @rehearsal.is_not_attended_by?(current_member)
+            Afwezig
           - else
-            = link_to 'Aanmelden', accept_rehearsal_path(@rehearsal), method: :put, class: accept_style(@rehearsal, current_member)
-          = link_to 'Afmelden',decline_rehearsal_path(@rehearsal), method: 'put', class: decline_style(@rehearsal, current_member)
-
+            = render partial: 'accept_decline_buttons'
       .row
         .col-10.mt-3
           Aanmeldigen:

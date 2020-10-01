@@ -1,0 +1,5 @@
+<% content = escape_javascript(
+  render(partial: 'attendance_list')
+) %>
+
+$("#attendance_list").html("<%= content %>");
