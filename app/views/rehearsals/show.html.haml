@@ -26,7 +26,7 @@
           Afmeldingen:
           = @declined_members_count
 
-      - if @rehearsal.max_present >= 0
+      - if @rehearsal.max_present && @rehearsal.max_present >= 0
         .row
           .col-10
             Beschikbaar:

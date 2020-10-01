@@ -39,7 +39,11 @@ class Admin::RehearsalsController < ApplicationController
   end
 
   def create
-    Rehearsal.create(rehearsal_params.merge(band_id: current_member.band_id))
+    @rehearsal = Rehearsal.create(rehearsal_params.merge(band_id: current_member.band_id))
+    group = Group.find(params[:group])
+    group.members.each do |member|
+      @rehearsal.member_presences.create(member_id: member.id, will_be_present: true)
+    end
     redirect_to action: :index
   end
 
