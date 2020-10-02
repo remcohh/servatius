@@ -18,6 +18,12 @@ class MessagesController < ApplicationController
     redirect_to messages_path
   end
 
+  def destroy
+    raise "umpermitted action" unless current_member.admin?
+    Message.find(params[:id]).destroy!
+    redirect_to action: :index
+  end
+
   private
 
   def message_params
