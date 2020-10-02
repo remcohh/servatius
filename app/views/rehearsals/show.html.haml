@@ -19,6 +19,14 @@
             = render partial: 'accept_decline_buttons'
       .row
         .col-10.mt-3
+          - if @rehearsal.is_accepted_by?(current_member)
+            %p.text-success
+              U bent aangemeld
+          - elsif @rehearsal.is_declined_by?(current_member)
+            %p.text-danger
+              U bent afgemeld
+      .row
+        .col-10.mt-3
           Aanmeldigen:
           = @accepted_members_count
       .row
