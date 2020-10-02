@@ -13,8 +13,12 @@
           .row
             .col-7.small
               = rehearsal.ensembles.collect(&:name).join(', ')
-            .col-2.small.text-danger
-              - if rehearsal.is_declined_by?(current_member)
+            - if rehearsal.is_declined_by?(current_member)
+              .col-2.small.text-danger
                 Afgemeld
+            - elsif rehearsal.is_accepted_by?(current_member)
+              .col-2.small.text-success
+                Aangemeld
+
 
 
