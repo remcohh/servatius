@@ -1,0 +1,3 @@
+class EnsemblesRehearsal < ApplicationRecord
+
+end
