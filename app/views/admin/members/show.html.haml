@@ -20,5 +20,11 @@
           = link_to 'Verstuur wachtwoord reset', admin_member_send_reset_password_link_url(@member), class: 'btn btn-sm btn-primary'
       .row
         .col-10.mb-1
+          = link_to 'Maak reset link', admin_member_generate_reset_password_link_url(@member), class: 'btn btn-sm btn-primary'
+      .row
+        .col-10.mb-1
           = link_to 'Verwijderen',admin_member_path(@member),  method: :delete, data: { confirm: 'Weet u het zeker?' }, class: 'btn btn-sm btn-danger'
+      .row
+        .col-10.mb-1
+          = @reset_password_url
   .col-1

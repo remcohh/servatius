@@ -69,6 +69,14 @@ class Admin::MembersController < ApplicationController
     redirect_to action: :index
   end
 
+  def generate_reset_password_link
+    @member = Member.find params[:member_id]
+    raw, hashed = Devise.token_generator.generate(Member, :reset_password_token)
+    @member.update_attributes reset_password_token: hashed, reset_password_sent_at: Time.now.utc
+    @reset_password_url = "http://leden.fanfaresintservatius.nl/members/password/edit?reset_password_token=#{raw}"
+    render action: :show
+  end
+
   private
 
   def member_params

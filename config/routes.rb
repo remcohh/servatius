@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :members do
       get 'send_login_link', to: 'members#send_login_link'
       get 'send_reset_password_link', to: 'members#send_reset_password_link'
+      get 'generate_reset_password_link', to: 'members#generate_reset_password_link'
     end
     resources :songs
     resources :chores
