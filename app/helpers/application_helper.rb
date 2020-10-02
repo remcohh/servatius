@@ -19,11 +19,11 @@ module ApplicationHelper
   end
 
   def decline_style(rehearsal_or_gig, member)
-    rehearsal_or_gig.is_declined_by?(member) ? 'btn btn-danger' : 'btn btn-outline-danger'
+    rehearsal_or_gig.is_declined_by?(member) ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-outline-danger'
   end
 
   def accept_style(rehearsal_or_gig, member)
-    rehearsal_or_gig.is_accepted_by?(member) ? 'btn btn-success' : 'btn btn-outline-success'
+    rehearsal_or_gig.is_accepted_by?(member) ? 'btn btn-sm btn-success' : 'btn btn-sm btn-outline-success'
   end
 
   def attended_style(rehearsal_or_gig, member)
