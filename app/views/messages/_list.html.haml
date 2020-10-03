@@ -2,12 +2,14 @@
   .row.mb-1.align-items-center
     .col-12.border-bottom
       .row
-        .col-12.small
-          = "#{message.member.full_name}, #{distance_of_time_in_words(message.created_at, Time.now)} geleden"
-          = link_to '-', message_path(message), method: :delete, data: { confirm: 'Weet u het zeker?' } if current_member.admin?
+        .col-12
+          %h3
+            = message.title
       .row
         .col-12.small
-          = "Bericht voor: #{message.messageable.name}"
+          = "Door #{message.member.full_name}, #{distance_of_time_in_words(message.created_at, Time.now)} geleden"
+          = link_to '[-]', message_path(message), method: :delete, data: { confirm: 'Weet u het zeker?' } if current_member.admin?
+          = link_to '[edit]', edit_message_path(message) if current_member.admin?
       .row.mt-2.mb-2
         .col-12
           = message.message

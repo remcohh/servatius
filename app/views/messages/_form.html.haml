@@ -5,9 +5,17 @@
       = bootstrap_form_for @message do |f|
         = hidden_field_tag :model, params[:model]
         = hidden_field_tag :id, params[:id]
+        - if @messageable
+          .row
+            .col-10
+              %p
+                = "Bericht voor: #{@messageable.name}"
         .row
           .col-10
-            = f.text_area :message, label: "Bericht voor: #{@messageable.name}"
+            = f.text_field :title, label: "Onderwerp"
+        .row
+          .col-10
+            = f.text_area :message, label: "Bericht"
         .row
           .col-10
             Upload
@@ -25,7 +33,7 @@
             = f.check_box :email_notification, label: "Stuur email notificatie"
         .row
           .col-10.mb-5.mt-3
-            = f.submit 'Versturen', class: 'btn btn-primary'
+            = f.submit 'Opslaan', class: 'btn btn-primary'
     .col-1
 
 :javascript

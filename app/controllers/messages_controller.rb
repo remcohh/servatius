@@ -5,6 +5,16 @@ class MessagesController < ApplicationController
     @messages = Message.for_member(current_member)
   end
 
+  def edit
+    @message = Message.find(params[:id])
+  end
+
+  def update
+    @message = Message.find(params[:id])
+    @message.update_attributes message_params
+    redirect_to messages_path
+  end
+
   def new
     @message = Message.new
     @messageable = get_messageable(params[:model], params[:id])
@@ -27,7 +37,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:message, :email_notification, :upload)
+    params.require(:message).permit(:message, :title, :email_notification, :upload)
   end
 
   def get_messageable(model, id)
