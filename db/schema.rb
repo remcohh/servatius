@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_30_131852) do
+ActiveRecord::Schema.define(version: 2020_10_03_152927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2020_09_30_131852) do
     t.boolean "statistics_active"
     t.boolean "website_active"
     t.boolean "info_active"
+    t.string "link_color"
   end
 
   create_table "chores", force: :cascade do |t|
