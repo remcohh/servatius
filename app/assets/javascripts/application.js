@@ -18,4 +18,4 @@
 //= require bootstrap
 //= require chartkick
 //= require Chart.bundle
-//= require_tree .
+//= require serviceworker-companion

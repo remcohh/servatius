@@ -1,11 +1,12 @@
 !!!
 %html{:lang => "en"}
   %head
-    %title= @cms_page.present? ? @cms_page.label : "Ledensite"
+    %title= @cms_page.present? ? @cms_page.label : "Fanfare Sint Servatius"
     / Required meta tags
     %meta{:charset => "utf-8"}/
     %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
     %meta{:content => cms_fragment_content("meta-description"), :name => "description"}/
+    %link{rel: "manifest", href: "/manifest.json", crossOrigin: "use-credentials"}
 
     %link{href: "https://fonts.googleapis.com/css?family=Quicksand&display=swap",  rel: "stylesheet"}
     / Bootstrap CSS

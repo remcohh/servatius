@@ -1,0 +1,13 @@
+{
+  "name": "Fanfare Sint Servatius",
+  "lang": "nl-NL",
+  "start_url": "/messages",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "servatius.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

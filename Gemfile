@@ -35,6 +35,7 @@ gem 'will_paginate'
 gem 'comfy_blog', '~> 2.0.0'
 gem 'chartkick'
 gem 'groupdate'
+gem 'serviceworker-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
