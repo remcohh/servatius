@@ -58,7 +58,8 @@ class Admin::BandsController < ApplicationController
                                  :font,
                                  :topnav_font_size,
                                  :topnav_font_color,
-                                 :topnav_font_color_secondary)
+                                 :topnav_font_color_secondary,
+                                 :link_color)
   end
 
 end
