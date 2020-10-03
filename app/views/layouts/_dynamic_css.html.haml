@@ -1,9 +1,14 @@
 :css
   .topnav {
-    background-color: #{@cms_site.present? ? band.topnav_color : '#179fe8'};
-    opacity: #{@cms_site.present? ? band.topnav_opacity : 1};
+    background-color: #{band.present? ? band.topnav_color : 'black'};
+    opacity: #{band.present? ? band.topnav_opacity : 1};
     }
 
   .topnav_font_color{
-    color: #{@cms_site.present? ? band.topnav_font_color: 'white'} !important;
+    color: #{band.present? ? band.topnav_font_color: 'white'} !important;
   }
+
+  a{
+    color: #{band.present? ? band.link_color: 'blue'};
+  }
+
