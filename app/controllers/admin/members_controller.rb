@@ -77,6 +77,15 @@ class Admin::MembersController < ApplicationController
     render action: :show
   end
 
+  def generate_password
+    @member = Member.find params[:member_id]
+    chars = ('0'..'9').to_a + ('a'..'z').to_a
+    @password = chars.sort_by { rand }.join[0...5]
+    @member.update_attributes password: @password, password_confirmation: @password
+    render action: :show
+
+  end
+
   private
 
   def member_params

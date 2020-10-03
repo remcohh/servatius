@@ -11,20 +11,24 @@
           = "Datum: #{@rehearsal.date_time.strftime('%d-%m-%Y %H:%M')}"
       .row
         .col-10.mt-3
-          - if @rehearsal.is_attended_by?(current_member)
-            Aanwezig
-          - elsif @rehearsal.is_not_attended_by?(current_member)
-            Afwezig
-          - else
-            = render partial: 'accept_decline_buttons'
-      .row
-        .col-10.mt-3
           - if @rehearsal.is_accepted_by?(current_member)
-            %p.text-success
+            %h3.text-success
               U bent aangemeld
           - elsif @rehearsal.is_declined_by?(current_member)
-            %p.text-danger
+            %h3.text-danger
               U bent afgemeld
+          - else
+            %h3
+              U bent niet aangemeld
+      .row
+        .col-10.mt-3
+          - if @rehearsal.is_attended_by?(current_member)
+            U bent registreerd als aanwezig
+          - elsif @rehearsal.is_not_attended_by?(current_member)
+            U bent registreerd als afwezig
+          - else
+            = render partial: 'accept_decline_buttons'
+
       .row
         .col-10.mt-3
           Aanmeldigen:
