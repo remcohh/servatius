@@ -1,26 +1,26 @@
 .container-fluid
   .row
-    .col-1
-    .col-10
+    .col-md-1
+    .col-12.col-md-10
       = bootstrap_form_for @message do |f|
         = hidden_field_tag :model, params[:model]
         = hidden_field_tag :id, params[:id]
         - if @messageable
           .row
-            .col-10
+            .col-12.col-md-10
               %p
                 = "Bericht voor: #{@messageable.name}"
         .row
-          .col-10
+          .col-12.col-md-10
             = f.text_field :title, label: "Onderwerp"
         .row
-          .col-10
+          .col-12.col-md-10.message-text
             = f.text_area :message, label: "Bericht"
         .row
-          .col-10
+          .col-12.col-md-10
             Upload
         .row
-          .col-10
+          .col-12.col-md-10
             .image-upload
               %label{for: "message_upload"}
                 %span.fa.fa-upload
@@ -29,12 +29,12 @@
               = f.file_field_without_bootstrap(:upload)
 
         .row
-          .col-10
+          .col-12.col-md-10
             = f.check_box :email_notification, label: "Stuur email notificatie"
         .row
           .col-10.mb-5.mt-3
             = f.submit 'Opslaan', class: 'btn btn-primary'
-    .col-1
+    .col-md-1
 
 :javascript
   $('input[type="file"]').on('change', function() {
