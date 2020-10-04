@@ -26,41 +26,25 @@
         %li.nav-item
           = link_to 'Leden app', members_messages_url, class: 'nav-link topnav_font_color'
       - else
-        - if current_member
+        - if @band.rehearsals_active
           %li.nav-item.dropdown
-            = link_to('Home', app_home_path, class: 'nav-link topnav_font_color')
+            = link_to('Repetities', rehearsals_path, class: 'nav-link topnav_font_color')
+        - if @band.gigs_active
+          %li.nav-item.dropdown
+            = link_to('Optredens', gigs_path, class: 'nav-link topnav_font_color')
+        - if @band.chores_active
+          %li.nav-item.dropdown
+            = link_to('Klussen', chores_path, class: 'nav-link topnav_font_color')
+        - if @band.statistics_active
+          %li.nav-item.dropdown
+            = link_to('Statistieken', rehearsal_statistics_path, class: 'nav-link topnav_font_color')
+        - if @band.website_active
+          %li.nav-item.dropdown
+            = link_to('Website', root_url, class: 'nav-link topnav_font_color')
+        - if @band.info_active
+          %li.nav-item.dropdown
+            = link_to('Info', '/leden', class: 'nav-link topnav_font_color')
         - if current_member&.admin?
-          %li.nav-item.dropdown
-            = link_to 'Admin', root_url, class: 'nav-link topnav_font_color', id: 'navbarDropdownAdmin', class: 'nav-link topnav_font_color dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
-            .dropdown-menu{ 'aria-labelledby' => "navbarDropdownAdmin" }
-              = link_to 'Verenigingen', admin_bands_url, class: 'dropdown-item'
-              = link_to 'Ensembles', admin_ensembles_url, class: 'dropdown-item'
-              = link_to 'Groepen', admin_groups_url, class: 'dropdown-item'
-              = link_to 'Instrumenten', admin_instruments_url, class: 'dropdown-item'
-              = link_to 'Muziekstukken', admin_songs_url, class: 'dropdown-item'
-              = link_to 'Leden', admin_members_url, class: 'dropdown-item'
-              = link_to('Repetities', admin_rehearsals_path, class: 'dropdown-item')
-              = link_to('Optredens', admin_gigs_path, class: 'dropdown-item')
-              = link_to('Klussen', admin_chores_path, class: 'dropdown-item')
-              = link_to('Site beheer', '/cms', class: 'dropdown-item')
-
-          - if @band.rehearsals_active
-            %li.nav-item.dropdown
-              = link_to('Repetities', rehearsals_path, class: 'nav-link topnav_font_color')
-          - if @band.gigs_active
-            %li.nav-item.dropdown
-              = link_to('Optredens', gigs_path, class: 'nav-link topnav_font_color')
-          - if @band.chores_active
-            %li.nav-item.dropdown
-              = link_to('Klussen', chores_path, class: 'nav-link topnav_font_color')
-          - if @band.statistics_active
-            %li.nav-item.dropdown
-              = link_to('Statistieken', rehearsal_statistics_path, class: 'nav-link topnav_font_color')
-          - if @band.website_active
-            %li.nav-item.dropdown
-              = link_to('Website', root_url, class: 'nav-link topnav_font_color')
-          - if @band.info_active
-            %li.nav-item.dropdown
-              = link_to('Info', '/leden', class: 'nav-link topnav_font_color')
-          %li.nav-item.dropdown
-            = link_to('Uitloggen', destroy_member_session_path, method: :delete, class: 'nav-link topnav_font_color')
+          = render partial: 'layouts/navbar_admin'
+        %li.nav-item.dropdown
+          = link_to('Uitloggen', destroy_member_session_path, method: :delete, class: 'nav-link topnav_font_color')

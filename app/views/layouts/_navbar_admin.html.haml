@@ -1,0 +1,13 @@
+%li.nav-item.dropdown
+  = link_to 'Admin', root_url, class: 'nav-link topnav_font_color', id: 'navbarDropdownAdmin', class: 'nav-link topnav_font_color dropdown-toggle',  role: 'button', 'data-toggle' => 'dropdown',  'aria-haspopup' => 'true', 'aria-expanded' =>'false'
+  .dropdown-menu{ 'aria-labelledby' => "navbarDropdownAdmin" }
+    = link_to 'Verenigingen', admin_bands_url, class: 'dropdown-item'
+    = link_to 'Ensembles', admin_ensembles_url, class: 'dropdown-item'
+    = link_to 'Leden', admin_members_url, class: 'dropdown-item'
+    = link_to 'Repetities', admin_rehearsals_path, class: 'dropdown-item'
+    = link_to 'Optredens', admin_gigs_path, class: 'dropdown-item'
+    = link_to 'Groepen', admin_groups_url, class: 'dropdown-item'
+    = link_to 'Instrumenten', admin_instruments_url, class: 'dropdown-item'
+    = link_to 'Muziekstukken', admin_songs_url, class: 'dropdown-item'
+    = link_to 'Klussen', admin_chores_path, class: 'dropdown-item'
+    = link_to 'Site beheer', '/cms', class: 'dropdown-item'
