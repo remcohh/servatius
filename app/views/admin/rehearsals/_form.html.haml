@@ -1,14 +1,14 @@
 .container-fluid
   .row
-    .col-1
-    .col-10
+    .col-md-1
+    .col-12.col-md-10
       = bootstrap_form_for ['admin', @rehearsal] do |f|
         .row
-          .col-10
+          .col-12.col-md-10
             %h3
-              Lid
+              Repetitie
         .row
-          .col-10
+          .col-12.col-md-10
             = f.text_field :description, label: 'Omschrijving'
             = f.datetime_field :date_time, label: 'Datum en tijd'
             = f.collection_select :ensemble_ids, Ensemble.all, 'id', :name, {}, { :multiple => true }
@@ -16,24 +16,24 @@
 
         - if params[:action] == 'new'
           .row
-            .col-10.mb-3
+            .col-12.col-md-10-mb-3
               Groep aanmelden (leden kunnen zelf weer afmelden)
               %br
               = select_tag :group, options_from_collection_for_select(Group.all, :id, :name), include_blank: true
 
         .row
-          .col-10
+          .col-12.col-md-10
             %h3
               Te repeteren
         = f.fields_for :playable_songs do |ff|
           .row
-            .col-10
+            .col-12.col-md-10
               = ff.collection_select(:song_id, Song.all.for_band(current_member.band_id), :id, :title, include_blank: true, label: 'Titel')
           .row
-            .col-10
+            .col-12.col-md-10
               = ff.text_area :remark, label: 'Opmerkingen'
 
         .row
-          .col-10.mb-5
+          .col-12.col-md-10.mb-5
             = f.submit 'Opslaan', class: 'btn btn-primary'
 
