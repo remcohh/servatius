@@ -1,7 +1,7 @@
 .container
   .row
     #messages.col-12
-      = render partial: 'list'
+      = render partial: 'list', locals: { messages: @messages }
   .row.fixed-bottom.mb-3
     .col-9
     .col-1

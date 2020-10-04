@@ -1,0 +1,18 @@
+.container
+  .row.section
+    .section_header.blue.small
+      Eerstvolgende repetities
+    #rehearsals.col-12
+      = render partial: 'rehearsals/list', locals: { rehearsals: @rehearsals }
+    .section_footer
+      = link_to 'Alle repetities', rehearsals_path
+  .row.section
+    .section_header.green.small
+      Laatste berichten
+    #messages.col-12.section_body
+      = render partial: 'messages/list', locals: { messages: @messages }
+    .section_footer
+      = link_to 'Alle berichten', messages_path
+
+
+

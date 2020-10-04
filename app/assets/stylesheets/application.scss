@@ -161,3 +161,34 @@ h3
 .underline {
     text-decoration: underline;
 }
+
+.section {
+    border: 1px solid #ccc;
+    margin: 5px;
+    margin-bottom: 15px;
+
+    .section_header{
+        padding: 5px;
+        margin-bottom: 10px;
+        border-radius: 0px 0px 10px 0px;
+    }
+
+    .section_body {
+      padding: 5px;
+    }
+
+    .section_footer{
+        padding: 5px;
+        text-decoration: underline;
+    }
+    .blue{
+        background-color: #2d499c;
+        color: white
+    }
+
+    .green{
+        background-color: green;
+        color: white
+    }
+}
+

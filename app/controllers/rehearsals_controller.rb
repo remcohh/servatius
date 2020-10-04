@@ -4,7 +4,7 @@ class RehearsalsController < ApplicationController
 
   def index
     @ensembles = current_member.ensembles
-    @rehearsals = Rehearsal.upcoming_for_ensemble(current_member.ensembles.first)
+    @rehearsals = Rehearsal.for_member(current_member)
   end
 
   def show

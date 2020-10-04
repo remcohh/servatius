@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   comfy_route :cms_admin, path: '/cms'
   # Ensure that this route is defined last
 
+  get 'home', to: 'home#index', as: 'app_home'
   get 'leden', to: redirect('/messages'), as: 'members_messages'
   get 'members', to: redirect('/messages')
   get 'rehearsals', to: 'rehearsals#index', as: 'rehearsals'

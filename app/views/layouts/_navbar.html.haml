@@ -3,7 +3,7 @@
     - if @cms_site.present?
       = link_to 'Home', root_url, class: 'nav-link topnav_font_color'
     - else
-      = link_to 'Leden app', members_messages_url, class: 'nav-link topnav_font_color'
+      = link_to 'Fanfare Sint Servatius', app_home_path, class: 'nav-link topnav_font_color'
   %button.navbar-toggler{'aria-controls' => 'navbarSupportedContent', 'aria-expanded' => 'false', 'aria-label' => 'Toggle navigation', 'data-target' => '#navbarSupportedContent', 'data-toggle' => 'collapse', :type => 'button'}
     %span.navbar-toggler-icon.topnav_font_color
   #navbarSupportedContent.collapse.navbar-collapse
