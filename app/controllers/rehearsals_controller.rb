@@ -64,7 +64,7 @@ class RehearsalsController < ApplicationController
 
   def set_presence_status
     @rehearsal = Rehearsal.find(params[:id])
-    @members = @rehearsal.members.order("ensemble_instruments.id")
+    @members = @rehearsal.registered_members.order("ensemble_instruments.id")
     att = @rehearsal.member_presences.where(member_id: params[:member_id]).first_or_create
     val = params[:attendance] == 'true'
     att.update_attribute :present, att.present == val ? nil : val
