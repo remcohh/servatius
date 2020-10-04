@@ -1,7 +1,7 @@
 {
   "name": "Fanfare Sint Servatius",
   "lang": "nl-NL",
-  "start_url": "/messages",
+  "start_url": "/home",
   "display": "standalone",
   "icons": [
     {

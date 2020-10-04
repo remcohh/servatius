@@ -41,7 +41,7 @@
       - if @rehearsal.max_present && @rehearsal.max_present >= 0
         .row
           .col-10
-            Beschikbaar:
+            Beschikbare plaatsen:
             = @rehearsal.max_present - @accepted_members_count
 
       - if !@rehearsal.playable_songs.empty?
