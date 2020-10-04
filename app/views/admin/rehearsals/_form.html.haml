@@ -17,12 +17,12 @@
         - if params[:action] == 'new'
           .row
             .col-12.col-md-10-mb-3
-              Groep aanmelden (leden kunnen zelf weer afmelden)
+              Groep aanmelden
               %br
               = select_tag :group, options_from_collection_for_select(Group.all, :id, :name), include_blank: true
 
         .row
-          .col-12.col-md-10
+          .col-12.col-md-10.mt-3
             %h3
               Te repeteren
         = f.fields_for :playable_songs do |ff|
