@@ -40,7 +40,7 @@ class Admin::RehearsalsController < ApplicationController
 
   def create
     @rehearsal = Rehearsal.create(rehearsal_params.merge(band_id: current_member.band_id))
-    if params[:group]
+    unless params[:group].blank?
       group = Group.find(params[:group])
       group.members.each do |member|
         @rehearsal.member_presences.create(member_id: member.id, will_be_present: true)
