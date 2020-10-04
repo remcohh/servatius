@@ -1,16 +1,16 @@
 .container-fluid
   .row
-    .col-1
-    .col-10
+    .col-md-1
+    .col-12.col-md-10
       = bootstrap_form_for ['admin', @ensemble] do |f|
         .row
-          .col-10
+          .col-12.col-md-10
             %h3
               Ensemble
         .row
-          .col-10
+          .col-12.col-md-10
             = f.text_field :name, label: 'Naam'
         .row
-          .col-10.mb-5
+          .col-12.col-md-10
             = f.submit 'Opslaan', class: 'btn btn-primary'
-    .col-1
+    .col-md-1

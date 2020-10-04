@@ -1,14 +1,14 @@
 .container-fluid
   .row
-    .col-1
-    .col-10
+    .col-md-1
+    .col-12.col-md-10
       = bootstrap_form_for ['admin', @band] do |f|
         .row
-          .col-10
+          .col-12.col-md-10
             %h3
               Vereniging
         .row
-          .col-10
+          .col-12.col-md-10
             = f.text_field :name, label: 'Naam'
             = f.text_field :font, label: 'Font'
             = f.check_box :rehearsals_active, label: "Gebruik repetities"
@@ -23,6 +23,6 @@
             = f.text_field :topnav_font_color_secondary, label: 'Navigatie font kleur secundair'
             = f.text_field :link_color, label: 'Link kleur'
         .row
-          .col-10.mb-5
+          .col-12.col-md-10-mb-5
             = f.submit 'Opslaan', class: 'btn btn-primary'
-    .col-1
+    .col-md-1

@@ -1,14 +1,14 @@
 .container-fluid
   .row
-    .col-1
-    .col-10
+    .col-md-1
+    .col-12.col-md-10
       = bootstrap_form_for ['admin', @member] do |f|
         .row
-          .col-10
+          .col-12.col-md-10
             %h3
               Lid
         .row
-          .col-10
+          .col-12.col-md-10
             = f.text_field :first_name, label: 'Voornaam'
             = f.text_field :last_name, label: 'Achternaam'
             = f.text_field :email, label: 'Email'
@@ -16,6 +16,6 @@
             = f.collection_check_boxes :group_ids, Group.all, "id", :name, { label: 'Groepen' }
 
         .row
-          .col-10.mb-5
+          .col-12.col-md-10.mb-5
             = f.submit 'Opslaan', class: 'btn btn-primary'
     .col-md-1
