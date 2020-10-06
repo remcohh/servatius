@@ -8,6 +8,7 @@ class RehearsalsController < ApplicationController
   end
 
   def show
+    @backlink = request.referrer
     @rehearsal = Rehearsal.find(params[:id])
     @accepted_members_count = @rehearsal.accepted_members.count
     @declined_members_count = @rehearsal.declined_members.count
