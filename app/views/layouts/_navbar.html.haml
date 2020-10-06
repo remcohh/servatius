@@ -3,7 +3,7 @@
     - if @cms_site.present?
       = link_to 'Home', root_url, class: 'nav-link topnav_font_color'
     - else
-      %span.leftback
+      %span.leftback.d-block.d-sm-none
         - if @backlink
           &#8592;
         - else
