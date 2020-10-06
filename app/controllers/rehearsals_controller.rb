@@ -5,10 +5,11 @@ class RehearsalsController < ApplicationController
   def index
     @ensembles = current_member.ensembles
     @rehearsals = Rehearsal.for_member(current_member)
+    @set_backlink = 'rehearsals'
   end
 
   def show
-    @backlink = request.referrer
+    @backlink = params[:backlink]
     @rehearsal = Rehearsal.find(params[:id])
     @accepted_members_count = @rehearsal.accepted_members.count
     @declined_members_count = @rehearsal.declined_members.count
@@ -28,6 +29,7 @@ class RehearsalsController < ApplicationController
   end
 
   def decline
+    @backlink = params[:backlink]
     @rehearsal = Rehearsal.find(params[:id])
     if @rehearsal.is_declined_by?(current_member)
       @rehearsal.member_presences.where(member_id: current_member.id).delete_all
@@ -43,6 +45,7 @@ class RehearsalsController < ApplicationController
   end
 
   def accept
+    @backlink = params[:backlink]
     @rehearsal = Rehearsal.find(params[:id])
     if @rehearsal.is_accepted_by?(current_member)
       @rehearsal.member_presences.where(member_id: current_member.id).delete_all
@@ -54,7 +57,7 @@ class RehearsalsController < ApplicationController
         @rehearsal.member_presences.create(member_id: current_member.id, will_be_present: true)
       end
     end
-    redirect_to action: :show
+    redirect_to action: :show, backlink: @backlink
   end
 
   def remove_decline

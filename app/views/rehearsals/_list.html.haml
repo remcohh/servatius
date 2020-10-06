@@ -3,7 +3,7 @@
     .col-12.border-bottom
       .row
         .col-3
-          = link_to rehearsal.date_time.strftime('%d-%m'), rehearsal_path(rehearsal)
+          = link_to rehearsal.date_time.strftime('%d-%m'), rehearsal_path(rehearsal, backlink: @set_backlink)
           .small
             = rehearsal.date_time.strftime('%H:%M')
         .col-9
