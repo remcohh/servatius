@@ -1,0 +1,15 @@
+.container-fluid
+  .row
+    .col-md-1
+    .col-12.col-md-10
+      .row
+        .col-12.col-md-10
+          %h3
+            Profiel
+      .row
+        .col-12.col-md-10
+          = "Naam: #{current_member.full_name}"
+      .row
+        .col-12.col-md-10
+          = link_to "Wijzig wachtwoord", edit_password_path
+

@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get 'home', to: 'home#index', as: 'app_home'
   get 'leden', to: redirect('/messages'), as: 'members_messages'
   get 'members', to: redirect('/messages')
+  get 'profile', to: 'members#profile', as: 'profile'
+  get 'edit_password', to: 'members#edit_password', as: 'edit_password'
+  put 'update_password', to: 'members#update_password', as: 'update_password'
   get 'rehearsals', to: 'rehearsals#index', as: 'rehearsals'
   get 'rehearsal/:id', to: 'rehearsals#show', as: 'rehearsal'
   get 'rehearsal/:id/presence', to: 'rehearsals#presence', as: 'rehearsal_presence'
