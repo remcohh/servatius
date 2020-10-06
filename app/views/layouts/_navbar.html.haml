@@ -49,6 +49,8 @@
         - if current_member
           %li.nav-item.dropdown
             = link_to('Profiel', profile_path, class: 'nav-link topnav_font_color')
+          %li.nav-item.dropdown
+            = link_to('Wijzig wachtwoord', edit_password_path, class: 'nav-link topnav_font_color')
         - if current_member
           %li.nav-item.dropdown
             = link_to('Uitloggen', destroy_member_session_path, method: :delete, class: 'nav-link topnav_font_color')
