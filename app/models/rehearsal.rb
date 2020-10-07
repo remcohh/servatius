@@ -82,4 +82,8 @@ class Rehearsal < ApplicationRecord
               .uniq
   end
 
+  def available
+    max_present ? max_present - accepted_members.count : nil
+  end
+
 end
