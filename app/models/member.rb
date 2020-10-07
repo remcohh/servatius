@@ -13,7 +13,7 @@ class Member < ApplicationRecord
       ],
   )
 
-  has_many :member_presences
+  has_many :member_presences, dependent: :destroy
 
   scope :name_filter, ->(name) {
     where('lower(last_name) like ? or lower(first_name) like ?', "%#{name.downcase}%", "%#{name.downcase}%")
