@@ -46,6 +46,14 @@ class Admin::RehearsalsController < ApplicationController
         @rehearsal.member_presences.create(member_id: member.id, will_be_present: true)
       end
     end
+    if params[:accept_for_ensemble_members]
+      already_present_ids = @rehearsal.member_presences.collect(&:member_id)
+      @rehearsal.ensembles.each do |ensemble|
+        ensemble.members.each do |member|
+          @rehearsal.member_presences.create(member_id: member.id, will_be_present: true) unless already_present_ids.include?(member.id)
+        end
+      end
+    end
     redirect_to action: :index
   end
 

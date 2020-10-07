@@ -12,15 +12,18 @@
             = f.text_field :description, label: 'Omschrijving'
             = f.datetime_field :date_time, label: 'Datum en tijd'
             = f.collection_select :ensemble_ids, Ensemble.all, 'id', :name, {}, { :multiple => true }
+            = check_box_tag :accept_for_ensemble_members
+            %span
+              Ensemble leden standaard aanmelden
+            %br
+            %br
             = f.text_field :max_present, label: 'Maximaal aantal deelnemers'
-
         - if params[:action] == 'new'
           .row
             .col-12.col-md-10-mb-3
               Groep aanmelden
               %br
               = select_tag :group, options_from_collection_for_select(Group.all, :id, :name), include_blank: true
-
         .row
           .col-12.col-md-10.mt-3
             %h3
