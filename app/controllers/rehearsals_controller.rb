@@ -11,9 +11,7 @@ class RehearsalsController < ApplicationController
   def show
     @backlink = params[:backlink]
     @rehearsal = Rehearsal.find(params[:id])
-    @accepted_members_count = @rehearsal.accepted_members.count
-    @declined_members_count = @rehearsal.declined_members.count
-    @state = @rehearsal.max_present && @rehearsal.max_present - @accepted_members_count <= 0 ? :full : :available
+    calc_metrics_state
   end
 
   def presence
@@ -41,6 +39,7 @@ class RehearsalsController < ApplicationController
         @rehearsal.member_presences.create(member_id: current_member.id, will_be_present: false)
       end
     end
+    calc_metrics_state
   end
 
   def accept
@@ -56,6 +55,7 @@ class RehearsalsController < ApplicationController
         @rehearsal.member_presences.create(member_id: current_member.id, will_be_present: true)
       end
     end
+    calc_metrics_state
   end
 
   def remove_decline
@@ -119,6 +119,14 @@ class RehearsalsController < ApplicationController
       h[r.date_time.strftime('%d-%m')] = r.members.without_attendance.count
       h
     end
+  end
+
+  private
+
+  def calc_metrics_state
+    @accepted_members_count = @rehearsal.accepted_members.count
+    @declined_members_count = @rehearsal.declined_members.count
+    @state = @rehearsal.max_present && @rehearsal.max_present - @accepted_members_count <= 0 ? :full : :available
   end
 
 end
