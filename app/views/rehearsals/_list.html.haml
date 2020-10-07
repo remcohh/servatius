@@ -22,7 +22,7 @@
           - if rehearsal.available && rehearsal.available > 0
             .row.available
               .col-12.small
-                = "Nog #{rehearsal.available} plaatsen"
+                = "Nog #{rehearsal.available} #{rehearsal.available > 1 ? 'plaatsen' : 'plaats'}"
 
 
 
