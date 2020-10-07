@@ -41,7 +41,6 @@ class RehearsalsController < ApplicationController
         @rehearsal.member_presences.create(member_id: current_member.id, will_be_present: false)
       end
     end
-    redirect_to action: :show, backlink: @backlink
   end
 
   def accept
@@ -57,7 +56,6 @@ class RehearsalsController < ApplicationController
         @rehearsal.member_presences.create(member_id: current_member.id, will_be_present: true)
       end
     end
-    redirect_to action: :show, backlink: @backlink
   end
 
   def remove_decline

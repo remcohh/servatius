@@ -1,5 +1,5 @@
 - if @state == :full && !@rehearsal.is_accepted_by?(current_member)
   = link_to 'Aanmelden', '', class: 'btn btn-sm btn-outline-secondary'
 - else
-  = link_to 'Aanmelden', accept_rehearsal_path(@rehearsal, backlink: @backlink), method: :put, class: accept_style(@rehearsal, current_member)
-= link_to 'Afmelden',decline_rehearsal_path(@rehearsal, backlink: @backlink), method: :put, class: decline_style(@rehearsal, current_member)
+  = link_to 'Aanmelden', accept_rehearsal_path(@rehearsal), method: :put, remote: true, class: accept_style(@rehearsal, current_member)
+= link_to 'Afmelden',decline_rehearsal_path(@rehearsal), method: :put, remote: true, class: decline_style(@rehearsal, current_member)
