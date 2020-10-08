@@ -26,6 +26,8 @@ class Rehearsal < ApplicationRecord
 
   def registered_members
     members.includes(:member_presences).where('member_presences.will_be_present' => true)
+                                        .where('member_presences.presentable_id' => id)
+                                        .where('member_presences.presentable_type' => 'Rehearsal')
   end
 
   scope :upcoming_for_ensemble, ->(ensemble) {
