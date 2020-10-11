@@ -1,17 +1,33 @@
-.col-md-10.col-12
-  - instrument = ''
-  - members.each do |rm|
-    - previnstrument = instrument
-    - instrument = rm.instrument_for_ensemble(event.ensembles.first)['name']
-    - if instrument != previnstrument
-      .row.mb-1
-        .col-7.font-weight-bold
-          = instrument
+.col-12
+  .row.mb-3
+    .col-12
+      = radio_button_tag 'collection', 'registered', @collection == 'registered'
+      Aangemelde leden
+      = radio_button_tag 'collection', 'all',  @collection == 'all'
+      Alle leden
 
-    .row.mb-1
-      .col-5
-        = rm.full_name
-      .col-7.mb-1
-        = link_to 'Aanwezig', rehearsal_presence_update_path(event, { member_id: rm.id, attendance: true }), method: :put, remote: true, class: attended_style(event, rm)
-        = link_to 'Afwezig', rehearsal_presence_update_path(event, { member_id: rm.id, attendance: false }), method: :put, remote: true, class: not_attended_style(event, rm)
+  .row
+    .col-md-10.col-12
+      - instrument = ''
+      - members.each do |rm|
+        - previnstrument = instrument
+        - instrument = rm.instrument_for_ensemble(event.ensembles.first)['name']
+        - if instrument != previnstrument
+          .row.mb-1
+            .col-7.font-weight-bold
+              = instrument
 
+        .row.mb-1
+          .col-5
+            = rm.full_name
+          .col-7.mb-1
+            = link_to 'Aanwezig', rehearsal_presence_update_path(event, { member_id: rm.id, attendance: true }), method: :put, remote: true, class: attended_style(event, rm)
+            = link_to 'Afwezig', rehearsal_presence_update_path(event, { member_id: rm.id, attendance: false }), method: :put, remote: true, class: not_attended_style(event, rm)
+
+:javascript
+  $(document).ready(function () {
+    $( "input:radio[name=collection]" ).on('change', function(e){
+      console.log("changed",this.value)
+      window.location = window.location.origin + window.location.pathname + '?collection=' + this.value
+    });
+  });

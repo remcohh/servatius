@@ -16,7 +16,15 @@ class RehearsalsController < ApplicationController
 
   def presence
     @rehearsal = Rehearsal.find(params[:id])
-    @members = @rehearsal.registered_members.order("ensemble_instruments.id")
+    @collection = params[:collection] || 'registered'
+    if @collection == 'registered'
+      @members = @rehearsal.registered_members.order("ensemble_instruments.id")
+    elsif @collection == 'all'
+      @members = @rehearsal.members.order("ensemble_instruments.id")
+    else
+      @members = []
+    end
+
     render template: 'presence/presence', locals: { event: @rehearsal, members: @members }
   end
 
