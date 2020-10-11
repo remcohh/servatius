@@ -17,13 +17,7 @@ class RehearsalsController < ApplicationController
   def presence
     @rehearsal = Rehearsal.find(params[:id])
     @collection = params[:collection] || 'registered'
-    if @collection == 'registered'
-      @members = @rehearsal.registered_members.order("ensemble_instruments.id")
-    elsif @collection == 'all'
-      @members = @rehearsal.members.order("ensemble_instruments.id")
-    else
-      @members = []
-    end
+    get_members
 
     render template: 'presence/presence', locals: { event: @rehearsal, members: @members }
   end
@@ -73,8 +67,9 @@ class RehearsalsController < ApplicationController
   end
 
   def set_presence_status
+    @collection = params[:collection] || 'registered'
     @rehearsal = Rehearsal.find(params[:id])
-    @members = @rehearsal.registered_members.order("ensemble_instruments.id")
+    get_members
     att = @rehearsal.member_presences.where(member_id: params[:member_id]).first_or_create
     val = params[:attendance] == 'true'
     att.update_attribute :present, att.present == val ? nil : val
@@ -135,6 +130,16 @@ class RehearsalsController < ApplicationController
     @accepted_members_count = @rehearsal.accepted_members.count
     @declined_members_count = @rehearsal.declined_members.count
     @state = @rehearsal.max_present && @rehearsal.max_present - @accepted_members_count <= 0 ? :full : :available
+  end
+
+  def get_members
+    if @collection == 'registered'
+      @members = @rehearsal.registered_members.order("ensemble_instruments.id")
+    elsif @collection == 'all'
+      @members = @rehearsal.members.order("ensemble_instruments.id")
+    else
+      @members = []
+    end
   end
 
 end

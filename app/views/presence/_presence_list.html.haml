@@ -21,8 +21,8 @@
           .col-5
             = rm.full_name
           .col-7.mb-1
-            = link_to 'Aanwezig', rehearsal_presence_update_path(event, { member_id: rm.id, attendance: true }), method: :put, remote: true, class: attended_style(event, rm)
-            = link_to 'Afwezig', rehearsal_presence_update_path(event, { member_id: rm.id, attendance: false }), method: :put, remote: true, class: not_attended_style(event, rm)
+            = link_to 'Aanwezig', rehearsal_presence_update_path(event, { member_id: rm.id, attendance: true, collection: @collection }), method: :put, remote: true, class: attended_style(event, rm)
+            = link_to 'Afwezig', rehearsal_presence_update_path(event, { member_id: rm.id, attendance: false, collection: @collection }), method: :put, remote: true, class: not_attended_style(event, rm)
 
 :javascript
   $(document).ready(function () {
