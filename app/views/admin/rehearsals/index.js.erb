@@ -10,3 +10,12 @@ $(document).ready(function () {
   });
 });
 
+// make row clickable, duplicate from application.js
+$('.data-row').on('click', function(e){
+    link = $(this).find('a').attr('href');
+    if(link != undefined){
+        window.location = link
+        e.preventDefault();
+    }
+});
+

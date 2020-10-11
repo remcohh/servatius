@@ -6,6 +6,8 @@
         .col-10
           %h3
             Aan- en afmeldingen
+          .small
+            = event.description
       .row.mt-3
         .col-10.font-weight-bold
           = "Datum: #{event.date_time.strftime('%d-%m-%Y %H:%M')}"

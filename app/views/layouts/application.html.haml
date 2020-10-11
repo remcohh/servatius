@@ -32,7 +32,6 @@
     // enables clicking anywhere in the data-row
     $('.data-row').on('click', function(e){
       link = $(this).find('a').attr('href');
-      console.log(link);
       if(link != undefined){
         window.location = link
         e.preventDefault();
@@ -40,8 +39,7 @@
     });
 
   });
-    $(document).ready(function () {
-  });
+
 
   $(document).ready(function () {
     $('.leftback').on('click', function(){
