@@ -44,7 +44,7 @@
 
   .row.mt-3
     .col-10
-      aangemelde instrumenten:
+      Aangemelde instrumenten:
       %br
       = @rehearsal.instrument_count.collect{ |ic| "#{ic['name']}: <b>#{ic['count']}</b>" }.join('<br>').html_safe
 
