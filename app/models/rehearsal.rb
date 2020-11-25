@@ -92,7 +92,7 @@ class Rehearsal < ApplicationRecord
     INNER JOIN ensemble_instruments_members eim on eim.member_id = mp.member_id
     INNER JOIN ensemble_instruments ei on ei.id = eim.ensemble_instrument_id AND ei.ensemble_id = er.ensemble_id
     INNER JOIN instruments i on ei.instrument_id = i.id
-    WHERE r.id=#{r.id} AND mp.will_be_present = true
+    WHERE r.id=#{id} AND mp.will_be_present = true
     group by i.name
     HEREDOC
     ActiveRecord::Base.connection.execute(q)
