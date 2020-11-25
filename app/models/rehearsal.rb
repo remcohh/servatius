@@ -87,11 +87,12 @@ class Rehearsal < ApplicationRecord
   def instrument_count
     q=<<-HEREDOC
     select i.name, count(i.name) from rehearsals r
+    INNER JOIN ensembles_rehearsals er on er.rehearsal_id = r.id
     INNER JOIN member_presences mp on mp.presentable_id = r.id and mp.presentable_type = 'Rehearsal'
     INNER JOIN ensemble_instruments_members eim on eim.member_id = mp.member_id
-    INNER JOIN ensemble_instruments ei on ei.id = eim.ensemble_instrument_id
+    INNER JOIN ensemble_instruments ei on ei.id = eim.ensemble_instrument_id AND ei.ensemble_id = er.ensemble_id
     INNER JOIN instruments i on ei.instrument_id = i.id
-    WHERE r.id=#{id} AND mp.will_be_present = true
+    WHERE r.id=#{r.id} AND mp.will_be_present = true
     group by i.name
     HEREDOC
     ActiveRecord::Base.connection.execute(q)
