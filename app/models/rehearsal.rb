@@ -75,6 +75,10 @@ class Rehearsal < ApplicationRecord
     member_presences.where(member_presences: { will_be_present: false}).eager_load(:member)
   end
 
+  def undecided_members
+    member_presences.where(member_presences: { will_be_present: nil}).eager_load(:member)
+  end
+
   def self.for_member(member)
     Rehearsal.joins(:members)
               .where(['members.id = ?', member])

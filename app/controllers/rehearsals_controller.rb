@@ -129,6 +129,7 @@ class RehearsalsController < ApplicationController
   def calc_metrics_state
     @accepted_members_count = @rehearsal.accepted_members.count
     @declined_members_count = @rehearsal.declined_members.count
+    @undecided_members_count = @rehearsal.undecided_members.count
     @state = @rehearsal.max_present && @rehearsal.max_present - @accepted_members_count <= 0 ? :full : :available
   end
 
