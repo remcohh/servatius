@@ -35,10 +35,10 @@
     .col-10
       Afmeldingen:
       = @declined_members_count
-  .row
-    .col-10
-      Onbekend:
-      = @undecided_members_count
+  -#.row
+  -#  .col-10
+  -#    Onbekend:
+  -#    = @undecided_members_count
 
   - if @rehearsal.max_present && @rehearsal.max_present >= 0
     .row
