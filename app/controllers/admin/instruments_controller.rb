@@ -46,7 +46,7 @@ class Admin::InstrumentsController < ApplicationController
   private
 
   def instrument_params
-    params.require(:instrument).permit(:title, :composer, :state)
+    params.require(:instrument).permit(:name)
   end
 
 end
